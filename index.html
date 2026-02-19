@@ -3,318 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Блекаут-Генератор</title>
+    <title>ELECTRIFY (c)</title>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
         :root {
-            --bg-app: #e0e5ec;
-            --text-main: #4a4a4a;
-            --radius: 20px;
-            --neumorph-shadow-light: #ffffff;
-            --neumorph-shadow-dark: #a3b1c6;
-
-            /* === КОЛЬОРИ ГРАФІКУ (Default) === */
-            --chart-bg: #ffffff;
-            --light-bg: #fbbf24;   
-            --light-text: #1f2937; 
-            --dark-bg: #1f2937;    
-            --dark-text: #ffffff;  
+            --bg-app: #e0e5ec; --text-main: #4a4a4a; --radius: 20px;
+            --neumorph-shadow-light: #ffffff; --neumorph-shadow-dark: #a3b1c6;
+            --c-yellow: #fbbf24; --c-red: #d9463b; --c-dark: #060606;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-app);
-            color: var(--text-main);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-app); color: var(--text-main); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .app-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; }
 
-        .app-container {
-            width: 100%;
-            max-width: 500px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
+        .card { background: var(--bg-app); padding: 25px; border-radius: var(--radius); box-shadow: 9px 9px 16px var(--neumorph-shadow-dark), -9px -9px 16px var(--neumorph-shadow-light); border: 1px solid rgba(255,255,255,0.2); }
+        h2 { margin: 0 0 20px 0; font-weight: 900; color: #333; letter-spacing: -0.5px; }
 
-        /* NEUMORPHISM CARD STYLE */
-        .card {
-            background: var(--bg-app);
-            padding: 25px;
-            border-radius: var(--radius);
-            box-shadow: 9px 9px 16px var(--neumorph-shadow-dark), 
-                       -9px -9px 16px var(--neumorph-shadow-light);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        h2 { margin: 0 0 20px 0; font-weight: 800; color: #333; }
-
-        /* INPUTS */
-        .input-neumorph {
-            width: 100%;
-            border: none;
-            border-radius: 12px;
-            padding: 15px;
-            font-family: inherit;
-            background: var(--bg-app);
-            box-shadow: inset 6px 6px 10px var(--neumorph-shadow-dark), 
-                        inset -6px -6px 10px var(--neumorph-shadow-light);
-            box-sizing: border-box;
-            color: #333;
-            outline: none;
-            transition: 0.3s;
-        }
+        .form-group { margin-bottom: 15px; }
+        .form-label { font-size: 12px; font-weight: bold; color: #666; margin-left: 5px; display: block; margin-bottom: 5px; }
         
-        .input-neumorph:focus {
-            box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), 
-                        inset -4px -4px 8px var(--neumorph-shadow-light);
-        }
-
-        textarea.input-neumorph { height: 100px; resize: none; font-family: monospace; }
+        .input-neumorph { width: 100%; border: none; border-radius: 12px; padding: 15px; font-family: inherit; background: var(--bg-app); box-shadow: inset 6px 6px 10px var(--neumorph-shadow-dark), inset -6px -6px 10px var(--neumorph-shadow-light); box-sizing: border-box; color: #333; outline: none; transition: 0.3s; font-weight: 500; }
+        .input-neumorph:focus { box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), inset -4px -4px 8px var(--neumorph-shadow-light); }
+        textarea.input-neumorph { height: 100px; resize: none; font-family: monospace; font-weight: normal; }
         
-        select.input-neumorph {
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-            background-repeat: no-repeat;
-            background-position: right 15px top 50%;
-            background-size: 12px auto;
-        }
+        select.input-neumorph { appearance: none; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 15px top 50%; background-size: 12px auto; cursor: pointer; }
 
-        /* BUTTONS */
         .btn-group { display: flex; gap: 15px; margin-top: 20px; }
-        
-        .btn-neu {
-            flex: 1;
-            padding: 16px;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 15px;
-            cursor: pointer;
-            background: var(--bg-app);
-            box-shadow: 6px 6px 10px var(--neumorph-shadow-dark), 
-                       -6px -6px 10px var(--neumorph-shadow-light);
-            color: #333;
-            transition: all 0.2s ease;
-            display: flex; justify-content: center; align-items: center; gap: 8px;
-        }
+        .btn-neu { flex: 1; padding: 16px; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; background: var(--bg-app); box-shadow: 6px 6px 10px var(--neumorph-shadow-dark), -6px -6px 10px var(--neumorph-shadow-light); color: #333; transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .btn-neu:active { box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), inset -4px -4px 8px var(--neumorph-shadow-light); transform: scale(0.98); }
+        .btn-primary { color: #007aff; } .btn-danger { color: #ff3b30; }
+        .tools-row { display: flex; gap: 10px; margin-bottom: 15px; }
 
-        .btn-neu:active {
-            box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), 
-                        inset -4px -4px 8px var(--neumorph-shadow-light);
-            transform: scale(0.98);
-        }
-
-        .btn-primary { color: #007aff; }
-        .btn-danger { color: #ff3b30; }
-        .btn-action { margin-top: 15px; width: 100%; background: #007aff; color: white; box-shadow: 6px 6px 15px rgba(0,122,255,0.3); }
-        .btn-action:active { background: #0063cf; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2); }
-
-        /*         /* === ЗОНА ГЕНЕРАЦІЇ (ПРИХОВАНА) === */
-        #captureTarget {
-            background-color: #1a1c23; /* Темний фон як на макеті */
-            color: #ffffff;
-            padding: 40px;
-            border-radius: 20px;
-            position: absolute; left: -9999px; top: 0; width: 540px; 
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; }
-        .header-title { font-size: 26px; font-weight: 900; text-transform: uppercase; line-height: 1.2; letter-spacing: 0.5px; }
-        .header-title span { color: #fbbf24; } /* Жовтий акцент на даті */
-        .logo-fixed { height: 50px; width: auto; object-fit: contain; }
-
-        /* Вертикальний таймлайн */
-        .timeline-container {
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            padding-left: 85px; /* Місце для годин зліва */
-        }
-
-        /* Жовта лінія, що йде зверху вниз */
-        .timeline-container::before {
-            content: '';
-            position: absolute;
-            left: 55px; /* Розташування лінії */
-            top: 25px;
-            bottom: 25px;
-            width: 4px;
-            background: #fbbf24;
-            border-radius: 2px;
-        }
-
-        .tl-row {
-            display: flex;
-            align-items: stretch;
-            margin-bottom: 15px;
-            position: relative;
-            min-height: 75px;
-        }
-        .tl-row:last-child { margin-bottom: 0; }
-
-        /* Час зліва */
-        .tl-time {
-            position: absolute;
-            left: -85px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-weight: 800;
-            font-size: 20px;
-            color: #ffffff;
-            width: 60px;
-            text-align: right;
-            letter-spacing: 1px;
-        }
-
-        /* Крапка на лінії */
-        .tl-row::before {
-            content: '';
-            position: absolute;
-            left: -34px; /* Вирівнювання крапки по лінії */
-            top: 50%;
-            transform: translateY(-50%);
-            width: 14px;
-            height: 14px;
-            background: #1a1c23;
-            border: 4px solid #fbbf24;
-            border-radius: 50%;
-            z-index: 2;
-        }
-
-        /* Блоки статусів */
-        .tl-block {
-            flex: 1;
-            border-radius: 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-            font-weight: 800;
-            font-size: 24px;
-            position: relative;
-            overflow: hidden;
-            letter-spacing: 0.5px;
-        }
-        
-        .tl-icon { width: 32px; height: 32px; margin-bottom: 4px; }
-
-        /* Світло Є */
-        .tl-on {
-            background: #fbbf24;
-            color: #1a1c23;
-            box-shadow: 0 0 25px rgba(251, 191, 36, 0.15);
-        }
-
-        /* Світла НЕМАЄ */
-        .tl-off {
-            background: #2a2d36;
-            color: #ffffff;
-            border: 2px solid rgba(255, 60, 48, 0.6);
-            box-shadow: 0 0 25px rgba(255, 60, 48, 0.15);
-        }
-        .tl-off .tl-subtitle {
-            font-size: 16px;
-            font-weight: 600;
-            color: #a1a1aa;
-            margin-top: 4px;
-        }
-
-        .total-time {
-            text-align: center;
-            margin-top: 35px;
-            font-size: 20px;
-            font-weight: 500;
-            color: #e4e4e7;
-        }
-
-        /* РЕЗУЛЬТАТ */
         #outputWrapper { display: none; width: 100%; }
+        #generatedImage { width: 100%; height: auto; display: block; margin-bottom: 15px; box-shadow: 5px 5px 15px rgba(0,0,0,0.15); border-radius: 0; }
         
-        #generatedImage { 
-            width: 100%; height: auto; border-radius: 12px; display: block; margin-bottom: 15px;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.15);
-        }
+        .copy-block { margin-top: 15px; padding: 20px; border-radius: 15px; background: var(--bg-app); cursor: pointer; transition: all 0.2s; position: relative; user-select: none; box-shadow: 7px 7px 14px var(--neumorph-shadow-dark), -7px -7px 14px var(--neumorph-shadow-light); }
+        .copy-block:active { box-shadow: inset 5px 5px 10px var(--neumorph-shadow-dark), inset -5px -5px 10px var(--neumorph-shadow-light); transform: scale(0.99); }
+        .copy-block.copied { background: #e3fae3; }
+        .copy-content { font-family: monospace; font-size: 14px; color: #333; white-space: pre-wrap; line-height: 1.4; pointer-events: none; }
+        .copy-hint { margin-top: 10px; font-size: 12px; color: #007aff; text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* COPY BLOCK NEUMORPHIC */
-        .copy-block {
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 15px;
-            background: var(--bg-app);
-            box-shadow: 7px 7px 14px var(--neumorph-shadow-dark), 
-                       -7px -7px 14px var(--neumorph-shadow-light);
-            cursor: pointer;
-            transition: all 0.2s;
-            position: relative;
-            user-select: none;
-        }
+        /* === БАЗОВИЙ ТЕМНИЙ ШАБЛОН === */
+        #captureTarget { background: var(--c-dark); color: #ffffff; padding: 40px; position: absolute; left: -9999px; top: 0; width: 440px; box-sizing: border-box; -webkit-font-smoothing: antialiased; overflow: hidden; border-radius: 0; }
+        .header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 35px; position: relative; z-index: 2; }
+        .header-title { font-size: 24px; font-weight: 900; line-height: 1.25; letter-spacing: 0.5px; text-transform: uppercase; }
+        .header-title span { color: var(--c-yellow); }
+        .logo-fixed { width: 48px; height: 48px; object-fit: contain; border-radius: 50%; background: #ffffff; padding: 4px; box-sizing: border-box; }
 
-        .copy-block:active {
-            box-shadow: inset 5px 5px 10px var(--neumorph-shadow-dark), 
-                        inset -5px -5px 10px var(--neumorph-shadow-light);
-            transform: scale(0.99);
-        }
+        .footer-info { margin-top: 25px; padding-top: 20px; border-top: 1px solid #1f1f22; display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 2; }
+        .disclaimer-box { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: #6b7280; line-height: 1.4; font-weight: 500; }
+        .disclaimer-icon { width: 16px; height: 16px; flex-shrink: 0; color: #6b7280; margin-top: 1px; }
+        .footer-source { font-size: 12px; font-weight: 600; color: #888; display: flex; justify-content: space-between; align-items: center; }
+
+        /* === ТЕМА 1: СМАРТ-ДІМ (ТАЙМЛАЙН) === */
+        .tl-item { display: flex; position: relative; margin-bottom: 0; min-height: 75px; z-index: 2; }
+        .tl-item:last-child .tl-line, .tl-item:last-child .tl-dot { display: none; } 
+        .tl-item:last-child .content-col { padding-bottom: 0; }
         
-        .copy-block.copied {
-            background: #e3fae3;
-        }
-
-        .copy-content {
-            font-family: monospace;
-            font-size: 14px;
-            color: #333;
-            white-space: pre-wrap;
-            line-height: 1.4;
-            pointer-events: none; /* Щоб клік проходив на блок */
-        }
-
-        .copy-hint {
-            margin-top: 10px;
-            font-size: 12px;
-            color: #007aff;
-            text-align: center;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        .time-col { width: 65px; text-align: right; padding-right: 15px; font-weight: 700; font-size: 18px; padding-top: 2px; }
+        .time-col.off { color: var(--c-red); }
+        .time-col.on { color: var(--c-yellow); text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
         
-        .tools-row {
-            display: flex; gap: 10px; margin-bottom: 15px;
-        }
+        .line-col { display: flex; flex-direction: column; align-items: center; width: 24px; position: relative; z-index: 2; }
+        .icon-circle { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--c-dark); z-index: 3; }
+        .icon-house { width: 12px; height: 12px; }
+        .on .icon-house { fill: var(--c-yellow); filter: drop-shadow(0 0 5px var(--c-yellow)); }
+        .off .icon-house { fill: #555; }
+        
+        .tl-line { flex-grow: 1; margin-top: 4px; margin-bottom: 4px; min-height: 35px; width: 2px; }
+        .tl-line.dotted { background-image: linear-gradient(to bottom, #444 50%, transparent 50%); background-size: 2px 10px; }
+        .tl-line.solid { background: var(--c-yellow); box-shadow: 0 0 8px var(--c-yellow); }
+        
+        /* Логічна крапка між інтервалами */
+        .tl-dot { width: 6px; height: 6px; border-radius: 50%; margin-bottom: 4px; z-index: 3; }
+        .tl-dot.dot-on { background: var(--c-yellow); box-shadow: 0 0 5px var(--c-yellow); }
+        .tl-dot.dot-off { background: #555; }
+
+        .content-col { padding-left: 15px; flex-grow: 1; padding-bottom: 25px; display: flex; flex-direction: column; justify-content: flex-start; }
+        .info-row { display: flex; align-items: center; gap: 12px; } /* Вирівнювання плашки і годин в один ряд */
+        
+        .badge { display: flex; align-items: center; justify-content: center; padding: 4px 12px; border-radius: 8px; font-size: 13px; font-weight: 800; letter-spacing: 0.5px; height: 26px; box-sizing: border-box; }
+        .badge.off { background: #1a1a1c; border: 1px solid #333; color: #a1a1aa; }
+        .badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); border: 1px solid var(--c-yellow); }
+        
+        .interval { display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; }
+        .interval-icon { width: 16px; height: 16px; display: flex; align-items: center; }
+        .interval.off { color: var(--c-red); }
+        .interval.on { color: var(--c-yellow); }
+
+        /* === ТЕМА 2: ДВІ КОЛОНКИ === */
+        .tc-location { display: flex; align-items: center; gap: 6px; font-size: 16px; color: #888; font-weight: 600; margin-top: 8px; text-transform: none; letter-spacing: 0; }
+        .tc-location-icon { width: 16px; height: 16px; fill: currentColor; }
+        .tc-wrapper { display: flex; gap: 20px; text-align: center; margin-bottom: 10px; position: relative; z-index: 2; }
+        .tc-col { flex: 1; display: flex; flex-direction: column; align-items: center; }
+        
+        .tc-badge { padding: 8px 16px; border-radius: 12px; font-size: 14px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 20px; display: inline-block; width: 100%; box-sizing: border-box; }
+        .tc-badge.off { background: var(--c-red); color: #fff; box-shadow: 0 0 15px rgba(217, 70, 59, 0.3); }
+        .tc-badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); }
+        
+        .tc-times-wrapper { display: flex; flex-direction: column; gap: 12px; width: 100%; position: relative; padding-bottom: 20px; }
+        /* Схематичні гілки (brackets) */
+        .tc-bracket-line { position: absolute; width: 2px; background: #333; top: -10px; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; }
+        .tc-bracket-bottom { position: absolute; height: 2px; background: #333; bottom: 0; left: 20%; right: 20%; z-index: 1; }
+        .tc-bracket-tick { position: absolute; width: 2px; height: 10px; background: #333; bottom: -10px; left: 50%; transform: translateX(-50%); z-index: 1; }
+        
+        .tc-time { font-size: 20px; font-weight: 700; letter-spacing: 1px; position: relative; z-index: 2; background: var(--c-dark); padding: 4px 0; }
+        .tc-time.off { color: #fff; }
+        .tc-time.on { color: #fff; }
+        
+        .tc-total { font-size: 14px; font-weight: 700; margin-top: 15px; color: #a1a1aa; background: var(--c-dark); padding: 0 10px; position: relative; z-index: 2; }
+        
+        .tc-lightning { position: absolute; left: 50%; top: 5px; transform: translateX(-50%); color: var(--c-yellow); width: 24px; height: 24px; }
+
+        /* === ТЕМА 3: ЕМОДЗІ СПЛЕШ === */
+        .emoji-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .emoji-content-wrapper { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 0 20px 0; }
+        .em-title { font-size: 26px; font-weight: 900; line-height: 1.3; color: var(--c-yellow); text-transform: uppercase; margin-bottom: 10px; }
+        .em-title span { color: #ffffff; }
+        .em-time { font-size: 36px; font-weight: 800; color: var(--c-red); margin-bottom: 20px; letter-spacing: 2px; display: flex; align-items: center; gap: 12px; }
+        .em-time:last-child { margin-bottom: 0; }
+        .em-arrow { width: 24px; height: 24px; color: #555; }
 
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        
         <div class="card">
-            <h2>Блекаут-Генератор</h2>
+            <h2>ELECTRIFY &copy;</h2>
             
-            <div style="margin-bottom: 15px;">
-                <label style="font-size:12px; font-weight:bold; color:#666; margin-left:5px; display:block; margin-bottom:5px;">Заголовок посту:</label>
-                <select id="headerSelect" class="input-neumorph" onchange="toggleCustomHeader()">
-                    <option value="classic">⚡️💡 ГРАФІК НА [ДАТА]</option>
-                    <option value="random">💡🎲 Генератор випадкових чисел</option>
-                    <option value="scifi">🔌💡 Науково-фантастичний графік</option>
-                    <option value="habit">💡🔌 Картинка за звичкою (аварійка)</option>
-                    <option value="parallel">💡⚡️ Графік з паралельного всесвіту</option>
-                    <option value="dontcare">💡🔌 Графік, який не варто приймати близько до серця</option>
-                    <option value="custom">⚙️ Власна назва...</option>
+            <div class="form-group">
+                <label class="form-label">Візуальний дизайн:</label>
+                <select id="designSelect" class="input-neumorph">
+                    <option value="timeline">🏠 Смарт-дім (Таймлайн)</option>
+                    <option value="columns">⚖️ Дві колонки (Є / Немає)</option>
+                    <option value="emojis">🎈 Мінімалізм (Рандомні емодзі)</option>
                 </select>
-                <input type="text" id="customHeaderInput" class="input-neumorph" style="display:none; margin-top:10px;" placeholder="Введи свій заголовок...">
             </div>
-    
 
-            <textarea id="rawText" class="input-neumorph" placeholder="Встав текст графіку від Харківобленерго сюди..."></textarea>
+            <div class="form-group">
+                <label class="form-label">Заголовок посту:</label>
+                <input type="text" id="postTitleInput" class="input-neumorph" value="ГРАФІК ВІДКЛЮЧЕНЬ НА [ДАТА]" placeholder="Введи заголовок (тег [ДАТА] заміниться автоматично)">
+            </div>
+
+            <textarea id="rawText" class="input-neumorph" placeholder="Встав текст графіку від Харківобленерго сюди (з чергою 1.2)..."></textarea>
             
             <div class="btn-group">
                 <button class="btn-neu btn-primary" onclick="processDataAndGenerate()">⚡ Створити</button>
@@ -324,58 +155,44 @@
         </div>
 
         <div id="outputWrapper">
-            
             <div class="tools-row">
-                <button class="btn-neu" onclick="saveImageToGallery()">💾 Зберегти картинку</button>
-                <button class="btn-neu" onclick="randomizeTheme()">🎨 Колір</button>
+                <button class="btn-neu" onclick="saveImageToGallery()">💾 Зберегти</button>
             </div>
-
             <img id="generatedImage" src="">
-
             <div class="copy-block" id="copyBlock" onclick="copyToClipboard()">
                 <div class="copy-content" id="finalText">Тут буде текст...</div>
                 <div class="copy-hint" id="copyHint">Тапни, щоб скопіювати текст</div>
             </div>
         </div>
-
     </div>
 
-        <div id="captureTarget">
-        <div class="header-row">
-            <div class="header-title" id="dateDisplay">ГРАФІК ВІДКЛЮЧЕНЬ<br>НА <span>17 ЛЮТОГО</span></div>
-            <img src="./logo.png" alt="Logo" class="logo-fixed" onerror="this.style.display='none'">
-        </div>
-        
-        <div class="timeline-container" id="timelineContainer"></div>
-
-        <div class="total-time" id="totalTimeDisplay">Загальний час без світла: ~0 годин.</div>
-    </div>
+    <div id="captureTarget"></div>
 
     <script>
-        // НОВІ ІКОНКИ ДЛЯ ТАЙМЛАЙНУ
-        const svgBulb = `<svg class="tl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1.2 1.5-2.5 1.5-4a6 6 0 0 0-6-6 6 6 0 0 0-6 6c0 1.4.5 2.7 1.5 4 .7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`;
-        const svgZapOff = `<svg class="tl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"></line><path d="M8.5 8.5L3 14h9l-1 8 5.5-5.5"></path><path d="M16 10h5l-1.5 1.5"></path><path d="M12.4 6.6L13 2l-2.6 2.6"></path></svg>`;
+        // === ІКОНКИ ===
+        const houseSvg = `<svg class="icon-house" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h14v-8h3L12 3z"/></svg>`;
+        const iconBulb = `<svg class="interval-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1.2 1.5-2.5 1.5-4a6 6 0 0 0-6-6 6 6 0 0 0-6 6c0 1.4.5 2.7 1.5 4 .7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`;
+        const iconZapOff = `<svg class="interval-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"></line><path d="M8.5 8.5L3 14h9l-1 8 5.5-5.5"></path><path d="M16 10h5l-1.5 1.5"></path><path d="M12.4 6.6L13 2l-2.6 2.6"></path></svg>`;
+        const iconInfo = `<svg class="disclaimer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`;
+        const iconPin = `<svg class="tc-location-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`;
+        const iconLightning = `<svg class="tc-lightning" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`;
+        const iconArrow = `<svg class="em-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
 
-        // === DOM ЕЛЕМЕНТИ ===
+        // === DOM ===
         const debug = document.getElementById('debug');
-        const dateDisplay = document.getElementById('dateDisplay');
         const finalTextDiv = document.getElementById('finalText');
         const copyBlock = document.getElementById('copyBlock');
         const copyHint = document.getElementById('copyHint');
         const captureTarget = document.getElementById('captureTarget');
         const outputWrapper = document.getElementById('outputWrapper');
         const generatedImage = document.getElementById('generatedImage');
-        const headerSelect = document.getElementById('headerSelect');
-        const customHeaderInput = document.getElementById('customHeaderInput');
-        
-        // Нові елементи таймлайну
-        const timelineContainer = document.getElementById('timelineContainer');
-        const totalTimeDisplay = document.getElementById('totalTimeDisplay');
+        const designSelect = document.getElementById('designSelect');
+        const postTitleInput = document.getElementById('postTitleInput');
 
         let lastDateStr = "";
         let lastTextIntervals = "";
 
-        // === ХЕЛПЕРИ ДЛЯ ЧАСУ ===
+        // === ХЕЛПЕРИ ===
         function timeToMinutes(timeStr) {
             const [h, m] = timeStr.replace(/[^\d:]/g, '').split(':').map(Number);
             return (h || 0) * 60 + (m || 0);
@@ -387,55 +204,31 @@
             return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
         }
 
-        // === СТАРІ ФУНКЦІЇ (ЛОГІКА ТЕКСТУ) ===
-        function toggleCustomHeader() {
-            if (headerSelect.value === 'custom') {
-                customHeaderInput.style.display = 'block';
-            } else {
-                customHeaderInput.style.display = 'none';
-            }
-        }
-
         function getHeaderTitle(dateStr) {
-            let base = "";
-            switch(headerSelect.value) {
-                case 'classic': base = "⚡️💡 ГРАФІК"; break;
-                case 'random': base = "💡🎲 Генератор випадкових чисел від Харківобленерго"; break;
-                case 'scifi': base = "🔌💡 Науково-фантастичний графік"; break;
-                case 'habit': base = "💡🔌 Картинка, яку ми постимо за звичкою (все одно буде аварійка, хехе)"; break;
-                case 'parallel': base = "💡⚡️ Графік з паралельного всесвіту, в якому не існує Росії і аварійних відключень"; break;
-                case 'dontcare': base = "💡🔌 Графік, який не варто приймати близько до серця"; break;
-                case 'custom': base = customHeaderInput.value || "⚡️ ГРАФІК"; break;
-                default: base = "⚡️💡 ГРАФІК";
-            }
-            return headerSelect.value === 'classic' ? `${base} НА ${dateStr}` : `${base} на ${dateStr}`;
+            let rawTitle = postTitleInput.value.trim() || "ГРАФІК ВІДКЛЮЧЕНЬ НА [ДАТА]";
+            return rawTitle.replace(/\[ДАТА\]/gi, dateStr);
         }
 
         function getClockEmoji(timeStr) {
             let [h, m] = timeStr.split(':').map(Number);
             if (isNaN(m)) m = 0;
-            let emojiTimeH = h % 12;
-            if (emojiTimeH === 0) emojiTimeH = 12; 
+            let emojiTimeH = h % 12 || 12; 
             const fullClocks = ['🕛','🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚'];
             const halfClocks = ['🕧','🕜','🕝','🕞','🕟','🕠','🕡','🕢','🕣','🕤','🕥','🕦'];
-            let idx = emojiTimeH === 12 ? 0 : emojiTimeH;
-            return (m >= 30) ? halfClocks[idx] : fullClocks[idx];
+            return (m >= 30) ? halfClocks[emojiTimeH === 12 ? 0 : emojiTimeH] : fullClocks[emojiTimeH === 12 ? 0 : emojiTimeH];
         }
 
-        // === ГОЛОВНИЙ ДВИГУН ===
+        // === ГОЛОВНИЙ ПРОЦЕС ===
         function processDataAndGenerate() {
             const text = document.getElementById('rawText').value;
             debug.textContent = "";
-            timelineContainer.innerHTML = ""; 
             
+            // Парсимо дату
             const dateRegex = /(\d{1,2})\s+(січня|лютого|березня|квітня|травня|червня|липня|серпня|вересня|жовтня|листопада|грудня)/i;
             const dateMatch = text.match(dateRegex);
-            let dateStr = "СЬОГОДНІ";
-            if (dateMatch) dateStr = dateMatch[0].toUpperCase();
-            lastDateStr = dateStr;
+            lastDateStr = dateMatch ? dateMatch[0].toUpperCase() : "СЬОГОДНІ";
 
-            document.getElementById('dateDisplay').innerHTML = `ГРАФІК ВІДКЛЮЧЕНЬ<br>НА <span>${dateStr}</span>`;
-
+            // Парсимо чергу
             const regex = /(?:^|\n)\s*1\.2\s+([^\n]+)/;
             const match = text.match(regex);
             if (!match) { debug.textContent = "Не знайдено чергу 1.2!"; return; }
@@ -458,7 +251,7 @@
                 if (endMin === 0 || endStr === "24:00") endMin = 1440; 
                 if (endMin < startMin) endMin = 1440; 
 
-                outages.push({ startMin, endMin, startStr, displayEndStr: (endStr === "24:00" ? "00:00" : endStr) });
+                outages.push({ startMin, endMin, startStr, displayEndStr: (endStr === "24:00" || endMin === 1440 ? "00:00" : endStr) });
                 totalOffMinutes += (endMin - startMin);
                 
                 let displayStartText = startStr === "24:00" ? "00:00" : startStr;
@@ -469,55 +262,193 @@
             lastTextIntervals = textIntervals.join('\n');
             outages.sort((a, b) => a.startMin - b.startMin);
 
+            // Генеруємо універсальний масив інтервалів (Світло Є і Немає)
+            let allIntervals = [];
             let currentTime = 0;
             
             outages.forEach(outage => {
                 if (currentTime < outage.startMin) {
-                    addTimelineBlock(currentTime, outage.startMin, true);
+                    allIntervals.push({ isOn: true, startMin: currentTime, endMin: outage.startMin });
                 }
-                addTimelineBlock(outage.startMin, outage.endMin, false, outage.startStr, outage.displayEndStr);
+                allIntervals.push({ isOn: false, startMin: outage.startMin, endMin: outage.endMin, displayEndStr: outage.displayEndStr });
                 currentTime = outage.endMin;
             });
 
             if (currentTime < 1440) {
-                addTimelineBlock(currentTime, 1440, true);
+                allIntervals.push({ isOn: true, startMin: currentTime, endMin: 1440 });
             }
 
-            const totalHours = (totalOffMinutes / 60).toFixed(1).replace('.0', '');
-            totalTimeDisplay.textContent = `Загальний час без світла: ~${totalHours} годин.`;
+            const totalHoursOff = (totalOffMinutes / 60).toFixed(1).replace('.0', '');
+            const totalHoursOn = (24 - totalOffMinutes / 60).toFixed(1).replace('.0', '');
+
+            // Рендеримо вибраний дизайн
+            const design = designSelect.value;
+            const finalTitle = getHeaderTitle(lastDateStr).replace(lastDateStr, `<span>${lastDateStr}</span>`);
+
+            if (design === 'timeline') renderTimeline(allIntervals, totalHoursOff, finalTitle);
+            else if (design === 'columns') renderColumns(allIntervals, totalHoursOff, totalHoursOn, finalTitle);
+            else if (design === 'emojis') renderEmojis(outages, finalTitle);
 
             updateCopyText();
             outputWrapper.style.display = 'block';
-            setTimeout(generateImageOutput, 200);
+            setTimeout(generateImageOutput, 300);
         }
 
-        // Рендер окремого блоку метро-таймлайну
-        function addTimelineBlock(startMin, endMin, isOn, customStartStr = null, customEndStr = null) {
-            const startStr = customStartStr || minutesToTime(startMin);
-            const endStr = customEndStr || (endMin === 1440 ? "24:00" : minutesToTime(endMin));
-
-            const row = document.createElement('div');
-            row.className = 'tl-row';
-
-            const timeLabel = document.createElement('div');
-            timeLabel.className = 'tl-time';
-            timeLabel.textContent = startStr;
-            row.appendChild(timeLabel);
-
-            const block = document.createElement('div');
-            if (isOn) {
-                block.className = 'tl-block tl-on';
-                block.innerHTML = `${svgBulb}<div>Світло є</div>`;
-            } else {
-                block.className = 'tl-block tl-off';
-                block.innerHTML = `${svgZapOff}<div>${startStr} — ${endStr}</div><div class="tl-subtitle">Світла немає</div>`;
-            }
-            row.appendChild(block);
-
-            timelineContainer.appendChild(row);
+        // === СТАНДАРТНИЙ ФУТЕР ===
+        function getStandardFooter(hoursOffHtml = "") {
+            return `
+                <div class="footer-info">
+                    ${hoursOffHtml}
+                    <div class="disclaimer-box">${iconInfo}<div>Графік є орієнтовним, оскільки ситуація в енергосистемі постійно змінюється.</div></div>
+                    <div class="footer-source">
+                        <span>Джерело: Харківобленерго</span>
+                    </div>
+                </div>`;
         }
 
-        // === ІНШІ ПЛЮШКИ ===
+        // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
+        function renderTimeline(intervals, totalHoursOff, finalTitle) {
+            let html = `
+                <div class="header-row">
+                    <div class="header-title">${finalTitle}</div>
+                    <img src="./logo.png" alt="" class="logo-fixed">
+                </div>
+                <div id="timelineContainer">`;
+            
+            intervals.forEach((int, i) => {
+                const stateClass = int.isOn ? 'on' : 'off';
+                const badgeText = int.isOn ? 'СВІТЛО Є' : 'ВІДКЛЮЧЕННЯ';
+                const lineClass = int.isOn ? 'solid' : 'dotted';
+                const intIcon = int.isOn ? iconBulb : iconZapOff;
+                const startStr = minutesToTime(int.startMin);
+                const endStr = int.displayEndStr || (int.endMin === 1440 ? "00:00" : minutesToTime(int.endMin));
+                
+                // Логіка крапки: колір НАСТУПНОГО стану
+                let dotHtml = '';
+                if (i < intervals.length - 1) {
+                    const nextOn = intervals[i+1].isOn;
+                    const dotClass = nextOn ? 'dot-on' : 'dot-off';
+                    dotHtml = `<div class="tl-dot ${dotClass}"></div>`;
+                }
+
+                html += `
+                <div class="tl-item ${stateClass}">
+                    <div class="time-col ${stateClass}">${startStr}</div>
+                    <div class="line-col">
+                        <div class="icon-circle">${houseSvg}</div>
+                        <div class="tl-line ${lineClass}"></div>
+                        ${dotHtml}
+                    </div>
+                    <div class="content-col">
+                        <div class="info-row">
+                            <div class="badge ${stateClass}">${badgeText}</div>
+                            <div class="interval ${stateClass}">${intIcon} <span>${startStr} - ${endStr}</span></div>
+                        </div>
+                    </div>
+                </div>`;
+            });
+
+            const hoursHtml = `<div class="total-time">Загальний час без світла: ~${totalHoursOff} годин.</div>`;
+            html += `</div>` + getStandardFooter(hoursHtml);
+            captureTarget.innerHTML = html;
+        }
+
+        // === РЕНДЕР ТЕМА 2: ДВІ КОЛОНКИ ===
+        function renderColumns(intervals, totalHoursOff, totalHoursOn, finalTitle) {
+            let offHtml = ''; let onHtml = '';
+            
+            intervals.forEach(int => {
+                const startStr = minutesToTime(int.startMin);
+                const endStr = int.displayEndStr || (int.endMin === 1440 ? "00:00" : minutesToTime(int.endMin));
+                if (int.isOn) {
+                    onHtml += `<div class="tc-time on">${startStr} - ${endStr}</div>`;
+                } else {
+                    offHtml += `<div class="tc-time off">${startStr} - ${endStr}</div>`;
+                }
+            });
+
+            captureTarget.innerHTML = `
+                <div class="header-row" style="margin-bottom: 30px; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div class="header-title">${finalTitle}</div>
+                        <div class="tc-location">${iconPin} Валки</div>
+                    </div>
+                    <img src="./logo.png" alt="" class="logo-fixed">
+                </div>
+                
+                <div class="tc-wrapper">
+                    ${iconLightning}
+                    <div class="tc-col">
+                        <div class="tc-badge off">СВІТЛА НЕ БУДЕ</div>
+                        <div class="tc-times-wrapper">
+                            <div class="tc-bracket-line"></div>
+                            ${offHtml}
+                            <div class="tc-bracket-bottom"></div>
+                            <div class="tc-bracket-tick"></div>
+                        </div>
+                        <div class="tc-total">~${totalHoursOff} годин</div>
+                    </div>
+
+                    <div class="tc-col">
+                        <div class="tc-badge on">СВІТЛО БУДЕ</div>
+                        <div class="tc-times-wrapper">
+                            <div class="tc-bracket-line"></div>
+                            ${onHtml}
+                            <div class="tc-bracket-bottom"></div>
+                            <div class="tc-bracket-tick"></div>
+                        </div>
+                        <div class="tc-total">~${totalHoursOn} годин</div>
+                    </div>
+                </div>
+                ${getStandardFooter()}
+                `;
+        }
+
+        // === РЕНДЕР ТЕМА 3: ЕМОДЗІ СПЛЕШ ===
+        function renderEmojis(outages, finalTitle) {
+            // АНТИ-ХАОС: Емодзі тільки в бокових зонах (left: 5-20% та 80-95%)
+            const emList = ['⚡️', '💡', '🔌', '🔦', '🔋'];
+            let bgHtml = '<div class="emoji-bg">';
+            
+            const generateSide = (minLeft, maxLeft) => {
+                for(let i=0; i<6; i++) {
+                    let em = emList[Math.floor(Math.random() * emList.length)];
+                    let left = Math.floor(Math.random() * (maxLeft - minLeft)) + minLeft;
+                    let top = 5 + (i * 15) + Math.random() * 10; // Рівномірно по вертикалі
+                    let size = Math.floor(Math.random() * 16) + 18;
+                    let rot = Math.floor(Math.random() * 360);
+                    let opac = (Math.floor(Math.random() * 5) + 3) / 10; // 0.3 - 0.7
+                    bgHtml += `<div style="position:absolute; left:${left}%; top:${top}%; font-size:${size}px; transform:rotate(${rot}deg); opacity:${opac};">${em}</div>`;
+                }
+            };
+            
+            generateSide(2, 18); // Ліва колонка
+            generateSide(82, 98); // Права колонка
+            bgHtml += '</div>';
+
+            let listHtml = '';
+            outages.forEach(outage => {
+                listHtml += `<div class="em-time">${outage.startStr} ${iconArrow} ${outage.displayEndStr}</div>`;
+            });
+
+            captureTarget.innerHTML = `
+                ${bgHtml}
+                <div class="header-row" style="margin-bottom: 20px; position:relative; z-index:2;">
+                    <div>
+                        <div class="header-title">${finalTitle}</div>
+                        <div class="tc-location">${iconPin} Валки</div>
+                    </div>
+                    <img src="./logo.png" alt="" class="logo-fixed">
+                </div>
+                
+                <div class="emoji-content-wrapper">
+                    ${listHtml}
+                </div>
+                ${getStandardFooter()}
+                `;
+        }
+
+        // === ПЛЮШКИ ===
         function updateCopyText() {
             const header = getHeaderTitle(lastDateStr);
             finalTextDiv.textContent = `${header}\n\n${lastTextIntervals}\n\nХарківобленерго`;
@@ -528,26 +459,19 @@
 
         function generateImageOutput() {
             html2canvas(captureTarget, {
-                scale: 3, 
-                backgroundColor: null, 
-                logging: false,
-                useCORS: true
+                scale: 3, backgroundColor: null, logging: false, useCORS: true
             }).then(canvas => {
                 generatedImage.src = canvas.toDataURL('image/png');
             });
         }
 
         function copyToClipboard() {
-            const text = finalTextDiv.textContent;
-            navigator.clipboard.writeText(text).then(() => {
+            navigator.clipboard.writeText(finalTextDiv.textContent).then(() => {
                 copyBlock.classList.add('copied');
                 copyHint.textContent = "СКОПІЙОВАНО! ✅";
                 copyHint.style.color = "#28a745";
                 if(navigator.vibrate) navigator.vibrate(50);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-                alert("Не вдалося скопіювати автоматично. Спробуй вручну.");
-            });
+            }).catch(err => alert("Не вдалося скопіювати автоматично. Спробуй вручну."));
         }
 
         async function saveImageToGallery() {
@@ -555,33 +479,17 @@
             try {
                 const response = await fetch(generatedImage.src);
                 const blob = await response.blob();
-                const file = new File([blob], "grafik.png", { type: "image/png" });
-                if (navigator.share) {
-                    await navigator.share({ files: [file] });
-                } else {
-                    const link = document.createElement("a");
-                    link.href = generatedImage.src;
-                    link.download = "grafik.png";
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                }
-            } catch (err) {
-                console.error("Error sharing:", err);
-                alert("Помилка збереження. Спробуй зробити скріншот.");
-            }
+                const file = new File([blob], "grafik_valky.png", { type: "image/png" });
+                if (navigator.share) { await navigator.share({ files: [file] }); } 
+                else { const link = document.createElement("a"); link.href = generatedImage.src; link.download = "grafik_valky.png"; document.body.appendChild(link); link.click(); document.body.removeChild(link); }
+            } catch (err) { alert("Помилка збереження. Спробуй зробити скріншот."); }
         }
 
         function clearAll() {
             document.getElementById('rawText').value = '';
-            timelineContainer.innerHTML = '';
+            captureTarget.innerHTML = '';
             outputWrapper.style.display = 'none';
         }
-
-        function randomizeTheme() {
-            alert('Цю фічу тимчасово відключено, бо ми перейшли на елітний темний дизайн 🥷');
-        }
     </script>
-
 </body>
 </html>
