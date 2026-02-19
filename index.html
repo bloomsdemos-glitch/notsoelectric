@@ -312,6 +312,25 @@
                 </select>
                 <input type="text" id="customHeaderInput" class="input-neumorph" style="display:none; margin-top:10px;" placeholder="Введи свій заголовок...">
             </div>
+        // НОВІ ІКОНКИ ДЛЯ ТАЙМЛАЙНУ
+        const svgBulb = `<svg class="tl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1.2 1.5-2.5 1.5-4a6 6 0 0 0-6-6 6 6 0 0 0-6 6c0 1.4.5 2.7 1.5 4 .7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`;
+        const svgZapOff = `<svg class="tl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"></line><path d="M8.5 8.5L3 14h9l-1 8 5.5-5.5"></path><path d="M16 10h5l-1.5 1.5"></path><path d="M12.4 6.6L13 2l-2.6 2.6"></path></svg>`;
+
+        // Елементи нашого нового дизайну
+        const timelineContainer = document.getElementById('timelineContainer');
+        const totalTimeDisplay = document.getElementById('totalTimeDisplay');
+
+        // Хелпери для роботи з часом (переводимо все у хвилини і назад)
+        function timeToMinutes(timeStr) {
+            const [h, m] = timeStr.replace(/[^\d:]/g, '').split(':').map(Number);
+            return (h || 0) * 60 + (m || 0);
+        }
+
+        function minutesToTime(mins) {
+            const h = Math.floor(mins / 60);
+            const m = mins % 60;
+            return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+        }
 
             <textarea id="rawText" class="input-neumorph" placeholder="Встав текст графіку від Харківобленерго сюди..."></textarea>
             
@@ -397,37 +416,12 @@
         const headerSelect = document.getElementById('headerSelect');
         const customHeaderInput = document.getElementById('customHeaderInput');
 
-        let hoursStatus = new Array(24).fill('on'); 
+        
         let currentThemeIndex = 0;
         let lastDateStr = "";
         let lastTextIntervals = "";
 
-        // === INIT ===
-        function initGrid() {
-            grid.innerHTML = '';
-            for (let i = 0; i < 24; i++) {
-                const div = document.createElement('div');
-                div.className = 'hour-box';
-                const timeStr = i.toString().padStart(2, '0') + ":00";
-                
-                // Шар 1: Світло
-                const layerBase = document.createElement('div');
-                layerBase.className = 'layer-base';
-                layerBase.innerHTML = `${iconBulb}<span class="time-text">${timeStr}</span>`;
-                
-                // Шар 2: Темно
-                const layerOverlay = document.createElement('div');
-                layerOverlay.className = 'layer-overlay';
-                const overlayContent = document.createElement('div');
-                overlayContent.className = 'overlay-content';
-                overlayContent.innerHTML = `${iconZapOff}<span class="time-text">${timeStr}</span>`;
-                
-                layerOverlay.appendChild(overlayContent);
-                div.appendChild(layerBase);
-                div.appendChild(layerOverlay);
-                grid.appendChild(div);
-            }
-        }
+        
 
         // === ЛОГІКА ===
         function toggleCustomHeader() {
@@ -482,39 +476,12 @@
             return fullClocks[idx];
         }
 
-        function renderSingle(idx) {
-            const div = grid.children[idx];
-            const status = hoursStatus[idx];
-            const overlay = div.querySelector('.layer-overlay');
-            const overlayContent = div.querySelector('.overlay-content');
-            
-            overlay.style.display = 'none';
-            overlay.style.left = 'auto'; overlay.style.right = 'auto';
-            overlayContent.style.left = 'auto'; overlayContent.style.right = 'auto';
-
-            const boxWidth = div.offsetWidth + 'px';
-            overlayContent.style.width = boxWidth;
-
-            if (status === 'off') {
-                overlay.style.display = 'block';
-                overlay.style.width = '100%';
-                overlay.style.left = '0'; overlayContent.style.left = '0';
-            }
-            else if (status === 'start-half') {
-                overlay.style.display = 'block';
-                overlay.style.width = '50.5%'; 
-                overlay.style.right = '0'; overlayContent.style.right = '0';
-            }
-            else if (status === 'end-half') {
-                overlay.style.display = 'block';
-                overlay.style.width = '50.5%';
-                overlay.style.left = '0'; overlayContent.style.left = '0';
-            }
-        }
+        
 
         function processDataAndGenerate() {
             const text = document.getElementById('rawText').value;
             debug.textContent = "";
+            timelineContainer.innerHTML = ""; // Очищаємо екран
             
             // 1. Пошук дати
             const dateRegex = /(\d{1,2})\s+(січня|лютого|березня|квітня|травня|червня|липня|серпня|вересня|жовтня|листопада|грудня)/i;
@@ -523,50 +490,102 @@
             if (dateMatch) dateStr = dateMatch[0].toUpperCase();
             lastDateStr = dateStr;
 
-            // 2. На картинці ЗАВЖДИ класика
-            dateDisplay.innerHTML = `ГРАФІК<br>НА ${dateStr}`;
+            // Оновлюємо заголовок (жовтий акцент на даті)
+            document.getElementById('dateDisplay').innerHTML = `ГРАФІК ВІДКЛЮЧЕНЬ<br>НА <span>${dateStr}</span>`;
 
-            // 3. Парсинг 1.2
+            // 2. Парсинг 1.2
             const regex = /(?:^|\n)\s*1\.2\s+([^\n]+)/;
             const match = text.match(regex);
             if (!match) { debug.textContent = "Не знайдено чергу 1.2!"; return; }
 
-            hoursStatus.fill('on');
-            let textIntervals = [];
             const ranges = match[1].trim().split(';');
+            let outages = [];
+            let totalOffMinutes = 0;
+            let textIntervals = [];
 
             ranges.forEach(range => {
-                range = range.trim();
-                if (!range || !/\d/.test(range)) return;
                 let parts = range.split(/[\-\–\—]/); 
                 if (parts.length < 2) return;
                 
                 let startStr = parts[0].trim(); 
                 let endStr = parts[1].trim();
 
-                // ФІКС: якщо бачимо 24:00 -> це 00:00 для тексту
-                let displayEndStr = endStr === "24:00" ? "00:00" : endStr;
-                let displayStartStr = startStr === "24:00" ? "00:00" : startStr;
-
-                applyRange(parseTime(startStr), parseTime(endStr));
+                let startMin = timeToMinutes(startStr);
+                let endMin = timeToMinutes(endStr);
                 
-                // Формуємо рядок: 🕕 18:00-21:00
-                textIntervals.push(`${getClockEmoji(startStr)} ${displayStartStr}-${displayEndStr}`);
+                if (endMin === 0 || endStr === "24:00") endMin = 1440; // Якщо до опівночі
+                if (endMin < startMin) endMin = 1440; // Перехід через ніч
+
+                outages.push({ startMin, endMin, startStr, displayEndStr: (endStr === "24:00" ? "00:00" : endStr) });
+                totalOffMinutes += (endMin - startMin);
+                
+                // Текст для копіювання
+                let displayStartText = startStr === "24:00" ? "00:00" : startStr;
+                let displayEndText = endStr === "24:00" ? "00:00" : endStr;
+                textIntervals.push(`${getClockEmoji(startStr)} ${displayStartText}-${displayEndText}`);
             });
 
             lastTextIntervals = textIntervals.join('\n');
 
-            // Рендер і генерація
-            hoursStatus.forEach((_, i) => renderSingle(i));
+            // Сортуємо відключення по часу (щоб йшли по порядку)
+            outages.sort((a, b) => a.startMin - b.startMin);
+
+            // Будуємо блоки (Світло є -> Немає -> Є)
+            let currentTime = 0;
             
-            // Оновлюємо текстовий блок
+            outages.forEach(outage => {
+                // Якщо є проміжок зі світлом ДО відключення
+                if (currentTime < outage.startMin) {
+                    addTimelineBlock(currentTime, outage.startMin, true);
+                }
+                // Блок відключення
+                addTimelineBlock(outage.startMin, outage.endMin, false, outage.startStr, outage.displayEndStr);
+                currentTime = outage.endMin;
+            });
+
+            // Якщо після останнього відключення ще є час до 24:00
+            if (currentTime < 1440) {
+                addTimelineBlock(currentTime, 1440, true);
+            }
+
+            // Оновлюємо загальний час внизу (магія, яку всі будуть шерити)
+            const totalHours = (totalOffMinutes / 60).toFixed(1).replace('.0', '');
+            totalTimeDisplay.textContent = `Загальний час без світла: ~${totalHours} годин.`;
+
+            // Оновлюємо текст для копіювання і показуємо результат
             updateCopyText();
-            
             outputWrapper.style.display = 'block';
-            
-            // Генеруємо картинку з затримкою для шрифтів
-            setTimeout(generateImageOutput, 150);
+            setTimeout(generateImageOutput, 200);
         }
+
+        // Функція, яка створює один блок у нашому списку
+        function addTimelineBlock(startMin, endMin, isOn, customStartStr = null, customEndStr = null) {
+            const startStr = customStartStr || minutesToTime(startMin);
+            const endStr = customEndStr || (endMin === 1440 ? "24:00" : minutesToTime(endMin));
+
+            const row = document.createElement('div');
+            row.className = 'tl-row';
+
+            // Годинник зліва
+            const timeLabel = document.createElement('div');
+            timeLabel.className = 'tl-time';
+            timeLabel.textContent = startStr;
+            row.appendChild(timeLabel);
+
+            // Сам кольоровий блок
+            const block = document.createElement('div');
+            if (isOn) {
+                block.className = 'tl-block tl-on';
+                block.innerHTML = `${svgBulb}<div>Світло є</div>`;
+            } else {
+                block.className = 'tl-block tl-off';
+                block.innerHTML = `${svgZapOff}<div>${startStr} — ${endStr}</div><div class="tl-subtitle">Світла немає</div>`;
+            }
+            row.appendChild(block);
+
+            timelineContainer.appendChild(row);
+        }
+
 
         function updateCopyText() {
             const header = getHeaderTitle(lastDateStr);
@@ -576,36 +595,9 @@
             copyHint.style.color = "#007aff";
         }
 
-        function parseTime(t) { 
-            const cleaned = t.replace(/[^\d:]/g, '');
-            const parts = cleaned.split(':');
-            const h = parseInt(parts[0]) || 0;
-            const m = parts.length > 1 ? parseInt(parts[1]) : 0;
-            return { h: h, m: m }; 
-        }
+       
 
-        function applyRange(start, end) {
-            let s = start.h * 60 + start.m;
-            let e = end.h * 60 + end.m;
-            if (e === 0 && end.h === 0) e = 1440; // 00:00 як кінець
-            if (e === 0 && end.h === 24) e = 1440; // 24:00 як кінець
-            if (e < s) e = 1440; // перехід через добу (спрощено)
-            
-            for (let h = 0; h < 24; h++) {
-                let hs = h * 60;
-                let he = (h + 1) * 60;
-                
-                if (hs >= s && he <= e) {
-                    hoursStatus[h] = 'off';
-                }
-                else if (s > hs && s < he) {
-                    hoursStatus[h] = start.m >= 30 ? 'start-half' : 'off';
-                }
-                else if (e > hs && e < he) {
-                    hoursStatus[h] = end.m >= 30 ? 'end-half' : 'on';
-                }
-            }
-        }
+        
 
         function generateImageOutput() {
             html2canvas(captureTarget, {
@@ -678,8 +670,7 @@
 
         function clearAll() {
             document.getElementById('rawText').value = '';
-            hoursStatus.fill('on');
-            initGrid();
+            timelineContainer.innerHTML = '';
             outputWrapper.style.display = 'none';
         }
 
