@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
@@ -12,586 +13,815 @@
             --c-yellow: #fbbf24; --c-red: #d9463b; --c-dark: #060606;
         }
 
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-app); color: var(--text-main); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .app-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; }
+```
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-app); color: var(--text-main); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+    .app-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; }
 
-        .card { background: var(--bg-app); padding: 25px; border-radius: var(--radius); box-shadow: 9px 9px 16px var(--neumorph-shadow-dark), -9px -9px 16px var(--neumorph-shadow-light); border: 1px solid rgba(255,255,255,0.2); }
-        h2 { margin: 0 0 20px 0; font-weight: 900; color: #333; letter-spacing: -0.5px; }
+    .card { background: var(--bg-app); padding: 25px; border-radius: var(--radius); box-shadow: 9px 9px 16px var(--neumorph-shadow-dark), -9px -9px 16px var(--neumorph-shadow-light); border: 1px solid rgba(255,255,255,0.2); }
+    h2 { margin: 0 0 20px 0; font-weight: 900; color: #333; letter-spacing: -0.5px; }
 
-        .form-group { margin-bottom: 15px; }
-        .form-label { font-size: 12px; font-weight: bold; color: #666; margin-left: 5px; display: block; margin-bottom: 5px; }
-        
-        .input-neumorph { width: 100%; border: none; border-radius: 12px; padding: 15px; font-family: inherit; background: var(--bg-app); box-shadow: inset 6px 6px 10px var(--neumorph-shadow-dark), inset -6px -6px 10px var(--neumorph-shadow-light); box-sizing: border-box; color: #333; outline: none; transition: 0.3s; font-weight: 500; }
-        .input-neumorph:focus { box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), inset -4px -4px 8px var(--neumorph-shadow-light); }
-        textarea.input-neumorph { height: 100px; resize: none; font-family: monospace; font-weight: normal; }
-        select.input-neumorph { appearance: none; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 15px top 50%; background-size: 12px auto; cursor: pointer; }
+    .form-group { margin-bottom: 15px; }
+    .form-label { font-size: 12px; font-weight: bold; color: #666; margin-left: 5px; display: block; margin-bottom: 5px; }
+    
+    .input-neumorph { width: 100%; border: none; border-radius: 12px; padding: 15px; font-family: inherit; background: var(--bg-app); box-shadow: inset 6px 6px 10px var(--neumorph-shadow-dark), inset -6px -6px 10px var(--neumorph-shadow-light); box-sizing: border-box; color: #333; outline: none; transition: 0.3s; font-weight: 500; }
+    .input-neumorph:focus { box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), inset -4px -4px 8px var(--neumorph-shadow-light); }
+    textarea.input-neumorph { height: 100px; resize: none; font-family: monospace; font-weight: normal; }
+    select.input-neumorph { appearance: none; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 15px top 50%; background-size: 12px auto; cursor: pointer; }
 
-        .btn-group { display: flex; gap: 15px; margin-top: 20px; }
-        .btn-neu { flex: 1; padding: 16px; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; background: var(--bg-app); box-shadow: 6px 6px 10px var(--neumorph-shadow-dark), -6px -6px 10px var(--neumorph-shadow-light); color: #333; transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px; }
-        .btn-neu:active { box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), inset -4px -4px 8px var(--neumorph-shadow-light); transform: scale(0.98); }
-        .btn-primary { color: #007aff; } .btn-danger { color: #ff3b30; }
-        .tools-row { display: flex; gap: 10px; margin-bottom: 15px; }
+    .btn-group { display: flex; gap: 15px; margin-top: 20px; }
+    .btn-neu { flex: 1; padding: 16px; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; background: var(--bg-app); box-shadow: 6px 6px 10px var(--neumorph-shadow-dark), -6px -6px 10px var(--neumorph-shadow-light); color: #333; transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px; }
+    .btn-neu:active { box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), inset -4px -4px 8px var(--neumorph-shadow-light); transform: scale(0.98); }
+    .btn-primary { color: #007aff; } .btn-danger { color: #ff3b30; }
+    .tools-row { display: flex; gap: 10px; margin-bottom: 15px; }
 
-                /* ЕДИТОР ІНТЕРВАЛІВ */
-        #editorWrapper { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05); }
-        .edit-chips-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-        .edit-chip { padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; background: var(--bg-app); transition: 0.2s; user-select: none; box-shadow: 3px 3px 6px var(--neumorph-shadow-dark), -3px -3px 6px var(--neumorph-shadow-light); display: flex; align-items: center; gap: 6px; }
-        .edit-chip:active { transform: scale(0.95); }
-        .edit-chip.off-state { border: 2px solid #888; color: #888; }
-        .edit-chip.on-state { border: 2px solid var(--c-yellow); color: var(--c-yellow); }
-        .edit-chip.rescued { border-color: var(--c-yellow); background: var(--c-yellow); color: #000; box-shadow: none; }
-        .edit-chip.emergency { border-color: var(--c-red); background: var(--c-red); color: #fff; box-shadow: none; }
+    /* ЕДИТОР ІНТЕРВАЛІВ */
+    #editorWrapper { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05); }
+    .edit-chips-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .edit-chip { padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; background: var(--bg-app); transition: 0.2s; user-select: none; box-shadow: 3px 3px 6px var(--neumorph-shadow-dark), -3px -3px 6px var(--neumorph-shadow-light); display: flex; align-items: center; gap: 6px; }
+    .edit-chip:active { transform: scale(0.95); }
+    .edit-chip.off-state { border: 2px solid #888; color: #888; }
+    .edit-chip.on-state { border: 2px solid var(--c-yellow); color: var(--c-yellow); }
+    .edit-chip.rescued { border-color: var(--c-yellow); background: var(--c-yellow); color: #000; box-shadow: none; }
+    .edit-chip.emergency { border-color: var(--c-red); background: var(--c-red); color: #fff; box-shadow: none; }
 
-        #outputWrapper { display: none; width: 100%; margin-top: 20px;}
-        #generatedImage { width: 100%; height: auto; display: block; margin-bottom: 15px; box-shadow: 5px 5px 15px rgba(0,0,0,0.15); border-radius: 0; }
-        
-        .copy-block { margin-top: 15px; padding: 20px; border-radius: 15px; background: var(--bg-app); cursor: pointer; transition: all 0.2s; position: relative; user-select: none; box-shadow: 7px 7px 14px var(--neumorph-shadow-dark), -7px -7px 14px var(--neumorph-shadow-light); }
-        .copy-block:active { box-shadow: inset 5px 5px 10px var(--neumorph-shadow-dark), inset -5px -5px 10px var(--neumorph-shadow-light); transform: scale(0.99); }
-        .copy-block.copied { background: #e3fae3; }
-        .copy-content { font-family: monospace; font-size: 14px; color: #333; white-space: pre-wrap; line-height: 1.4; pointer-events: none; }
-        .copy-hint { margin-top: 10px; font-size: 12px; color: #007aff; text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+    #outputWrapper { display: none; width: 100%; margin-top: 20px;}
+    #generatedImage { width: 100%; height: auto; display: block; margin-bottom: 15px; box-shadow: 5px 5px 15px rgba(0,0,0,0.15); border-radius: 0; }
+    
+    .copy-block { margin-top: 15px; padding: 20px; border-radius: 15px; background: var(--bg-app); cursor: pointer; transition: all 0.2s; position: relative; user-select: none; box-shadow: 7px 7px 14px var(--neumorph-shadow-dark), -7px -7px 14px var(--neumorph-shadow-light); }
+    .copy-block:active { box-shadow: inset 5px 5px 10px var(--neumorph-shadow-dark), inset -5px -5px 10px var(--neumorph-shadow-light); transform: scale(0.99); }
+    .copy-block.copied { background: #e3fae3; }
+    .copy-content { font-family: monospace; font-size: 14px; color: #333; white-space: pre-wrap; line-height: 1.4; pointer-events: none; }
+    .copy-hint { margin-top: 10px; font-size: 12px; color: #007aff; text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-                        /* === БАЗОВИЙ ТЕМНИЙ ШАБЛОН === */
-        #captureTarget { background: var(--c-dark); color: #ffffff; padding: 25px 30px; position: absolute; left: -9999px; top: 0; width: 440px; box-sizing: border-box; -webkit-font-smoothing: antialiased; overflow: hidden; border-radius: 0; }
-        
-        .header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px; position: relative; z-index: 2; }
-        .header-title { font-size: 24px; font-weight: 900; line-height: 1.25; letter-spacing: 0.5px; text-transform: uppercase; margin: 0; max-width: 320px; }
-        .header-title span { color: var(--c-yellow); }
-        .logo-fixed { width: 44px; height: 44px; object-fit: contain; border-radius: 50%; background: #ffffff; padding: 4px; box-sizing: border-box; flex-shrink: 0; }
+    /* === БАЗОВИЙ ТЕМНИЙ ШАБЛОН === */
+    #captureTarget { 
+        background: var(--c-dark); 
+        color: #ffffff; 
+        padding: 20px 25px 25px 25px;  /* менший верхній відступ */
+        position: absolute; 
+        left: -9999px; 
+        top: 0; 
+        width: 440px; 
+        box-sizing: border-box; 
+        -webkit-font-smoothing: antialiased; 
+        overflow: hidden; 
+        border-radius: 0; 
+    }
+    
+    /* === ХЕДЕР === */
+    .header-row { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: flex-start; 
+        margin-bottom: 20px; 
+        position: relative; 
+        z-index: 2; 
+    }
+    .header-title { 
+        font-size: 22px; 
+        font-weight: 900; 
+        line-height: 1.25; 
+        letter-spacing: 0.5px; 
+        text-transform: uppercase; 
+        margin: 0; 
+        flex: 1;
+        padding-right: 10px;
+    }
+    .header-title .title-date-line {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    .header-title .title-date-line span.date-text { 
+        color: var(--c-yellow); 
+    }
+    .header-title .valky-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 14px;
+        color: rgba(255,255,255,0.75);
+        font-weight: 600;
+        text-transform: none;
+        letter-spacing: 0;
+        white-space: nowrap;
+    }
+    .header-title .valky-tag svg {
+        width: 13px;
+        height: 13px;
+        fill: rgba(255,255,255,0.6);
+        flex-shrink: 0;
+    }
 
-        .footer-info { margin-top: 10px; padding-top: 20px; border-top: 1px solid #333; display: flex; flex-direction: column; gap: 15px; position: relative; z-index: 2; }
-        .disclaimer-box { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: #888; line-height: 1.4; font-weight: 500; }
-        .disclaimer-icon { width: 16px; height: 16px; flex-shrink: 0; color: #888; margin-top: 2px; }
-        .footer-source { font-size: 14px; font-weight: 500; color: #888; text-align: center; margin-top: 5px; }
+    /* Лого — маленьке, в правому нижньому куті блоку хедера */
+    .logo-wrapper {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        align-self: stretch;
+        flex-shrink: 0;
+    }
+    .logo-fixed { 
+        width: 34px; 
+        height: 34px; 
+        object-fit: contain; 
+        border-radius: 50%; 
+        background: #ffffff; 
+        padding: 3px; 
+        box-sizing: border-box; 
+        flex-shrink: 0; 
+    }
 
-        .total-time-center { text-align: center; font-family: monospace; font-size: 15px; color: #a1a1aa; margin-top: 15px; margin-bottom: 10px; position: relative; z-index: 2; font-weight: 600; }
+    /* === ФУТЕР === */
+    .footer-info { 
+        margin-top: 8px; 
+        padding-top: 15px; 
+        border-top: 1px solid #2a2a2a; 
+        display: flex; 
+        flex-direction: column; 
+        gap: 10px; 
+        position: relative; 
+        z-index: 2; 
+    }
+    .disclaimer-box { 
+        display: flex; 
+        align-items: flex-start; 
+        gap: 8px; 
+        font-size: 12px; 
+        color: #888; 
+        line-height: 1.4; 
+        font-weight: 500; 
+    }
+    .disclaimer-icon { 
+        width: 14px; 
+        height: 14px; 
+        flex-shrink: 0; 
+        color: #888; 
+        margin-top: 1px; 
+        overflow: visible;
+    }
+    .footer-source { 
+        font-size: 12px; 
+        font-weight: 500; 
+        color: #888; 
+        text-align: center; 
+        margin-top: 5px;
+        padding-bottom: 5px;
+    }
 
-        /* === ТЕМА 1: СМАРТ-ДІМ (ТАЙМЛАЙН) === */
-        #timelineContainer { padding-top: 5px; }
-        .tl-item { display: flex; align-items: stretch; margin-bottom: 0; min-height: 65px; z-index: 2; }
-        .tl-item:last-child .tl-line, .tl-item:last-child .tl-dot { display: none; } 
-        .tl-item:last-child .content-col { padding-bottom: 0; }
-        
-        .time-col { width: 60px; text-align: right; padding-right: 15px; font-weight: 700; font-size: 18px; line-height: 24px; flex-shrink: 0; margin-top: -1px; }
-        .time-col.off { color: var(--c-red); }
-        .time-col.on { color: var(--c-yellow); text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
-        
-        .line-col { display: flex; flex-direction: column; align-items: center; width: 28px; flex-shrink: 0; position: relative; z-index: 2; }
-        .icon-circle { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--c-dark); z-index: 3; }
-        .icon-house { width: 16px; height: 16px; } /* Збільшив хатинку */
-        .on .icon-house { fill: var(--c-yellow); filter: drop-shadow(0 0 5px var(--c-yellow)); }
-        .off .icon-house { fill: #555; }
-        
-        .tl-line { flex-grow: 1; width: 2px; margin: 4px 0; min-height: 35px; }
-        .tl-line.dotted { background-image: linear-gradient(to bottom, #444 50%, transparent 50%); background-size: 2px 10px; }
-        .tl-line.solid { background: var(--c-yellow); box-shadow: 0 0 8px var(--c-yellow); }
-        .tl-dot { width: 6px; height: 6px; border-radius: 50%; z-index: 3; margin-bottom: 4px; }
-        .tl-dot.dot-on { background: var(--c-yellow); box-shadow: 0 0 5px var(--c-yellow); }
-        .tl-dot.dot-off { background: #555; }
+    /* === ТЕМА 1: СМАРТ-ДІМ (ТАЙМЛАЙН) === */
+    .total-time-center { 
+        text-align: center; 
+        font-family: monospace; 
+        font-size: 13px; 
+        color: #a1a1aa; 
+        margin-top: 10px; 
+        margin-bottom: 5px; 
+        position: relative; 
+        z-index: 2; 
+        font-weight: 400;  /* звичайний, не жирний */
+    }
 
-        .content-col { padding-left: 15px; flex-grow: 1; padding-bottom: 25px; margin-top: -2px; }
-        .info-row { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; } 
-        
-        .badge { display: inline-flex; align-items: center; justify-content: center; padding: 2px 8px; border-radius: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.5px; height: auto; width: max-content; }
-        .badge.off { background: #1a1a1c; border: 1px solid #333; color: #a1a1aa; }
-        .badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 10px rgba(251, 191, 36, 0.2); border: 1px solid var(--c-yellow); }
+    #timelineContainer { padding-top: 5px; }
+    .tl-item { display: flex; align-items: stretch; margin-bottom: 0; min-height: 75px; z-index: 2; }
+    .tl-item:last-child .tl-line, .tl-item:last-child .tl-dot { display: none; } 
+    .tl-item:last-child .content-col { padding-bottom: 0; }
+    
+    .time-col { width: 60px; text-align: right; padding-right: 15px; font-weight: 700; font-size: 18px; line-height: 24px; flex-shrink: 0; margin-top: -1px; }
+    .time-col.off { color: var(--c-red); }
+    .time-col.on { color: var(--c-yellow); text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
+    
+    .line-col { display: flex; flex-direction: column; align-items: center; width: 32px; flex-shrink: 0; position: relative; z-index: 2; }
+    .icon-circle { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--c-dark); z-index: 3; }
+    .icon-house { width: 22px; height: 22px; } /* Збільшена хатинка */
+    .on .icon-house { fill: var(--c-yellow); filter: drop-shadow(0 0 5px var(--c-yellow)); }
+    .off .icon-house { fill: #555; }
+    
+    .tl-line { flex-grow: 1; width: 2px; margin: 4px 0; min-height: 45px; }  /* довші лінії */
+    .tl-line.dotted { background-image: linear-gradient(to bottom, #444 50%, transparent 50%); background-size: 2px 10px; }
+    .tl-line.solid { background: var(--c-yellow); box-shadow: 0 0 8px var(--c-yellow); }
+    .tl-dot { width: 6px; height: 6px; border-radius: 50%; z-index: 3; margin-bottom: 4px; }
+    .tl-dot.dot-on { background: var(--c-yellow); box-shadow: 0 0 5px var(--c-yellow); }
+    .tl-dot.dot-off { background: #555; }
 
-        .interval { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; }
-        .interval-icon { width: 13px; height: 13px; display: flex; align-items: center; justify-content: center; } /* Зменшив блискавки */
-        .interval.off { color: var(--c-red); }
-        .interval.on { color: var(--c-yellow); }
+    .content-col { padding-left: 15px; flex-grow: 1; padding-bottom: 30px; margin-top: -2px; }
+    .info-row { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; } 
+    
+    /* Badge — tight fit, обтікає текст */
+    .badge { 
+        display: inline-flex; 
+        align-items: center; 
+        justify-content: center; 
+        padding: 3px 10px; 
+        border-radius: 6px; 
+        font-size: 11px; 
+        font-weight: 800; 
+        letter-spacing: 0.5px; 
+        width: auto;          /* тільки по тексту */
+        max-width: max-content;
+    }
+    .badge.off { background: #1a1a1c; border: 1px solid #333; color: #a1a1aa; }
+    .badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 10px rgba(251, 191, 36, 0.2); border: 1px solid var(--c-yellow); }
 
-        /* === ТЕМА 2: ДВІ КОЛОНКИ === */
-        .tc-wrapper { display: flex; gap: 20px; text-align: center; margin-bottom: 10px; position: relative; z-index: 2; margin-top: 15px; }
-        .tc-col { flex: 1; display: flex; flex-direction: column; align-items: center; }
-        
-        .tc-badge { padding: 8px 16px; border-radius: 12px; font-size: 14px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 20px; display: inline-block; width: 100%; box-sizing: border-box; }
-        .tc-badge.off { background: var(--c-red); color: #fff; box-shadow: 0 0 15px rgba(217, 70, 59, 0.3); }
-        .tc-badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); }
-        
-        .tc-times-wrapper { display: flex; flex-direction: column; gap: 12px; width: 100%; position: relative; padding-bottom: 20px; }
-        .tc-bracket-line { position: absolute; width: 2px; background: #333; top: -10px; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; }
-        .tc-bracket-bottom { position: absolute; height: 2px; background: #333; bottom: 0; left: 20%; right: 20%; z-index: 1; }
-        .tc-bracket-tick { position: absolute; width: 2px; height: 10px; background: #333; bottom: -10px; left: 50%; transform: translateX(-50%); z-index: 1; }
-        
-        .tc-time { font-size: 20px; font-weight: 700; letter-spacing: 1px; position: relative; z-index: 2; background: var(--c-dark); padding: 4px 0; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-        .tc-time.off { color: #fff; }
-        .tc-time.on { color: #fff; }
+    .interval { display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; }
+    .interval-icon { 
+        width: 14px; 
+        height: 14px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    .interval.off { color: var(--c-red); }
+    .interval.on { color: var(--c-yellow); }
 
-        .tc-total { font-size: 14px; font-weight: 700; margin-top: 15px; color: #a1a1aa; background: var(--c-dark); padding: 0 10px; position: relative; z-index: 2; }
-        .tc-lightning { position: absolute; left: 50%; top: 5px; transform: translateX(-50%); color: var(--c-yellow); width: 24px; height: 24px; }
+    /* Фіча «Світло було» / «Аварійне» — тег поряд, не всередині */
+    .badge-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .badge-modifier {
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+    .badge-modifier.rescued { color: var(--c-yellow); }
+    .badge-modifier.emergency { color: var(--c-red); }
 
-        /* === ТЕМА 3: ЕМОДЗІ СПЛЕШ === */
-        .emoji-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-        .emoji-content-wrapper { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 0 20px 0; }
-        .em-time { font-size: 34px; font-weight: 800; color: var(--c-red); margin-bottom: 24px; letter-spacing: 2px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 100%; }
-        .em-time:last-child { margin-bottom: 0; }
-        .em-arrow { width: 24px; height: 24px; color: #555; }
+    /* === ТЕМА 2: ДВІ КОЛОНКИ === */
+    .tc-wrapper { display: flex; gap: 20px; text-align: center; margin-bottom: 10px; position: relative; z-index: 2; margin-top: 15px; }
+    .tc-col { flex: 1; display: flex; flex-direction: column; align-items: center; }
+    
+    .tc-badge { padding: 8px 16px; border-radius: 12px; font-size: 14px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 20px; display: inline-block; width: 100%; box-sizing: border-box; }
+    .tc-badge.off { background: var(--c-red); color: #fff; box-shadow: 0 0 15px rgba(217, 70, 59, 0.3); }
+    .tc-badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); }
+    
+    .tc-times-wrapper { display: flex; flex-direction: column; gap: 12px; width: 100%; position: relative; padding-bottom: 20px; }
+    .tc-bracket-line { position: absolute; width: 2px; background: #333; top: -10px; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; }
+    .tc-bracket-bottom { position: absolute; height: 2px; background: #333; bottom: 0; left: 20%; right: 20%; z-index: 1; }
+    .tc-bracket-tick { position: absolute; width: 2px; height: 10px; background: #333; bottom: -10px; left: 50%; transform: translateX(-50%); z-index: 1; }
+    
+    .tc-time { font-size: 18px; font-weight: 700; letter-spacing: 1px; position: relative; z-index: 2; background: var(--c-dark); padding: 4px 0; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .tc-time.off { color: #fff; }
+    .tc-time.on { color: #fff; }
+    .tc-modifier { font-size: 11px; font-weight: 800; text-transform: uppercase; }
+    .tc-modifier.rescued { color: var(--c-yellow); }
+    .tc-modifier.emergency { color: var(--c-red); }
+
+    .tc-total { font-size: 14px; font-weight: 700; margin-top: 15px; color: #888; background: var(--c-dark); padding: 0 10px; position: relative; z-index: 2; }
+    .tc-lightning { position: absolute; left: 50%; top: 5px; transform: translateX(-50%); color: var(--c-yellow); width: 24px; height: 24px; }
+
+    /* === ТЕМА 3: ЕМОДЗІ СПЛЕШ === */
+    .emoji-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+    .emoji-content-wrapper { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 5px 0 15px 0; }
+
+    /* Емодзі: рядки по дві пари */
+    .em-rows { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+    .em-row { display: flex; justify-content: center; gap: 20px; }
+    .em-time { 
+        font-size: 20px; 
+        font-weight: 800; 
+        color: var(--c-red); 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+    .em-time .em-arrow { width: 16px; height: 16px; color: #555; }
+    .em-time.is-off { color: var(--c-red); }
+    .em-time.is-rescued {
+        color: var(--c-yellow);
+        opacity: 0.7;
+    }
+    .em-time.is-rescued .em-time-text {
+        text-decoration: line-through;
+        text-decoration-color: var(--c-yellow);
+        text-decoration-thickness: 2px;
+    }
+    .em-time.is-emergency {
+        color: var(--c-red);
+        opacity: 0.7;
+    }
+    .em-time.is-emergency .em-time-text {
+        text-decoration: line-through;
+        text-decoration-color: var(--c-red);
+        text-decoration-thickness: 2px;
+    }
 
 </style>
+```
+
 </head>
 <body>
 
-    <div class="app-container">
-        <div class="card">
-            <h2>ELECTRIFY &copy;</h2>
-            
-            <div class="form-group">
-                <label class="form-label">Візуальний дизайн (можна змінювати на льоту):</label>
-                <select id="designSelect" class="input-neumorph" onchange="if(globalIntervals.length) processDataAndGenerate(false)">
-                    <option value="timeline">🏠 Смарт-дім (Таймлайн)</option>
-                    <option value="columns">⚖️ Дві колонки (Є / Немає)</option>
-                    <option value="emojis">🎈 Мінімалізм (Рандомні емодзі)</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Заголовок посту:</label>
-                <input type="text" id="postTitleInput" class="input-neumorph" value="ГРАФІК ВІДКЛЮЧЕНЬ НА [ДАТА]" placeholder="Введи заголовок (тег [ДАТА] заміниться автоматично)">
-            </div>
-
-            <textarea id="rawText" class="input-neumorph" placeholder="Встав текст графіку від Харківобленерго сюди (з чергою 1.2)..."></textarea>
-            
-            <div class="btn-group">
-                <button class="btn-neu btn-primary" onclick="processDataAndGenerate(true)">⚡ Створити</button>
-                <button class="btn-neu btn-danger" onclick="clearAll()">❌</button>
-            </div>
-
-            <div id="editorWrapper">
-                <label class="form-label">СВІТЛО БУЛО? (натисни на блок, щоб скасувати відключення):</label>
-                <div class="edit-chips-container" id="editorChips"></div>
-            </div>
-
-            <div id="debug" style="color:red; font-size:12px; margin-top:10px; text-align:center;"></div>
+```
+<div class="app-container">
+    <div class="card">
+        <h2>ELECTRIFY &copy;</h2>
+        
+        <div class="form-group">
+            <label class="form-label">Візуальний дизайн (можна змінювати на льоту):</label>
+            <select id="designSelect" class="input-neumorph" onchange="if(globalIntervals.length) processDataAndGenerate(false)">
+                <option value="timeline">🏠 Смарт-дім (Таймлайн)</option>
+                <option value="columns">⚖️ Дві колонки (Є / Немає)</option>
+                <option value="emojis">🎈 Мінімалізм (Рандомні емодзі)</option>
+            </select>
         </div>
 
-        <div id="outputWrapper">
-            <div class="tools-row">
-                <button class="btn-neu" onclick="saveImageToGallery()">💾 Зберегти</button>
-            </div>
-            <img id="generatedImage" src="">
-            <div class="copy-block" id="copyBlock" onclick="copyToClipboard()">
-                <div class="copy-content" id="finalText">Тут буде текст...</div>
-                <div class="copy-hint" id="copyHint">Тапни, щоб скопіювати текст</div>
-            </div>
+        <div class="form-group">
+            <label class="form-label">Заголовок посту:</label>
+            <input type="text" id="postTitleInput" class="input-neumorph" value="ГРАФІК ВІДКЛЮЧЕНЬ НА [ДАТА]" placeholder="Введи заголовок (тег [ДАТА] заміниться автоматично)">
         </div>
+
+        <textarea id="rawText" class="input-neumorph" placeholder="Встав текст графіку від Харківобленерго сюди (з чергою 1.2)..."></textarea>
+        
+        <div class="btn-group">
+            <button class="btn-neu btn-primary" onclick="processDataAndGenerate(true)">⚡ Створити</button>
+            <button class="btn-neu btn-danger" onclick="clearAll()">❌</button>
+        </div>
+
+        <div id="editorWrapper">
+            <label class="form-label">РЕДАКТОР ГРАФІКУ (натисни на блок, щоб змінити стан):<br><span style="font-weight:normal; font-size:11px; color:#888; text-transform:none;">Сірі — відключення (клік = світло було). Жовті — світло є (клік = аварійне).</span></label>
+            <div class="edit-chips-container" id="editorChips"></div>
+        </div>
+
+        <div id="debug" style="color:red; font-size:12px; margin-top:10px; text-align:center;"></div>
     </div>
 
-    <div id="captureTarget"></div>
+    <div id="outputWrapper">
+        <div class="tools-row">
+            <button class="btn-neu" onclick="saveImageToGallery()">💾 Зберегти</button>
+        </div>
+        <img id="generatedImage" src="">
+        <div class="copy-block" id="copyBlock" onclick="copyToClipboard()">
+            <div class="copy-content" id="finalText">Тут буде текст...</div>
+            <div class="copy-hint" id="copyHint">Тапни, щоб скопіювати текст</div>
+        </div>
+    </div>
+</div>
 
-    <script>
-        // === ІКОНКИ ===
-        const houseSvg = `<svg class="icon-house" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h14v-8h3L12 3z"/></svg>`;
-        const iconBulb = `<svg class="interval-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1.2 1.5-2.5 1.5-4a6 6 0 0 0-6-6 6 6 0 0 0-6 6c0 1.4.5 2.7 1.5 4 .7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`;
-        const iconZapOff = `<svg class="interval-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"></line><path d="M8.5 8.5L3 14h9l-1 8 5.5-5.5"></path><path d="M16 10h5l-1.5 1.5"></path><path d="M12.4 6.6L13 2l-2.6 2.6"></path></svg>`;
-        const iconInfo = `<svg class="disclaimer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`;
-        const iconPin = `<svg class="tc-location-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`;
-        const iconLightning = `<svg class="tc-lightning" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`;
-        const iconArrow = `<svg class="em-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
+<div id="captureTarget"></div>
 
-        // === DOM ===
-        const debug = document.getElementById('debug');
-        const finalTextDiv = document.getElementById('finalText');
-        const copyBlock = document.getElementById('copyBlock');
-        const copyHint = document.getElementById('copyHint');
-        const captureTarget = document.getElementById('captureTarget');
-        const outputWrapper = document.getElementById('outputWrapper');
-        const generatedImage = document.getElementById('generatedImage');
-        const designSelect = document.getElementById('designSelect');
-        const postTitleInput = document.getElementById('postTitleInput');
-        
-        const editorWrapper = document.getElementById('editorWrapper');
-        const editorChips = document.getElementById('editorChips');
+<script>
+    // === ІКОНКИ ===
+    const houseSvg = `<svg class="icon-house" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h14v-8h3L12 3z"/></svg>`;
+    
+    // Іконки однакового розміру з текстом (14px)
+    const iconBulb = `<svg class="interval-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1.2 1.5-2.5 1.5-4a6 6 0 0 0-6-6 6 6 0 0 0-6 6c0 1.4.5 2.7 1.5 4 .7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`;
+    const iconZapOff = `<svg class="interval-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"></line><path d="M8.5 8.5L3 14h9l-1 8 5.5-5.5"></path><path d="M16 10h5l-1.5 1.5"></path><path d="M12.4 6.6L13 2l-2.6 2.6"></path></svg>`;
+    
+    // Іконка (i) — повністю видима, без обрізань
+    const iconInfo = `<svg class="disclaimer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="overflow:visible; min-width:14px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="1" fill="currentColor" stroke="none"/></svg>`;
+    
+    // Пін-локація
+    const iconPin = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`;
+    
+    const iconLightning = `<svg class="tc-lightning" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`;
+    const iconArrow = `<svg class="em-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
 
-        let lastDateStr = "";
-                let lastTextIntervals = "";
-        let globalIntervals = []; // Тепер зберігаємо абсолютно всі інтервали 24/7
+    // === DOM ===
+    const debug = document.getElementById('debug');
+    const finalTextDiv = document.getElementById('finalText');
+    const copyBlock = document.getElementById('copyBlock');
+    const copyHint = document.getElementById('copyHint');
+    const captureTarget = document.getElementById('captureTarget');
+    const outputWrapper = document.getElementById('outputWrapper');
+    const generatedImage = document.getElementById('generatedImage');
+    const designSelect = document.getElementById('designSelect');
+    const postTitleInput = document.getElementById('postTitleInput');
+    
+    const editorWrapper = document.getElementById('editorWrapper');
+    const editorChips = document.getElementById('editorChips');
 
-        // === ХЕЛПЕРИ ===
-        function timeToMinutes(timeStr) {
-            const [h, m] = timeStr.replace(/[^\d:]/g, '').split(':').map(Number);
-            return (h || 0) * 60 + (m || 0);
+    let lastDateStr = "";
+    let lastTextIntervals = "";
+    let globalIntervals = [];
+
+    // === ХЕЛПЕРИ ===
+    function timeToMinutes(timeStr) {
+        const [h, m] = timeStr.replace(/[^\d:]/g, '').split(':').map(Number);
+        return (h || 0) * 60 + (m || 0);
+    }
+
+    function minutesToTime(mins) {
+        const h = Math.floor(mins / 60);
+        const m = mins % 60;
+        return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+    }
+
+    function getHeaderTitle(dateStr) {
+        let rawTitle = postTitleInput.value.trim() || "ГРАФІК ВІДКЛЮЧЕНЬ НА [ДАТА]";
+        return rawTitle.replace(/\[ДАТА\]/gi, dateStr);
+    }
+
+    function getClockEmoji(timeStr) {
+        let [h, m] = timeStr.split(':').map(Number);
+        if (isNaN(m)) m = 0;
+        let emojiTimeH = h % 12 || 12; 
+        const fullClocks = ['🕛','🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚'];
+        const halfClocks = ['🕧','🕜','🕝','🕞','🕟','🕠','🕡','🕢','🕣','🕤','🕥','🕦'];
+        return (m >= 30) ? halfClocks[emojiTimeH === 12 ? 0 : emojiTimeH] : fullClocks[emojiTimeH === 12 ? 0 : emojiTimeH];
+    }
+
+    // === СПІЛЬНИЙ ХЕДЕР ===
+    function getStandardHeader(dateStr, rawTitleTemplate) {
+        // Будуємо заголовок: перший рядок — все до [ДАТА], другий рядок — дата + Валки
+        let rawTitle = rawTitleTemplate || postTitleInput.value.trim() || "ГРАФІК ВІДКЛЮЧЕНЬ НА [ДАТА]";
+        const dateTagIndex = rawTitle.toUpperCase().indexOf('[ДАТА]');
+        let beforeDate = dateTagIndex >= 0 ? rawTitle.substring(0, dateTagIndex) : rawTitle;
+        let hasDate = dateTagIndex >= 0;
+
+        const valkyHtml = `<span class="valky-tag">${iconPin} Валки</span>`;
+
+        let titleHtml;
+        if (hasDate) {
+            titleHtml = `
+                <div>${beforeDate.trim()}</div>
+                <div class="title-date-line">
+                    <span class="date-text">${dateStr}</span>
+                    ${valkyHtml}
+                </div>`;
+        } else {
+            titleHtml = `<div>${rawTitle}</div>`;
         }
 
-        function minutesToTime(mins) {
-            const h = Math.floor(mins / 60);
-            const m = mins % 60;
-            return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
-        }
+        return `
+            <div class="header-row">
+                <div class="header-title">${titleHtml}</div>
+                <div class="logo-wrapper">
+                    <img src="./logo.png" alt="" class="logo-fixed">
+                </div>
+            </div>`;
+    }
 
-        function getHeaderTitle(dateStr) {
-            let rawTitle = postTitleInput.value.trim() || "ГРАФІК ВІДКЛЮЧЕНЬ НА [ДАТА]";
-            return rawTitle.replace(/\[ДАТА\]/gi, dateStr);
-        }
+    // === СПІЛЬНИЙ ФУТЕР ===
+    function getStandardFooter() {
+        return `
+            <div class="footer-info">
+                <div class="disclaimer-box">${iconInfo}<div>Час і тривалість відключень можуть змінюватися залежно від стану енергосистеми / аварійних ситуацій</div></div>
+                <div class="footer-source">
+                    <span><b>Джерело:</b> Харківобленерго</span>
+                </div>
+            </div>`;
+    }
 
-        function getClockEmoji(timeStr) {
-            let [h, m] = timeStr.split(':').map(Number);
-            if (isNaN(m)) m = 0;
-            let emojiTimeH = h % 12 || 12; 
-            const fullClocks = ['🕛','🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚'];
-            const halfClocks = ['🕧','🕜','🕝','🕞','🕟','🕠','🕡','🕢','🕣','🕤','🕥','🕦'];
-            return (m >= 30) ? halfClocks[emojiTimeH === 12 ? 0 : emojiTimeH] : fullClocks[emojiTimeH === 12 ? 0 : emojiTimeH];
-        }
+    // === ГОЛОВНИЙ ПРОЦЕС ===
+    function processDataAndGenerate(fromRawText = true) {
+        debug.textContent = "";
+        if (fromRawText) {
+            const text = document.getElementById('rawText').value;
+            const dateRegex = /(\d{1,2})\s+(січня|лютого|березня|квітня|травня|червня|липня|серпня|вересня|жовтня|листопада|грудня)/i;
+            const dateMatch = text.match(dateRegex);
+            lastDateStr = dateMatch ? dateMatch[0].toUpperCase() : "СЬОГОДНІ";
 
-        // === ГОЛОВНИЙ ПРОЦЕС ===
-        function processDataAndGenerate(fromRawText = true) {
-            debug.textContent = "";
-            if (fromRawText) {
-                const text = document.getElementById('rawText').value;
-                const dateRegex = /(\d{1,2})\s+(січня|лютого|березня|квітня|травня|червня|липня|серпня|вересня|жовтня|листопада|грудня)/i;
-                const dateMatch = text.match(dateRegex);
-                lastDateStr = dateMatch ? dateMatch[0].toUpperCase() : "СЬОГОДНІ";
+            const regex = /(?:^|\n)\s*1\.2\s+([^\n]+)/;
+            const match = text.match(regex);
+            if (!match) { debug.textContent = "Не знайдено чергу 1.2!"; return; }
 
-                const regex = /(?:^|\n)\s*1\.2\s+([^\n]+)/;
-                const match = text.match(regex);
-                if (!match) { debug.textContent = "Не знайдено чергу 1.2!"; return; }
+            const ranges = match[1].trim().split(';');
+            let tempOutages = [];
 
-                const ranges = match[1].trim().split(';');
-                let tempOutages = [];
+            ranges.forEach(range => {
+                let parts = range.split(/[\-\–\—]/); 
+                if (parts.length < 2) return;
+                let startStr = parts[0].trim(); 
+                let endStr = parts[1].trim();
+                let startMin = timeToMinutes(startStr);
+                let endMin = timeToMinutes(endStr);
+                
+                if (endMin === 0 || endStr === "24:00") endMin = 1440; 
+                if (endMin < startMin) endMin = 1440; 
 
-                ranges.forEach(range => {
-                    let parts = range.split(/[\-\–\—]/); 
-                    if (parts.length < 2) return;
-                    let startStr = parts[0].trim(); 
-                    let endStr = parts[1].trim();
-                    let startMin = timeToMinutes(startStr);
-                    let endMin = timeToMinutes(endStr);
-                    
-                    if (endMin === 0 || endStr === "24:00") endMin = 1440; 
-                    if (endMin < startMin) endMin = 1440; 
-
-                    tempOutages.push({ 
-                        startMin, endMin, startStr, 
-                        displayEndStr: (endStr === "24:00" || endMin === 1440 ? "00:00" : endStr)
-                    });
+                tempOutages.push({ 
+                    startMin, endMin, startStr, 
+                    displayEndStr: (endStr === "24:00" || endMin === 1440 ? "00:00" : endStr)
                 });
-                tempOutages.sort((a, b) => a.startMin - b.startMin);
+            });
+            tempOutages.sort((a, b) => a.startMin - b.startMin);
 
-                globalIntervals = [];
-                let currentTime = 0;
+            globalIntervals = [];
+            let currentTime = 0;
 
-                tempOutages.forEach(outage => {
-                    // Формуємо блок "Світло є"
-                    if (currentTime < outage.startMin) {
-                        globalIntervals.push({ 
-                            type: 'on', isModified: false, 
-                            startMin: currentTime, endMin: outage.startMin,
-                            startStr: minutesToTime(currentTime), displayEndStr: minutesToTime(outage.startMin)
-                        });
-                    }
-                    // Формуємо блок "Відключення"
-                    globalIntervals.push({ 
-                        type: 'off', isModified: false, 
-                        startMin: outage.startMin, endMin: outage.endMin, 
-                        displayEndStr: outage.displayEndStr, startStr: outage.startStr
-                    });
-                    currentTime = outage.endMin;
-                });
-
-                // Добиваємо до кінця доби, якщо треба
-                if (currentTime < 1440) {
+            tempOutages.forEach(outage => {
+                if (currentTime < outage.startMin) {
                     globalIntervals.push({ 
                         type: 'on', isModified: false, 
-                        startMin: currentTime, endMin: 1440,
-                        startStr: minutesToTime(currentTime), displayEndStr: "00:00"
+                        startMin: currentTime, endMin: outage.startMin,
+                        startStr: minutesToTime(currentTime), displayEndStr: minutesToTime(outage.startMin)
                     });
                 }
-            }
-
-            renderEditorChips();
-
-            let totalOffMinutes = 0;
-            let textIntervals = [];
-
-            // Розрахунок тексту і годин (враховуючи Аварії і Порятунки)
-            globalIntervals.forEach(int => {
-                let isActuallyOff = (int.type === 'off' && !int.isModified) || (int.type === 'on' && int.isModified);
-                
-                if (isActuallyOff) {
-                    totalOffMinutes += (int.endMin - int.startMin);
-                    let note = (int.type === 'on' && int.isModified) ? " (аварійне ⚠️)" : "";
-                    textIntervals.push(`${getClockEmoji(int.startStr)} ${int.startStr}-${int.displayEndStr}${note}`);
-                }
-            });
-            
-            lastTextIntervals = textIntervals.join('\n');
-
-            const totalHoursOff = (totalOffMinutes / 60).toFixed(1).replace('.0', '');
-            const totalHoursOn = (24 - totalOffMinutes / 60).toFixed(1).replace('.0', '');
-
-            const design = designSelect.value;
-                        // Динамічно додаємо "Валки" прямо в заголовок після дати
-            const valkyPinHtml = `<span style="display:inline-flex; align-items:center; font-size:18px; color:rgba(255,255,255,0.9); font-weight:600; text-transform:none; letter-spacing:0; margin-left:8px;">${iconPin} Валки</span>`;
-            const finalTitle = getHeaderTitle(lastDateStr).replace(lastDateStr, `<span>${lastDateStr}</span> ${valkyPinHtml}`);
-
-            if (design === 'timeline') renderTimeline(globalIntervals, totalHoursOff, finalTitle);
-            else if (design === 'columns') renderColumns(globalIntervals, totalHoursOff, totalHoursOn, finalTitle);
-            else if (design === 'emojis') renderEmojis(globalIntervals, finalTitle);
-
-            updateCopyText();
-            outputWrapper.style.display = 'block';
-            setTimeout(generateImageOutput, 300);
-        }
-
-        // Рендер кнопок редагування (Чіпи)
-        function renderEditorChips() {
-            editorChips.innerHTML = '';
-            if (globalIntervals.length > 0) {
-                editorWrapper.style.display = 'block';
-                editorWrapper.querySelector('.form-label').innerHTML = 'РЕДАКТОР ГРАФІКУ (натисни на блок, щоб змінити стан):<br><span style="font-weight:normal; font-size:11px; color:#888; text-transform:none;">Сірі — відключення (клік = світло було). Жовті — світло є (клік = аварійне).</span>';
-
-                globalIntervals.forEach((int) => {
-                    const btn = document.createElement('div');
-                    let timeText = `${int.startStr} - ${int.displayEndStr}`;
-                    
-                    if (int.type === 'off') {
-                        btn.className = `edit-chip ${int.isModified ? 'rescued' : 'off-state'}`;
-                        btn.innerHTML = `🌑 ${timeText} ${int.isModified ? '💡' : ''}`;
-                    } else {
-                        btn.className = `edit-chip ${int.isModified ? 'emergency' : 'on-state'}`;
-                        btn.innerHTML = `💡 ${timeText} ${int.isModified ? '⚠️' : ''}`;
-                    }
-
-                    btn.onclick = () => {
-                        int.isModified = !int.isModified;
-                        processDataAndGenerate(false); 
-                    };
-                    editorChips.appendChild(btn);
+                globalIntervals.push({ 
+                    type: 'off', isModified: false, 
+                    startMin: outage.startMin, endMin: outage.endMin, 
+                    displayEndStr: outage.displayEndStr, startStr: outage.startStr
                 });
-            } else {
-                editorWrapper.style.display = 'none';
+                currentTime = outage.endMin;
+            });
+
+            if (currentTime < 1440) {
+                globalIntervals.push({ 
+                    type: 'on', isModified: false, 
+                    startMin: currentTime, endMin: 1440,
+                    startStr: minutesToTime(currentTime), displayEndStr: "00:00"
+                });
             }
         }
 
-        // === СПІЛЬНІ ЕЛЕМЕНТИ ===
-        function getStandardHeader(finalTitle) {
-            return `
-                <div class="header-row">
-                    <div class="header-title">${finalTitle}</div>
-                    <img src="./logo.png" alt="" class="logo-fixed">
-                </div>`;
-        }
+        renderEditorChips();
 
-        function getStandardFooter() {
-            return `
-                <div class="footer-info">
-                    <div class="disclaimer-box">${iconInfo}<div>Графік є орієнтовним, оскільки ситуація в енергосистемі постійно змінюється</div></div>
-                    <div class="footer-source">
-                        <span><b>Джерело:</b> Харківобленерго</span>
-                    </div>
-                </div>`;
-        }
+        let totalOffMinutes = 0;
+        let textIntervals = [];
 
-        // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
-        function renderTimeline(intervals, totalHoursOff, finalTitle) {
-            let html = getStandardHeader(finalTitle) + `<div id="timelineContainer">`;
-                
-            intervals.forEach((int, i) => {
-                const isVisuallyOn = int.type === 'on';
-                const stateClass = isVisuallyOn ? 'on' : 'off';
-                
-                // Нова логіка бейджів: перекреслення + акуратний текст поруч
-                let badgeHtml = '';
-                if (int.type === 'off') {
-                    if (int.isModified) {
-                        badgeHtml = `<div style="display: flex; gap: 10px; align-items: center;"><div class="badge off" style="text-decoration: line-through; text-decoration-color: var(--c-yellow); opacity: 0.6;">ВІДКЛЮЧЕННЯ</div><div style="color: var(--c-yellow); font-size: 13px; font-weight: 800; text-transform: uppercase;">💡 Світло було</div></div>`;
-                    } else {
-                        badgeHtml = `<div class="badge off">ВІДКЛЮЧЕННЯ</div>`;
-                    }
-                } else {
-                    if (int.isModified) {
-                        badgeHtml = `<div style="display: flex; gap: 10px; align-items: center;"><div class="badge on" style="text-decoration: line-through; text-decoration-color: var(--c-red); opacity: 0.6;">СВІТЛО Є</div><div style="color: var(--c-red); font-size: 13px; font-weight: 800; text-transform: uppercase;">⚠️ Аварійне</div></div>`;
-                    } else {
-                        badgeHtml = `<div class="badge on">СВІТЛО Є</div>`;
-                    }
-                }
-                    
-                const lineClass = isVisuallyOn ? 'solid' : 'dotted';
-                const intIcon = isVisuallyOn ? iconBulb : iconZapOff;
-                
-                let dotHtml = '';
-                if (i < intervals.length - 1) {
-                    const nextOn = intervals[i+1].type === 'on';
-                    const dotClass = nextOn ? 'dot-on' : 'dot-off';
-                    dotHtml = `<div class="tl-dot ${dotClass}"></div>`;
-                }
-
-                html += `
-                <div class="tl-item ${stateClass}">
-                    <div class="time-col ${stateClass}">${int.startStr}</div>
-                    <div class="line-col">
-                        <div class="icon-circle">${houseSvg}</div>
-                        <div class="tl-line ${lineClass}"></div>
-                        ${dotHtml}
-                    </div>
-                    <div class="content-col">
-                        <div class="info-row">
-                            ${badgeHtml}
-                            <div class="interval ${stateClass}">${intIcon} <span>${int.startStr} - ${int.displayEndStr}</span></div>
-                        </div>
-                    </div>
-                </div>`;
-            });
-
-            html += `</div>`;
-            html += `<div class="total-time-center">Загальний час без світла: ~${totalHoursOff} годин</div>`;
-            html += getStandardFooter();
-            captureTarget.innerHTML = html;
-        }
-
-        // === РЕНДЕР ТЕМА 2: ДВІ КОЛОНКИ ===
-        function renderColumns(intervals, totalHoursOff, totalHoursOn, finalTitle) {
-            let offHtml = '';
-            let onHtml = '';
+        globalIntervals.forEach(int => {
+            let isActuallyOff = (int.type === 'off' && !int.isModified) || (int.type === 'on' && int.isModified);
             
-            intervals.forEach(int => {
+            if (isActuallyOff) {
+                totalOffMinutes += (int.endMin - int.startMin);
+                let note = (int.type === 'on' && int.isModified) ? " (аварійне ⚠️)" : "";
+                textIntervals.push(`${getClockEmoji(int.startStr)} ${int.startStr}-${int.displayEndStr}${note}`);
+            }
+        });
+        
+        lastTextIntervals = textIntervals.join('\n');
+
+        const totalHoursOff = (totalOffMinutes / 60).toFixed(1).replace('.0', '');
+        const totalHoursOn = (24 - totalOffMinutes / 60).toFixed(1).replace('.0', '');
+
+        const design = designSelect.value;
+
+        if (design === 'timeline') renderTimeline(globalIntervals, totalHoursOff);
+        else if (design === 'columns') renderColumns(globalIntervals, totalHoursOff, totalHoursOn);
+        else if (design === 'emojis') renderEmojis(globalIntervals);
+
+        updateCopyText();
+        outputWrapper.style.display = 'block';
+        setTimeout(generateImageOutput, 300);
+    }
+
+    // Рендер кнопок редагування
+    function renderEditorChips() {
+        editorChips.innerHTML = '';
+        if (globalIntervals.length > 0) {
+            editorWrapper.style.display = 'block';
+
+            globalIntervals.forEach((int) => {
+                const btn = document.createElement('div');
                 let timeText = `${int.startStr} - ${int.displayEndStr}`;
-                if (int.type === 'on') {
-                    if (int.isModified) {
-                        offHtml += `<div class="tc-time off" style="color: var(--c-red);"><span style="text-decoration: line-through; text-decoration-color: var(--c-red); text-decoration-thickness: 2px; opacity: 0.6;">${timeText}</span> <span style="font-size: 12px; font-weight: 800; text-transform: uppercase; margin-top: 2px;">⚠️ Аварія</span></div>`;
-                    } else {
-                        onHtml += `<div class="tc-time on">${timeText}</div>`;
-                    }
+                
+                if (int.type === 'off') {
+                    btn.className = `edit-chip ${int.isModified ? 'rescued' : 'off-state'}`;
+                    btn.innerHTML = `🌑 ${timeText} ${int.isModified ? '💡' : ''}`;
                 } else {
-                    if (int.isModified) {
-                        offHtml += `<div class="tc-time off" style="color: var(--c-yellow);"><span style="text-decoration: line-through; text-decoration-color: var(--c-yellow); text-decoration-thickness: 2px; opacity: 0.6;">${timeText}</span> <span style="font-size: 12px; font-weight: 800; text-transform: uppercase; margin-top: 2px;">💡 Було</span></div>`;
-                    } else {
-                        offHtml += `<div class="tc-time off">${timeText}</div>`;
-                    }
+                    btn.className = `edit-chip ${int.isModified ? 'emergency' : 'on-state'}`;
+                    btn.innerHTML = `💡 ${timeText} ${int.isModified ? '⚠️' : ''}`;
                 }
+
+                btn.onclick = () => {
+                    int.isModified = !int.isModified;
+                    processDataAndGenerate(false); 
+                };
+                editorChips.appendChild(btn);
             });
+        } else {
+            editorWrapper.style.display = 'none';
+        }
+    }
 
-            captureTarget.innerHTML = getStandardHeader(finalTitle) + `
-                <div class="tc-wrapper">
-                    ${iconLightning}
-                    <div class="tc-col">
-                        <div class="tc-badge off">СВІТЛА НЕ БУДЕ</div>
-                        <div class="tc-times-wrapper">
-                            <div class="tc-bracket-line"></div>
-                            ${offHtml}
-                            <div class="tc-bracket-bottom"></div>
-                            <div class="tc-bracket-tick"></div>
-                        </div>
-                        <div class="tc-total">~${totalHoursOff} годин</div>
-                    </div>
+    // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
+    function renderTimeline(intervals, totalHoursOff) {
+        let html = getStandardHeader(lastDateStr) + `<div id="timelineContainer">`;
+            
+        intervals.forEach((int, i) => {
+            const isVisuallyOn = int.type === 'on';
+            const stateClass = isVisuallyOn ? 'on' : 'off';
+            
+            // Badge + модифікатор поряд (не всередині)
+            let badgeHtml = '';
+            if (int.type === 'off') {
+                if (int.isModified) {
+                    // Перекреслення + "Світло було" поряд
+                    badgeHtml = `<div class="badge-row">
+                        <div class="badge off" style="text-decoration: line-through; text-decoration-color: var(--c-yellow); text-decoration-thickness: 2px; opacity: 0.55;">ВІДКЛЮЧЕННЯ</div>
+                        <span class="badge-modifier rescued">💡 Світло було</span>
+                    </div>`;
+                } else {
+                    badgeHtml = `<div class="badge off">ВІДКЛЮЧЕННЯ</div>`;
+                }
+            } else {
+                if (int.isModified) {
+                    // Перекреслення + "Аварійне" поряд
+                    badgeHtml = `<div class="badge-row">
+                        <div class="badge on" style="text-decoration: line-through; text-decoration-color: var(--c-red); text-decoration-thickness: 2px; opacity: 0.55;">СВІТЛО Є</div>
+                        <span class="badge-modifier emergency">⚠️ Аварійне</span>
+                    </div>`;
+                } else {
+                    badgeHtml = `<div class="badge on">СВІТЛО Є</div>`;
+                }
+            }
+                
+            const lineClass = isVisuallyOn ? 'solid' : 'dotted';
+            const intIcon = isVisuallyOn ? iconBulb : iconZapOff;
+            
+            let dotHtml = '';
+            if (i < intervals.length - 1) {
+                const nextOn = intervals[i+1].type === 'on';
+                const dotClass = nextOn ? 'dot-on' : 'dot-off';
+                dotHtml = `<div class="tl-dot ${dotClass}"></div>`;
+            }
 
-                    <div class="tc-col">
-                        <div class="tc-badge on">СВІТЛО БУДЕ</div>
-                        <div class="tc-times-wrapper">
-                            <div class="tc-bracket-line"></div>
-                            ${onHtml}
-                            <div class="tc-bracket-bottom"></div>
-                            <div class="tc-bracket-tick"></div>
-                        </div>
-                        <div class="tc-total">~${totalHoursOn} годин</div>
+            html += `
+            <div class="tl-item ${stateClass}">
+                <div class="time-col ${stateClass}">${int.startStr}</div>
+                <div class="line-col">
+                    <div class="icon-circle">${houseSvg}</div>
+                    <div class="tl-line ${lineClass}"></div>
+                    ${dotHtml}
+                </div>
+                <div class="content-col">
+                    <div class="info-row">
+                        ${badgeHtml}
+                        <div class="interval ${stateClass}">${intIcon} <span>${int.startStr} — ${int.displayEndStr}</span></div>
                     </div>
                 </div>
-                ` + getStandardFooter();
-        }
+            </div>`;
+        });
 
-        // === РЕНДЕР ТЕМА 3: ЕМОДЗІ СПЛЕШ ===
-        function renderEmojis(intervals, finalTitle) {
-            const emList = ['⚡️', '💡', '🔌', '🔦', '🔋'];
-            let bgHtml = '<div class="emoji-bg">';
-            
-            const generateSide = (baseLeft) => {
-                let lastEm = '';
-                for(let i=0; i<6; i++) {
-                    let em;
-                    do { em = emList[Math.floor(Math.random() * emList.length)]; } while (em === lastEm);
-                    lastEm = em;
-                    let left = baseLeft + (Math.random() * 8); 
-                    let top = 8 + (i * 16) + (Math.random() * 6 - 3); 
-                    let size = Math.floor(Math.random() * 14) + 20;
-                    let rot = Math.floor(Math.random() * 60) - 30;
-                    let opac = (Math.floor(Math.random() * 4) + 4) / 10;
-                    bgHtml += `<div style="position:absolute; left:${left}%; top:${top}%; font-size:${size}px; transform:rotate(${rot}deg); opacity:${opac};">${em}</div>`;
+        html += `</div>`;
+        // Загальний час — ДО лінії футера
+        html += `<div class="total-time-center">Загальний час без світла: ~${totalHoursOff} год</div>`;
+        html += getStandardFooter();
+        captureTarget.innerHTML = html;
+    }
+
+    // === РЕНДЕР ТЕМА 2: ДВІ КОЛОНКИ ===
+    function renderColumns(intervals, totalHoursOff, totalHoursOn) {
+        let offHtml = '';
+        let onHtml = '';
+        
+        intervals.forEach(int => {
+            let timeText = `${int.startStr} - ${int.displayEndStr}`;
+            if (int.type === 'on') {
+                if (int.isModified) {
+                    // По графіку світло, але аварійне — показуємо в колонці "без світла"
+                    offHtml += `<div class="tc-time off">
+                        <span style="text-decoration: line-through; text-decoration-color: var(--c-red); text-decoration-thickness: 2px; opacity: 0.6;">${timeText}</span>
+                        <span class="tc-modifier emergency">⚠️ Аварія</span>
+                    </div>`;
+                } else {
+                    onHtml += `<div class="tc-time on">${timeText}</div>`;
+                }
+            } else {
+                if (int.isModified) {
+                    // По графіку відключення, але світло було — перекреслюємо жовтим
+                    offHtml += `<div class="tc-time off">
+                        <span style="text-decoration: line-through; text-decoration-color: var(--c-yellow); text-decoration-thickness: 2px; opacity: 0.6;">${timeText}</span>
+                        <span class="tc-modifier rescued">💡 Було</span>
+                    </div>`;
+                } else {
+                    offHtml += `<div class="tc-time off">${timeText}</div>`;
+                }
+            }
+        });
+
+        captureTarget.innerHTML = getStandardHeader(lastDateStr) + `
+            <div class="tc-wrapper">
+                ${iconLightning}
+                <div class="tc-col">
+                    <div class="tc-badge off">СВІТЛА НЕ БУДЕ</div>
+                    <div class="tc-times-wrapper">
+                        <div class="tc-bracket-line"></div>
+                        ${offHtml}
+                        <div class="tc-bracket-bottom"></div>
+                        <div class="tc-bracket-tick"></div>
+                    </div>
+                    <div class="tc-total">~${totalHoursOff} год</div>
+                </div>
+
+                <div class="tc-col">
+                    <div class="tc-badge on">СВІТЛО БУДЕ</div>
+                    <div class="tc-times-wrapper">
+                        <div class="tc-bracket-line"></div>
+                        ${onHtml}
+                        <div class="tc-bracket-bottom"></div>
+                        <div class="tc-bracket-tick"></div>
+                    </div>
+                    <div class="tc-total">~${totalHoursOn} год</div>
+                </div>
+            </div>
+            ` + getStandardFooter();
+    }
+
+    // === РЕНДЕР ТЕМА 3: ЕМОДЗІ МІНІМАЛІЗМ ===
+    function renderEmojis(intervals) {
+        const emList = ['⚡️', '💡', '🔌', '🔦', '🔋'];
+        let bgHtml = '<div class="emoji-bg">';
+        
+        const generateSide = (baseLeft) => {
+            let lastEm = '';
+            for(let i=0; i<6; i++) {
+                let em;
+                do { em = emList[Math.floor(Math.random() * emList.length)]; } while (em === lastEm);
+                lastEm = em;
+                let left = baseLeft + (Math.random() * 8); 
+                let top = 8 + (i * 16) + (Math.random() * 6 - 3); 
+                let size = Math.floor(Math.random() * 14) + 20;
+                let rot = Math.floor(Math.random() * 60) - 30;
+                let opac = (Math.floor(Math.random() * 4) + 4) / 10;
+                bgHtml += `<div style="position:absolute; left:${left}%; top:${top}%; font-size:${size}px; transform:rotate(${rot}deg); opacity:${opac};">${em}</div>`;
+            }
+        };
+        
+        generateSide(2);  
+        generateSide(84); 
+        bgHtml += '</div>';
+
+        // Збираємо тільки відключення (реальні)
+        let offIntervals = intervals.filter(int => 
+            (int.type === 'off' && !int.isModified) || (int.type === 'on' && int.isModified)
+        );
+
+        // Розбиваємо по 2 в рядок
+        let rowsHtml = '';
+        for (let i = 0; i < offIntervals.length; i += 2) {
+            let cellA = offIntervals[i];
+            let cellB = offIntervals[i + 1];
+
+            const renderCell = (int) => {
+                if (!int) return '';
+                let timeText = `${int.startStr}${iconArrow}${int.displayEndStr}`;
+                if (int.type === 'on' && int.isModified) {
+                    // Аварійне
+                    return `<div class="em-time is-emergency"><span class="em-time-text">${timeText}</span> ⚠️</div>`;
+                } else if (int.type === 'off' && int.isModified) {
+                    // Світло було (перекреслюємо)
+                    return `<div class="em-time is-rescued"><span class="em-time-text">${timeText}</span> 💡</div>`;
+                } else {
+                    return `<div class="em-time is-off">${timeText}</div>`;
                 }
             };
-            
-            generateSide(2);  
-            generateSide(84); 
-            bgHtml += '</div>';
 
-            let listHtml = '';
-            intervals.forEach(int => {
-                let timeText = `${int.startStr} ${iconArrow} ${int.displayEndStr}`;
-                
-                if (int.type === 'off' && !int.isModified) {
-                    listHtml += `<div class="em-time">${timeText}</div>`;
-                } else if (int.type === 'off' && int.isModified) {
-                    listHtml += `<div class="em-time" style="color:var(--c-yellow);">
-                                    <div style="display:flex; align-items:center; justify-content:center; gap:12px;">
-                                        <span style="text-decoration:line-through; text-decoration-color:var(--c-yellow); text-decoration-thickness:3px; opacity:0.6;">${timeText}</span>
-                                        <span style="font-size: 28px;">💡</span>
-                                    </div>
-                                 </div>`;
-                } else if (int.type === 'on' && int.isModified) {
-                    listHtml += `<div class="em-time" style="color:var(--c-red);">
-                                    <div style="display:flex; align-items:center; justify-content:center; gap:12px;">
-                                        <span style="text-decoration:line-through; text-decoration-color:var(--c-red); text-decoration-thickness:3px; opacity:0.6;">${timeText}</span>
-                                        <span style="font-size: 28px;">⚠️</span>
-                                    </div>
-                                 </div>`;
-                }
-            });
-
-            captureTarget.innerHTML = `
-                ${bgHtml}
-                <div style="position:relative; z-index:2; padding-bottom: 10px;">
-                    ` + getStandardHeader(finalTitle) + `
-                </div>
-                <div class="emoji-content-wrapper">
-                    ${listHtml}
-                </div>
-                ` + getStandardFooter();
+            rowsHtml += `<div class="em-row">${renderCell(cellA)}${renderCell(cellB)}</div>`;
         }
 
+        captureTarget.innerHTML = `
+            ${bgHtml}
+            <div style="position:relative; z-index:2;">
+                ${getStandardHeader(lastDateStr)}
+            </div>
+            <div class="emoji-content-wrapper">
+                <div class="em-rows">${rowsHtml}</div>
+            </div>
+            ${getStandardFooter()}`;
+    }
 
-        // === ПЛЮШКИ ===
-        function updateCopyText() {
-            const header = getHeaderTitle(lastDateStr);
-            finalTextDiv.textContent = `${header}\n\n${lastTextIntervals}\n\nХарківобленерго`;
-            copyBlock.classList.remove('copied');
-            copyHint.textContent = "Тапни, щоб скопіювати текст";
-            copyHint.style.color = "#007aff";
-        }
+    // === ПЛЮШКИ ===
+    function updateCopyText() {
+        const header = getHeaderTitle(lastDateStr);
+        finalTextDiv.textContent = `${header}\n\n${lastTextIntervals}\n\nХарківобленерго`;
+        copyBlock.classList.remove('copied');
+        copyHint.textContent = "Тапни, щоб скопіювати текст";
+        copyHint.style.color = "#007aff";
+    }
 
-        function generateImageOutput() {
-            html2canvas(captureTarget, {
-                scale: 3, backgroundColor: null, logging: false, useCORS: true
-            }).then(canvas => {
-                generatedImage.src = canvas.toDataURL('image/png');
-            });
-        }
+    function generateImageOutput() {
+        html2canvas(captureTarget, {
+            scale: 3, backgroundColor: null, logging: false, useCORS: true
+        }).then(canvas => {
+            generatedImage.src = canvas.toDataURL('image/png');
+        });
+    }
 
-        function copyToClipboard() {
-            navigator.clipboard.writeText(finalTextDiv.textContent).then(() => {
-                copyBlock.classList.add('copied');
-                copyHint.textContent = "СКОПІЙОВАНО! ✅";
-                copyHint.style.color = "#28a745";
-                if(navigator.vibrate) navigator.vibrate(50);
-            }).catch(err => alert("Не вдалося скопіювати автоматично. Спробуй вручну."));
-        }
+    function copyToClipboard() {
+        navigator.clipboard.writeText(finalTextDiv.textContent).then(() => {
+            copyBlock.classList.add('copied');
+            copyHint.textContent = "СКОПІЙОВАНО! ✅";
+            copyHint.style.color = "#28a745";
+            if(navigator.vibrate) navigator.vibrate(50);
+        }).catch(err => alert("Не вдалося скопіювати автоматично. Спробуй вручну."));
+    }
 
-        async function saveImageToGallery() {
-            if (!generatedImage.src) return;
-            try {
-                const response = await fetch(generatedImage.src);
-                const blob = await response.blob();
-                const file = new File([blob], "grafik_valky.png", { type: "image/png" });
-                if (navigator.share) { await navigator.share({ files: [file] }); } 
-                else { const link = document.createElement("a"); link.href = generatedImage.src; link.download = "grafik_valky.png"; document.body.appendChild(link); link.click(); document.body.removeChild(link); }
-            } catch (err) { alert("Помилка збереження. Спробуй зробити скріншот."); }
-        }
+    async function saveImageToGallery() {
+        if (!generatedImage.src) return;
+        try {
+            const response = await fetch(generatedImage.src);
+            const blob = await response.blob();
+            const file = new File([blob], "grafik_valky.png", { type: "image/png" });
+            if (navigator.share) { await navigator.share({ files: [file] }); } 
+            else { const link = document.createElement("a"); link.href = generatedImage.src; link.download = "grafik_valky.png"; document.body.appendChild(link); link.click(); document.body.removeChild(link); }
+        } catch (err) { alert("Помилка збереження. Спробуй зробити скріншот."); }
+    }
 
-        function clearAll() {
-            document.getElementById('rawText').value = '';
-            captureTarget.innerHTML = '';
-            globalIntervals = [];
-            editorWrapper.style.display = 'none';
-            outputWrapper.style.display = 'none';
-        }
-    </script>
+    function clearAll() {
+        document.getElementById('rawText').value = '';
+        captureTarget.innerHTML = '';
+        globalIntervals = [];
+        editorWrapper.style.display = 'none';
+        outputWrapper.style.display = 'none';
+    }
+</script>
+
+
 </body>
 </html>
