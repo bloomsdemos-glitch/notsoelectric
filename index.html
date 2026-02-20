@@ -139,7 +139,7 @@
         .em-time-row { display: flex; align-items: center; justify-content: center; gap: 12px; }
         .em-time:last-child { margin-bottom: 0; }
         .em-arrow { width: 24px; height: 24px; color: #555; }
-
+</style>
 </head>
 <body>
 
@@ -149,7 +149,7 @@
             
             <div class="form-group">
                 <label class="form-label">Візуальний дизайн (можна змінювати на льоту):</label>
-                <select id="designSelect" class="input-neumorph" onchange="if(currentOutages.length) processDataAndGenerate(false)">
+                <select id="designSelect" class="input-neumorph" onchange="if(globalIntervals.length) processDataAndGenerate(false)">
                     <option value="timeline">🏠 Смарт-дім (Таймлайн)</option>
                     <option value="columns">⚖️ Дві колонки (Є / Немає)</option>
                     <option value="emojis">🎈 Мінімалізм (Рандомні емодзі)</option>
@@ -596,7 +596,7 @@
         function clearAll() {
             document.getElementById('rawText').value = '';
             captureTarget.innerHTML = '';
-            currentOutages = [];
+            globalIntervals = [];
             editorWrapper.style.display = 'none';
             outputWrapper.style.display = 'none';
         }
