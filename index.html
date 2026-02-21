@@ -238,10 +238,10 @@
     const iconClock = `🕘`;
     const iconSparkles = `<svg viewBox="0 0 512 512" width="12" height="12" fill="currentColor" style="margin-right:4px; margin-bottom:1px;"><path d="M327.5 104.2l-14-42.6c-2.5-7.6-13.4-7.6-15.9 0l-14 42.6c-4.4 13.5-15 24.1-28.5 28.5l-42.6 14c-7.6 2.5-7.6 13.4 0 15.9l42.6 14c13.5 4.4 24.1 15 28.5 28.5l14 42.6c2.5 7.6 13.4 7.6 15.9 0l14-42.6c4.4-13.5 15-24.1 28.5-28.5l42.6-14c7.6-2.5 7.6-13.4 0-15.9l-42.6-14c-13.5-4.4-24.1-15-28.5-28.5zM433.8 335.5l-9.1-27.6c-1.6-4.9-8.7-4.9-10.3 0l-9.1 27.6c-2.9 8.7-9.8 15.7-18.5 18.5l-27.6 9.1c-4.9 1.6-4.9 8.7 0 10.3l27.6 9.1c8.7 2.9 15.7 9.8 18.5 18.5l9.1 27.6c1.6 4.9 8.7 4.9 10.3 0l9.1-27.6c2.9-8.7 9.8-15.7 18.5-18.5l27.6-9.1c4.9-1.6 4.9-8.7 0-10.3l-27.6-9.1c-8.7-2.9-15.7-9.8-18.5-18.5zM152 352l-20.4-61.9c-3.6-11-19.5-11-23.1 0L88 352c-6.4 19.5-21.6 34.8-41.2 41.2l-61.9 20.4c-11 3.6-11 19.5 0 23.1l61.9 20.4c19.5 6.4 34.8 21.6 41.2 41.2l20.4 61.9c3.6 11 19.5 11 23.1 0l20.4-61.9c6.4-19.5 21.6-34.8 41.2-41.2l61.9-20.4c11-3.6 11-19.5 0-23.1l-61.9-20.4c-19.5-6.4-34.8-21.6-41.2-41.2z"/></svg>`;
     const iconBan = `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px; margin-bottom:1px;"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>`;
-        const iconLink = `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block; margin-right:2px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>`;
+            const iconLightningSVG = `<svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" stroke="none" style="margin-right:4px; display:inline-block; vertical-align:middle;"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`;
+    const iconClockSVG = `<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`;
+    const iconLink = `<svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block; margin-right:4px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>`;
 
-    const iconLightningSVG = `<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" stroke="none" style="margin-right:4px; display:inline-block; vertical-align:middle;"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`;
-    const iconClockSVG = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`;
 
     
     // Іконки однакового розміру з текстом (14px)
@@ -462,7 +462,55 @@
         }
     }
 
-                // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
+                    /* === ТЕМА 1: СМАРТ-ДІМ (ТАЙМЛАЙН) === */
+    .total-time-center { display: flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; font-size: 13px; color: #888; margin-top: 25px; margin-bottom: 15px; position: relative; z-index: 2; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    #timelineContainer { padding-top: 0px; display: flex; flex-direction: column; gap: 0; }
+
+    .tl-item { display: flex; flex-direction: column; z-index: 2; margin-bottom: 0; }
+    .tl-item:last-child .tl-body { display: none; }
+
+    .tl-head { display: flex; align-items: center; min-height: 38px; position: relative; z-index: 2; }
+    .time-col { width: 60px; text-align: right; padding-right: 15px; font-weight: 700; font-size: 18px; flex-shrink: 0; line-height: 1; margin: 0; }
+    .time-col.off { color: var(--c-red); }
+    .time-col.on { color: var(--c-yellow); text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
+
+    .icon-node { display: flex; flex-direction: column; align-items: center; width: 36px; flex-shrink: 0; }
+    .icon-circle { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--c-dark); z-index: 3; position: relative; }
+    .icon-house { width: 22px; height: 22px; }
+    .on .icon-house { fill: var(--c-yellow); filter: drop-shadow(0 0 5px var(--c-yellow)); }
+    .off .icon-house { fill: #555; }
+
+    .badge-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
+
+    /* МАГІЯ МЕТРОПОЛІТЕНУ: Негативні марджини натягують лінію впритул до хатинок */
+    .tl-body { display: flex; align-items: stretch; min-height: 52px; margin-top: -8px; margin-bottom: -6px; position: relative; z-index: 1; }
+    .line-node { display: flex; flex-direction: column; align-items: center; justify-content: space-between; width: 36px; flex-shrink: 0; padding: 0; }
+
+    .tl-dot-micro { width: 4px; height: 4px; border-radius: 50%; opacity: 0.8; }
+    .tl-dot-micro.on { background: var(--c-yellow); }
+    .tl-dot-micro.off { background: #555; }
+
+    .tl-dot-large { width: 8px; height: 8px; border-radius: 50%; z-index: 3; }
+    .tl-dot-large.on { background: var(--c-yellow); box-shadow: 0 0 6px rgba(251, 191, 36, 0.6); }
+    .tl-dot-large.off { background: #666; }
+
+    .interval-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
+    /* Фікс іконки: тепер вона жорстко по центру з текстом */
+    .interval { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; line-height: 1; }
+    .interval-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: -1px; }
+    .interval-icon svg { width: 15px; height: 15px; display: block; }
+    .interval.off { color: var(--c-red); }
+    .interval.on { color: var(--c-yellow); }
+
+    .badge { display: flex; align-items: center; justify-content: center; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; width: max-content; line-height: 1; text-transform: uppercase; gap: 4px; }
+    .badge.off { background: #1a1a1c; border: 1px solid #333; color: #a1a1aa; }
+    .badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 10px rgba(251, 191, 36, 0.2); border: 1px solid var(--c-yellow); }
+    .badge-row { display: flex; align-items: center; gap: 8px; }
+    .badge-modifier { font-size: 12px; font-weight: 800; text-transform: uppercase; }
+    .badge-modifier.rescued { color: var(--c-yellow); }
+    .badge-modifier.emergency { color: var(--c-red); }
+
+    // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
     function renderTimeline(intervals, totalHoursOff) {
         let headerContent = getStandardHeader(lastDateStr);
         headerContent += `<div class="source-top">${iconLink} Джерело: Харківобленерго</div>`;
@@ -481,20 +529,30 @@
             const redBanIcon = `<span style="color: var(--c-red); display: flex; align-items: center;">${iconBan}</span>`;
             
             let badgeHtml = '';
+            let intervalTextStyle = ''; // Стиль для перекреслення годин
+
             if (int.type === 'off') {
-                if (int.isModified) badgeHtml = `<div class="badge-row"><div class="badge off" style="text-decoration: line-through; opacity: 0.55;">${redBanIcon} ВІДКЛЮЧЕННЯ</div><span class="badge-modifier rescued">💡 Світло було</span></div>`;
-                else badgeHtml = `<div class="badge off">${redBanIcon} ВІДКЛЮЧЕННЯ</div>`;
+                if (int.isModified) {
+                    badgeHtml = `<div class="badge-row"><div class="badge off" style="text-decoration: line-through; opacity: 0.55;">${redBanIcon} ВІДКЛЮЧЕННЯ</div><span class="badge-modifier rescued">💡 Світло було</span></div>`;
+                    intervalTextStyle = `color: rgba(251, 191, 36, 0.7); text-decoration: line-through; text-decoration-color: rgba(251, 191, 36, 0.7); text-decoration-thickness: 2px;`;
+                } else {
+                    badgeHtml = `<div class="badge off">${redBanIcon} ВІДКЛЮЧЕННЯ</div>`;
+                }
             } else {
-                if (int.isModified) badgeHtml = `<div class="badge-row"><div class="badge on" style="text-decoration: line-through; opacity: 0.55; color: #000;">${iconLightningSVG} СВІТЛО Є</div><span class="badge-modifier emergency">⚠️ Аварійне</span></div>`;
-                else badgeHtml = `<div class="badge on" style="color: #000;">${iconLightningSVG} СВІТЛО Є</div>`;
+                if (int.isModified) {
+                    badgeHtml = `<div class="badge-row"><div class="badge on" style="text-decoration: line-through; opacity: 0.55; color: #000;">${iconLightningSVG} СВІТЛО Є</div><span class="badge-modifier emergency">⚠️ Аварійне</span></div>`;
+                    intervalTextStyle = `color: #888; text-decoration: line-through; text-decoration-color: #888; text-decoration-thickness: 2px;`;
+                } else {
+                    badgeHtml = `<div class="badge on" style="color: #000;">${iconLightningSVG} СВІТЛО Є</div>`;
+                }
             }
                 
             const intIcon = isVisuallyOn ? iconBulb : iconZapOff;
             
-            // Ланцюг: 4 малих кружечки (щоб вони дихали) і 1 фінальний великий
+            // Ланцюг: рівно 5 малих і 1 великий. Вони розтягнуться завдяки flexbox і negative margin
             let dotsHtml = '';
             if (i < intervals.length - 1) { 
-                for(let d = 0; d < 4; d++) {
+                for(let d = 0; d < 5; d++) {
                     dotsHtml += `<div class="tl-dot-micro ${stateClass}"></div>`;
                 }
                 dotsHtml += `<div class="tl-dot-large ${nextStateClass}"></div>`;
@@ -515,7 +573,10 @@
                         ${dotsHtml}
                     </div>
                     <div class="interval-col">
-                        <div class="interval ${stateClass}">${intIcon} <span>${int.startStr} - ${int.displayEndStr}</span></div>
+                        <div class="interval ${stateClass}">
+                            <div class="interval-icon">${intIcon}</div>
+                            <span style="${intervalTextStyle}">${int.startStr} - ${int.displayEndStr}</span>
+                        </div>
                     </div>
                 </div>
             </div>`;
@@ -527,7 +588,6 @@
         html += getStandardFooter(false); 
         captureTarget.innerHTML = html;
     }
-
 
 
     // === РЕНДЕР ТЕМА 2: ДВІ КОЛОНКИ ===
