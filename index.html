@@ -336,7 +336,7 @@
 
                 tempOutages.push({ 
                     startMin, endMin, startStr, 
-                    displayEndStr: (endStr === "24:00" || endMin === 1440 ? "24:00" : endStr)
+                    displayEndStr: (endStr === "24:00" || endMin === 1440 ? "00:00" : endStr)
                 });
             });
             tempOutages.sort((a, b) => a.startMin - b.startMin);
@@ -362,7 +362,7 @@
                 globalIntervals.push({ 
                     type: 'on', isModified: false, 
                     startMin: currentTime, endMin: 1440,
-                    startStr: minutesToTime(currentTime), displayEndStr: "24:00"
+                    startStr: minutesToTime(currentTime), displayEndStr: "00:00"
                 });
             }
         }
