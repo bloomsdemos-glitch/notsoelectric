@@ -169,11 +169,11 @@
 
 <div class="app-container">
     <div class="card">
-        <h2>ELECTRIFY &copy;</h2>
+        <h2>ELECTRIFY • Валки &copy;</h2>
 
 
     <div class="form-group">
-        <label class="form-label">Візуальний дизайн (можна змінювати на льоту):</label>
+        <label class="form-label">Візуальний дизайн:</label>
         <select id="designSelect" class="input-neumorph" onchange="if(globalIntervals.length) processDataAndGenerate(false)">
             <option value="timeline">🏠 Смарт-дім (Таймлайн)</option>
             <option value="columns">⚖️ Дві колонки (Є / Немає)</option>
@@ -183,7 +183,7 @@
 
     <div class="form-group">
         <label class="form-label">Заголовок посту:</label>
-        <input type="text" id="postTitleInput" class="input-neumorph" value="ГРАФІК ВІДКЛЮЧЕНЬ НА [ДАТА]" placeholder="Введи заголовок (тег [ДАТА] заміниться автоматично)">
+        <input type="text" id="postTitleInput" class="input-neumorph" value="ГРАФІК ВІДКЛЮЧЕНЬ [ДАТА]" placeholder="Введи заголовок (тег [ДАТА] заміниться автоматично)">
     </div>
 
     <textarea id="rawText" class="input-neumorph" placeholder="Встав текст графіку від Харківобленерго сюди (з чергою 1.2)..."></textarea>
@@ -265,7 +265,7 @@
     }
 
     function getHeaderTitle(dateStr) {
-        let rawTitle = postTitleInput.value.trim() || "ГРАФІК ВІДКЛЮЧЕНЬ НА [ДАТА]";
+        let rawTitle = postTitleInput.value.trim() || "ГРАФІК ВІДКЛЮЧЕНЬ [ДАТА]";
         return rawTitle.replace(/\[ДАТА\]/gi, dateStr);
     }
 
@@ -280,7 +280,7 @@
 
     // === СПІЛЬНИЙ ХЕДЕР ===
     function getStandardHeader(dateStr, rawTitleTemplate) {
-        let rawTitle = rawTitleTemplate || postTitleInput.value.trim() || "ГРАФІК ВІДКЛЮЧЕНЬ НА [ДАТА]";
+        let rawTitle = rawTitleTemplate || postTitleInput.value.trim() || "ГРАФІК ВІДКЛЮЧЕНЬ [ДАТА]";
         const dateTagIndex = rawTitle.toUpperCase().indexOf('[ДАТА]');
         let beforeDate = dateTagIndex >= 0 ? rawTitle.substring(0, dateTagIndex) : rawTitle;
         let hasDate = dateTagIndex >= 0;
