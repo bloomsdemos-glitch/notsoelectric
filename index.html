@@ -1,4 +1,5 @@
-т<!DOCTYPE html>
+<!DOCTYPE html>
+
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
@@ -12,202 +13,206 @@
             --c-yellow: #fbbf24; --c-red: #d9463b; --c-dark: #060606;
         }
 
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-app); color: var(--text-main); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .app-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; }
+```
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-app); color: var(--text-main); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+    .app-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; }
 
-        .card { background: var(--bg-app); padding: 25px; border-radius: var(--radius); box-shadow: 9px 9px 16px var(--neumorph-shadow-dark), -9px -9px 16px var(--neumorph-shadow-light); border: 1px solid rgba(255,255,255,0.2); }
-        h2 { margin: 0 0 20px 0; font-weight: 900; color: #333; letter-spacing: -0.5px; }
+    .card { background: var(--bg-app); padding: 25px; border-radius: var(--radius); box-shadow: 9px 9px 16px var(--neumorph-shadow-dark), -9px -9px 16px var(--neumorph-shadow-light); border: 1px solid rgba(255,255,255,0.2); }
+    h2 { margin: 0 0 20px 0; font-weight: 900; color: #333; letter-spacing: -0.5px; }
 
-        .form-group { margin-bottom: 15px; }
-        .form-label { font-size: 12px; font-weight: bold; color: #666; margin-left: 5px; display: block; margin-bottom: 5px; }
-        
-        .input-neumorph { width: 100%; border: none; border-radius: 12px; padding: 15px; font-family: inherit; background: var(--bg-app); box-shadow: inset 6px 6px 10px var(--neumorph-shadow-dark), inset -6px -6px 10px var(--neumorph-shadow-light); box-sizing: border-box; color: #333; outline: none; transition: 0.3s; font-weight: 500; }
-        .input-neumorph:focus { box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), inset -4px -4px 8px var(--neumorph-shadow-light); }
-        textarea.input-neumorph { height: 100px; resize: none; font-family: monospace; font-weight: normal; }
-        select.input-neumorph { appearance: none; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 15px top 50%; background-size: 12px auto; cursor: pointer; }
+    .form-group { margin-bottom: 15px; }
+    .form-label { font-size: 12px; font-weight: bold; color: #666; margin-left: 5px; display: block; margin-bottom: 5px; }
+    
+    .input-neumorph { width: 100%; border: none; border-radius: 12px; padding: 15px; font-family: inherit; background: var(--bg-app); box-shadow: inset 6px 6px 10px var(--neumorph-shadow-dark), inset -6px -6px 10px var(--neumorph-shadow-light); box-sizing: border-box; color: #333; outline: none; transition: 0.3s; font-weight: 500; }
+    .input-neumorph:focus { box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), inset -4px -4px 8px var(--neumorph-shadow-light); }
+    textarea.input-neumorph { height: 100px; resize: none; font-family: monospace; font-weight: normal; }
+    select.input-neumorph { appearance: none; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 15px top 50%; background-size: 12px auto; cursor: pointer; }
 
-        .btn-group { display: flex; gap: 15px; margin-top: 20px; }
-        .btn-neu { flex: 1; padding: 16px; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; background: var(--bg-app); box-shadow: 6px 6px 10px var(--neumorph-shadow-dark), -6px -6px 10px var(--neumorph-shadow-light); color: #333; transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px; }
-        .btn-neu:active { box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), inset -4px -4px 8px var(--neumorph-shadow-light); transform: scale(0.98); }
-        .btn-primary { color: #007aff; } .btn-danger { color: #ff3b30; }
-        .tools-row { display: flex; gap: 10px; margin-bottom: 15px; }
+    .btn-group { display: flex; gap: 15px; margin-top: 20px; }
+    .btn-neu { flex: 1; padding: 16px; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; background: var(--bg-app); box-shadow: 6px 6px 10px var(--neumorph-shadow-dark), -6px -6px 10px var(--neumorph-shadow-light); color: #333; transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px; }
+    .btn-neu:active { box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), inset -4px -4px 8px var(--neumorph-shadow-light); transform: scale(0.98); }
+    .btn-primary { color: #007aff; } .btn-danger { color: #ff3b30; }
+    .tools-row { display: flex; gap: 10px; margin-bottom: 15px; }
 
-        /* ЕДИТОР ІНТЕРВАЛІВ */
-        #editorWrapper { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05); }
-        .edit-chips-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-        .edit-chip { padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; background: var(--bg-app); transition: 0.2s; user-select: none; box-shadow: 3px 3px 6px var(--neumorph-shadow-dark), -3px -3px 6px var(--neumorph-shadow-light); display: flex; align-items: center; gap: 6px; }
-        .edit-chip:active { transform: scale(0.95); }
-        .edit-chip.off-state { border: 2px solid #888; color: #888; }
-        .edit-chip.on-state { border: 2px solid var(--c-yellow); color: var(--c-yellow); }
-        .edit-chip.rescued { border-color: var(--c-yellow); background: var(--c-yellow); color: #000; box-shadow: none; }
-        .edit-chip.emergency { border-color: var(--c-red); background: var(--c-red); color: #fff; box-shadow: none; }
+    /* ЕДИТОР ІНТЕРВАЛІВ */
+    #editorWrapper { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05); }
+    .edit-chips-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .edit-chip { padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; background: var(--bg-app); transition: 0.2s; user-select: none; box-shadow: 3px 3px 6px var(--neumorph-shadow-dark), -3px -3px 6px var(--neumorph-shadow-light); display: flex; align-items: center; gap: 6px; }
+    .edit-chip:active { transform: scale(0.95); }
+    .edit-chip.off-state { border: 2px solid #888; color: #888; }
+    .edit-chip.on-state { border: 2px solid var(--c-yellow); color: var(--c-yellow); }
+    .edit-chip.rescued { border-color: var(--c-yellow); background: var(--c-yellow); color: #000; box-shadow: none; }
+    .edit-chip.emergency { border-color: var(--c-red); background: var(--c-red); color: #fff; box-shadow: none; }
 
-        #outputWrapper { display: none; width: 100%; margin-top: 20px;}
-        #generatedImage { width: 100%; height: auto; display: block; margin-bottom: 15px; box-shadow: 5px 5px 15px rgba(0,0,0,0.15); border-radius: 0; }
-        
-        .copy-block { margin-top: 15px; padding: 20px; border-radius: 15px; background: var(--bg-app); cursor: pointer; transition: all 0.2s; position: relative; user-select: none; box-shadow: 7px 7px 14px var(--neumorph-shadow-dark), -7px -7px 14px var(--neumorph-shadow-light); }
-        .copy-block:active { box-shadow: inset 5px 5px 10px var(--neumorph-shadow-dark), inset -5px -5px 10px var(--neumorph-shadow-light); transform: scale(0.99); }
-        .copy-block.copied { background: #e3fae3; }
-        .copy-content { font-family: monospace; font-size: 14px; color: #333; white-space: pre-wrap; line-height: 1.4; pointer-events: none; }
-        .copy-hint { margin-top: 10px; font-size: 12px; color: #007aff; text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+    #outputWrapper { display: none; width: 100%; margin-top: 20px;}
+    #generatedImage { width: 100%; height: auto; display: block; margin-bottom: 15px; box-shadow: 5px 5px 15px rgba(0,0,0,0.15); border-radius: 0; }
+    
+    .copy-block { margin-top: 15px; padding: 20px; border-radius: 15px; background: var(--bg-app); cursor: pointer; transition: all 0.2s; position: relative; user-select: none; box-shadow: 7px 7px 14px var(--neumorph-shadow-dark), -7px -7px 14px var(--neumorph-shadow-light); }
+    .copy-block:active { box-shadow: inset 5px 5px 10px var(--neumorph-shadow-dark), inset -5px -5px 10px var(--neumorph-shadow-light); transform: scale(0.99); }
+    .copy-block.copied { background: #e3fae3; }
+    .copy-content { font-family: monospace; font-size: 14px; color: #333; white-space: pre-wrap; line-height: 1.4; pointer-events: none; }
+    .copy-hint { margin-top: 10px; font-size: 12px; color: #007aff; text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* === БАЗОВИЙ ТЕМНИЙ ШАБЛОН === */
-        #captureTarget { background: var(--c-dark); color: #ffffff; padding: 20px 25px 25px 25px; position: absolute; left: -9999px; top: 0; width: 440px; box-sizing: border-box; -webkit-font-smoothing: antialiased; overflow: hidden; border-radius: 0; }
-        
-        /* === ХЕДЕР === */
-        .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; position: relative; z-index: 2; padding-right: 10px; }
-        .header-title { display: flex; flex-direction: column; gap: 6px; font-size: 22px; font-weight: 900; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; margin: 0; flex: 1; color: #ffffff; }
-        .title-date-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-        .title-date-line span.date-text { color: var(--c-yellow); line-height: 1; }
-        
-        /* Нова стильна рамка для Валок */
-        .valky-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; color: rgba(255,255,255,0.9); font-weight: 800; text-transform: none; letter-spacing: 0; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); line-height: 1; }
-        .valky-tag svg { width: 14px; height: 14px; fill: rgba(255,255,255,0.8); flex-shrink: 0; }
-        
-        .logo-wrapper { display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; margin-left: 15px; }
-        .logo-fixed { width: 42px; height: 42px; object-fit: contain; border-radius: 50%; background: #ffffff; padding: 4px; box-sizing: border-box; flex-shrink: 0; }
+    /* === БАЗОВИЙ ТЕМНИЙ ШАБЛОН === */
+    #captureTarget { background: var(--c-dark); color: #ffffff; padding: 20px 25px 25px 25px; position: absolute; left: -9999px; top: 0; width: 440px; box-sizing: border-box; -webkit-font-smoothing: antialiased; overflow: hidden; border-radius: 0; }
+    
+    /* === ХЕДЕР === */
+    .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; position: relative; z-index: 2; padding-right: 10px; }
+    .header-title { display: flex; flex-direction: column; gap: 6px; font-size: 22px; font-weight: 900; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; margin: 0; flex: 1; color: #ffffff; }
+    .title-date-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .title-date-line span.date-text { color: var(--c-yellow); line-height: 1; }
+    
+    .valky-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; color: rgba(255,255,255,0.9); font-weight: 800; text-transform: none; letter-spacing: 0; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); line-height: 1; }
+    .valky-tag svg { width: 14px; height: 14px; fill: rgba(255,255,255,0.8); flex-shrink: 0; }
+    
+    .logo-wrapper { display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; margin-left: 15px; }
+    .logo-fixed { width: 42px; height: 42px; object-fit: contain; border-radius: 50%; background: #ffffff; padding: 4px; box-sizing: border-box; flex-shrink: 0; }
 
-        /* === ФУТЕР І ДЖЕРЕЛО === */
-        .footer-info { margin-top: 15px; padding-top: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; position: relative; z-index: 2; width: 100%; }
-        
-        /* Робимо стильний корпус для примітки */
-        .disclaimer-box { display: flex; align-items: flex-start; justify-content: flex-start; text-align: left; gap: 10px; font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.4; font-weight: 500; width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 12px 15px; border-radius: 12px; box-sizing: border-box; }
-        .disclaimer-icon { width: 14px; height: 14px; flex-shrink: 0; color: rgba(255,255,255,0.6); margin-top: 1px; }
+    /* === ФУТЕР І ДЖЕРЕЛО === */
+    .footer-info { margin-top: 15px; padding-top: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; position: relative; z-index: 2; width: 100%; }
+    .disclaimer-box { display: flex; align-items: flex-start; justify-content: flex-start; text-align: left; gap: 10px; font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.4; font-weight: 500; width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 12px 15px; border-radius: 12px; box-sizing: border-box; }
+    .disclaimer-icon { width: 14px; height: 14px; flex-shrink: 0; color: rgba(255,255,255,0.6); margin-top: 1px; }
+    .source-bottom { display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-size: 12px; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 14px; background: rgba(0,0,0,0.3); font-weight: 600; letter-spacing: 0.5px; }
+    .source-top { display: flex; align-items: center; justify-content: flex-start; gap: 4px; font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 600; letter-spacing: 0.5px; margin-top: 8px; text-transform: uppercase; }
+    .header-divider { height: 1px; width: 100%; background: rgba(255,255,255,0.1); margin: 15px 0; }
 
-        /* Джерело для інших тем (знизу) */
-        .source-bottom { display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-size: 12px; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 14px; background: rgba(0,0,0,0.3); font-weight: 600; letter-spacing: 0.5px; }
+    /* === ТЕМА 1: СМАРТ-ДІМ (ТАЙМЛАЙН) — ОНОВЛЕНІ СТИЛІ === */
+    .total-time-center { display: flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; font-size: 13px; color: #888; margin-top: 25px; margin-bottom: 15px; position: relative; z-index: 2; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    #timelineContainer { padding-top: 0px; display: flex; flex-direction: column; gap: 0; }
 
-        /* Джерело під заголовком (для Смарт-дому) */
-        .source-top { display: flex; align-items: center; justify-content: flex-start; gap: 4px; font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 600; letter-spacing: 0.5px; margin-top: 8px; text-transform: uppercase; }
+    .tl-item { display: flex; flex-direction: column; z-index: 2; margin-bottom: 0; }
 
-        .header-divider { height: 1px; width: 100%; background: rgba(255,255,255,0.1); margin: 15px 0; }
+    .tl-head { display: flex; align-items: center; min-height: 38px; position: relative; z-index: 2; }
 
-        /* === ТЕМА 1: СМАРТ-ДІМ (ТАЙМЛАЙН) === */
-        .total-time-center { display: flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; font-size: 13px; color: #888; margin-top: 25px; margin-bottom: 15px; position: relative; z-index: 2; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-        #timelineContainer { padding-top: 0px; display: flex; flex-direction: column; gap: 0; }
+    /* Табулярні цифри, щоб двокрапки не стрибали */
+    .time-col { width: 60px; text-align: right; padding-right: 15px; font-weight: 700; font-size: 18px; flex-shrink: 0; line-height: 1; margin: 0; font-variant-numeric: tabular-nums; letter-spacing: 0.5px; }
+    .time-col.off { color: var(--c-red); }
+    .time-col.on { color: var(--c-yellow); text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
 
-        .tl-item { display: flex; flex-direction: column; z-index: 2; margin-bottom: 0; }
-        .tl-item:last-child .tl-body { display: none; }
+    .icon-node { display: flex; flex-direction: column; align-items: center; width: 36px; flex-shrink: 0; }
+    .icon-circle { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--c-dark); z-index: 3; position: relative; }
+    .icon-house { width: 22px; height: 22px; }
+    .on .icon-house { fill: var(--c-yellow); filter: drop-shadow(0 0 5px var(--c-yellow)); }
+    .off .icon-house { fill: #555; }
 
-        .tl-head { display: flex; align-items: center; min-height: 38px; position: relative; z-index: 2; }
-        .time-col { width: 60px; text-align: right; padding-right: 15px; font-weight: 700; font-size: 18px; flex-shrink: 0; line-height: 1; margin: 0; }
-        .time-col.off { color: var(--c-red); }
-        .time-col.on { color: var(--c-yellow); text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
+    .badge-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
 
-        .icon-node { display: flex; flex-direction: column; align-items: center; width: 36px; flex-shrink: 0; }
-        .icon-circle { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--c-dark); z-index: 3; position: relative; }
-        .icon-house { width: 22px; height: 22px; }
-        .on .icon-house { fill: var(--c-yellow); filter: drop-shadow(0 0 5px var(--c-yellow)); }
-        .off .icon-house { fill: #555; }
+    /* Кружечки тепер не обрізаються завдяки правильним відступам */
+    .tl-body { display: flex; align-items: stretch; min-height: 48px; margin-top: -3px; margin-bottom: -3px; position: relative; z-index: 1; }
+    .line-node { display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; width: 36px; flex-shrink: 0; padding: 4px 0; gap: 4px; }
 
-        .badge-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
+    .tl-dot-micro { width: 4px; height: 4px; border-radius: 50%; opacity: 0.8; }
+    .tl-dot-micro.on { background: var(--c-yellow); }
+    .tl-dot-micro.off { background: #555; }
 
-        /* МАГІЯ МЕТРОПОЛІТЕНУ: Негативні марджини натягують лінію впритул до хатинок */
-        .tl-body { display: flex; align-items: stretch; min-height: 52px; margin-top: -8px; margin-bottom: -6px; position: relative; z-index: 1; }
-        .line-node { display: flex; flex-direction: column; align-items: center; justify-content: space-between; width: 36px; flex-shrink: 0; padding: 0; }
+    .tl-dot-large { width: 7px; height: 7px; border-radius: 50%; z-index: 3; }
+    .tl-dot-large.on { background: var(--c-yellow); box-shadow: 0 0 5px rgba(251, 191, 36, 0.6); }
+    .tl-dot-large.off { background: #666; }
 
-        .tl-dot-micro { width: 4px; height: 4px; border-radius: 50%; opacity: 0.8; }
-        .tl-dot-micro.on { background: var(--c-yellow); }
-        .tl-dot-micro.off { background: #555; }
+    .interval-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; height: 100%; }
 
-        .tl-dot-large { width: 8px; height: 8px; border-radius: 50%; z-index: 3; }
-        .tl-dot-large.on { background: var(--c-yellow); box-shadow: 0 0 6px rgba(251, 191, 36, 0.6); }
-        .tl-dot-large.off { background: #666; }
+    /* Фікс іконки: тепер вона намертво на одному рівні з текстом */
+    .interval { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; line-height: 1; height: 20px; }
+    .interval-icon { display: flex; align-items: center; justify-content: center; width: 15px; height: 15px; flex-shrink: 0; margin-top: -1px; }
+    .interval-icon svg { width: 100%; height: 100%; display: block; }
 
-        .interval-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
-        .interval { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; line-height: 1; }
-        .interval-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: -1px; }
-        .interval-icon svg { width: 15px; height: 15px; display: block; }
-        .interval.off { color: var(--c-red); }
-        .interval.on { color: var(--c-yellow); }
+    /* Фікс годин: ідеально рівні двокрапки */
+    .interval-text { display: flex; align-items: center; font-variant-numeric: tabular-nums; letter-spacing: 0.5px; line-height: 1; }
+    .interval.off { color: var(--c-red); }
+    .interval.on { color: var(--c-yellow); }
 
-        .badge { display: flex; align-items: center; justify-content: center; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; width: max-content; line-height: 1; text-transform: uppercase; gap: 4px; }
-        .badge.off { background: #1a1a1c; border: 1px solid #333; color: #a1a1aa; }
-        .badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 10px rgba(251, 191, 36, 0.2); border: 1px solid var(--c-yellow); }
-        .badge-row { display: flex; align-items: center; gap: 8px; }
-        .badge-modifier { font-size: 12px; font-weight: 800; text-transform: uppercase; }
-        .badge-modifier.rescued { color: var(--c-yellow); }
-        .badge-modifier.emergency { color: var(--c-red); }
+    .badge { display: flex; align-items: center; justify-content: center; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; width: max-content; line-height: 1; text-transform: uppercase; gap: 4px; }
+    .badge.off { background: #1a1a1c; border: 1px solid #333; color: #a1a1aa; }
+    .badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 10px rgba(251, 191, 36, 0.2); border: 1px solid var(--c-yellow); }
+    .badge-row { display: flex; align-items: center; gap: 8px; }
+    .badge-modifier { font-size: 12px; font-weight: 800; text-transform: uppercase; }
+    .badge-modifier.rescued { color: var(--c-yellow); }
+    .badge-modifier.emergency { color: var(--c-red); }
 
-        /* === ТЕМА 2: ДВІ КОЛОНКИ === */
-        .tc-wrapper { display: flex; gap: 20px; text-align: center; margin-bottom: 10px; position: relative; z-index: 2; margin-top: 15px; }
-        .tc-col { flex: 1; display: flex; flex-direction: column; align-items: center; }
-        .tc-badge { padding: 8px 16px; border-radius: 12px; font-size: 14px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 20px; display: inline-block; width: 100%; box-sizing: border-box; }
-        .tc-badge.off { background: var(--c-red); color: #fff; box-shadow: 0 0 15px rgba(217, 70, 59, 0.3); }
-        .tc-badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); }
-        .tc-times-wrapper { display: flex; flex-direction: column; gap: 12px; width: 100%; position: relative; padding-bottom: 20px; }
-        .tc-bracket-line { position: absolute; width: 2px; background: #333; top: -10px; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; }
-        .tc-bracket-bottom { position: absolute; height: 2px; background: #333; bottom: 0; left: 20%; right: 20%; z-index: 1; }
-        .tc-bracket-tick { position: absolute; width: 2px; height: 10px; background: #333; bottom: -10px; left: 50%; transform: translateX(-50%); z-index: 1; }
-        .tc-time { font-size: 18px; font-weight: 700; letter-spacing: 1px; position: relative; z-index: 2; background: var(--c-dark); padding: 4px 0; display: flex; flex-direction: column; align-items: center; gap: 3px; }
-        .tc-time.off { color: var(--c-red); }
-        .tc-time.on { color: var(--c-yellow); }
-        .tc-modifier { font-size: 11px; font-weight: 800; text-transform: uppercase; }
-        .tc-modifier.rescued { color: var(--c-yellow); }
-        .tc-modifier.emergency { color: var(--c-red); }
-        .tc-total { font-size: 14px; font-weight: 700; margin-top: 15px; color: #888; background: var(--c-dark); padding: 0 10px; position: relative; z-index: 2; }
-        .tc-lightning { position: absolute; left: 50%; top: 5px; transform: translateX(-50%); color: var(--c-yellow); width: 24px; height: 24px; }
+    /* === ТЕМА 2: ДВІ КОЛОНКИ === */
+    .tc-wrapper { display: flex; gap: 20px; text-align: center; margin-bottom: 10px; position: relative; z-index: 2; margin-top: 15px; }
+    .tc-col { flex: 1; display: flex; flex-direction: column; align-items: center; }
+    .tc-badge { padding: 8px 16px; border-radius: 12px; font-size: 14px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 20px; display: inline-block; width: 100%; box-sizing: border-box; }
+    .tc-badge.off { background: var(--c-red); color: #fff; box-shadow: 0 0 15px rgba(217, 70, 59, 0.3); }
+    .tc-badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); }
+    .tc-times-wrapper { display: flex; flex-direction: column; gap: 12px; width: 100%; position: relative; padding-bottom: 20px; }
+    .tc-bracket-line { position: absolute; width: 2px; background: #333; top: -10px; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; }
+    .tc-bracket-bottom { position: absolute; height: 2px; background: #333; bottom: 0; left: 20%; right: 20%; z-index: 1; }
+    .tc-bracket-tick { position: absolute; width: 2px; height: 10px; background: #333; bottom: -10px; left: 50%; transform: translateX(-50%); z-index: 1; }
+    .tc-time { font-size: 18px; font-weight: 700; letter-spacing: 1px; position: relative; z-index: 2; background: var(--c-dark); padding: 4px 0; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .tc-time.off { color: var(--c-red); }
+    .tc-time.on { color: var(--c-yellow); }
+    .tc-modifier { font-size: 11px; font-weight: 800; text-transform: uppercase; }
+    .tc-modifier.rescued { color: var(--c-yellow); }
+    .tc-modifier.emergency { color: var(--c-red); }
+    .tc-total { font-size: 14px; font-weight: 700; margin-top: 15px; color: #888; background: var(--c-dark); padding: 0 10px; position: relative; z-index: 2; }
+    .tc-lightning { position: absolute; left: 50%; top: 5px; transform: translateX(-50%); color: var(--c-yellow); width: 24px; height: 24px; }
 
-        /* === ТЕМА 3: ЕМОДЗІ СПЛЕШ === */
-        .emoji-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-        .emoji-content-wrapper { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 5px 0 15px 0; }
-        .em-rows { width: 100%; display: flex; flex-direction: column; gap: 10px; }
-        .em-row { display: flex; justify-content: center; gap: 20px; }
-        .em-time { font-size: 20px; font-weight: 800; color: var(--c-red); display: flex; align-items: center; justify-content: center; gap: 5px; }
-        .em-time .em-arrow { width: 16px; height: 16px; color: var(--c-red); }
-        .em-time.is-off { color: var(--c-red); }
-        .em-time.is-rescued { color: var(--c-yellow); opacity: 0.7; }
-        .em-time.is-rescued .em-time-text { text-decoration: line-through; text-decoration-color: var(--c-yellow); text-decoration-thickness: 2px; }
-        .em-time.is-emergency { color: var(--c-red); opacity: 0.7; }
-        .em-time.is-emergency .em-time-text { text-decoration: line-through; text-decoration-color: var(--c-red); text-decoration-thickness: 2px; }
+    /* === ТЕМА 3: ЕМОДЗІ СПЛЕШ === */
+    .emoji-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+    .emoji-content-wrapper { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 5px 0 15px 0; }
+    .em-rows { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+    .em-row { display: flex; justify-content: center; gap: 20px; }
+    .em-time { font-size: 20px; font-weight: 800; color: var(--c-red); display: flex; align-items: center; justify-content: center; gap: 5px; }
+    .em-time .em-arrow { width: 16px; height: 16px; color: var(--c-red); }
+    .em-time.is-off { color: var(--c-red); }
+    .em-time.is-rescued { color: var(--c-yellow); opacity: 0.7; }
+    .em-time.is-rescued .em-time-text { text-decoration: line-through; text-decoration-color: var(--c-yellow); text-decoration-thickness: 2px; }
+    .em-time.is-emergency { color: var(--c-red); opacity: 0.7; }
+    .em-time.is-emergency .em-time-text { text-decoration: line-through; text-decoration-color: var(--c-red); text-decoration-thickness: 2px; }
 
-    </style>
+</style>
+```
+
 </head>
 <body>
 
 <div class="app-container">
     <div class="card">
         <h2>ELECTRIFY &copy;</h2>
-        
-        <div class="form-group">
-            <label class="form-label">Візуальний дизайн (можна змінювати на льоту):</label>
-            <select id="designSelect" class="input-neumorph" onchange="if(globalIntervals.length) processDataAndGenerate(false)">
-                <option value="timeline">🏠 Смарт-дім (Таймлайн)</option>
-                <option value="columns">⚖️ Дві колонки (Є / Немає)</option>
-                <option value="emojis">🎈 Мінімалізм (Рандомні емодзі)</option>
-            </select>
-        </div>
 
-        <div class="form-group">
-            <label class="form-label">Заголовок посту:</label>
-            <input type="text" id="postTitleInput" class="input-neumorph" value="ГРАФІК ВІДКЛЮЧЕНЬ НА [ДАТА]" placeholder="Введи заголовок (тег [ДАТА] заміниться автоматично)">
-        </div>
-
-        <textarea id="rawText" class="input-neumorph" placeholder="Встав текст графіку від Харківобленерго сюди (з чергою 1.2)..."></textarea>
-        
-        <div class="btn-group">
-            <button class="btn-neu btn-primary" onclick="processDataAndGenerate(true)">⚡ Створити</button>
-            <button class="btn-neu btn-danger" onclick="clearAll()">❌</button>
-        </div>
-
-        <div id="editorWrapper">
-            <label class="form-label">РЕДАКТОР ГРАФІКУ (натисни на блок, щоб змінити стан):<br><span style="font-weight:normal; font-size:11px; color:#888; text-transform:none;">Сірі — відключення (клік = світло було). Жовті — світло є (клік = аварійне).</span></label>
-            <div class="edit-chips-container" id="editorChips"></div>
-        </div>
-
-        <div id="debug" style="color:red; font-size:12px; margin-top:10px; text-align:center;"></div>
+```
+    <div class="form-group">
+        <label class="form-label">Візуальний дизайн (можна змінювати на льоту):</label>
+        <select id="designSelect" class="input-neumorph" onchange="if(globalIntervals.length) processDataAndGenerate(false)">
+            <option value="timeline">🏠 Смарт-дім (Таймлайн)</option>
+            <option value="columns">⚖️ Дві колонки (Є / Немає)</option>
+            <option value="emojis">🎈 Мінімалізм (Рандомні емодзі)</option>
+        </select>
     </div>
 
-    <div id="outputWrapper">
-        <div class="tools-row">
-            <button class="btn-neu" onclick="saveImageToGallery()">💾 Зберегти</button>
-        </div>
-        <img id="generatedImage" src="">
-        <div class="copy-block" id="copyBlock" onclick="copyToClipboard()">
-            <div class="copy-content" id="finalText">Тут буде текст...</div>
-            <div class="copy-hint" id="copyHint">Тапни, щоб скопіювати текст</div>
-        </div>
+    <div class="form-group">
+        <label class="form-label">Заголовок посту:</label>
+        <input type="text" id="postTitleInput" class="input-neumorph" value="ГРАФІК ВІДКЛЮЧЕНЬ НА [ДАТА]" placeholder="Введи заголовок (тег [ДАТА] заміниться автоматично)">
     </div>
+
+    <textarea id="rawText" class="input-neumorph" placeholder="Встав текст графіку від Харківобленерго сюди (з чергою 1.2)..."></textarea>
+    
+    <div class="btn-group">
+        <button class="btn-neu btn-primary" onclick="processDataAndGenerate(true)">⚡ Створити</button>
+        <button class="btn-neu btn-danger" onclick="clearAll()">❌</button>
+    </div>
+
+    <div id="editorWrapper">
+        <label class="form-label">РЕДАКТОР ГРАФІКУ (натисни на блок, щоб змінити стан):<br><span style="font-weight:normal; font-size:11px; color:#888; text-transform:none;">Сірі — відключення (клік = світло було). Жовті — світло є (клік = аварійне).</span></label>
+        <div class="edit-chips-container" id="editorChips"></div>
+    </div>
+
+    <div id="debug" style="color:red; font-size:12px; margin-top:10px; text-align:center;"></div>
+</div>
+
+<div id="outputWrapper">
+    <div class="tools-row">
+        <button class="btn-neu" onclick="saveImageToGallery()">💾 Зберегти</button>
+    </div>
+    <img id="generatedImage" src="">
+    <div class="copy-block" id="copyBlock" onclick="copyToClipboard()">
+        <div class="copy-content" id="finalText">Тут буде текст...</div>
+        <div class="copy-hint" id="copyHint">Тапни, щоб скопіювати текст</div>
+    </div>
+</div>
+```
+
 </div>
 
 <div id="captureTarget"></div>
@@ -308,7 +313,7 @@
             </div>`;
     }
 
-        // === ГОЛОВНИЙ ПРОЦЕС ===
+    // === ГОЛОВНИЙ ПРОЦЕС ===
     function processDataAndGenerate(fromRawText = true) {
         debug.textContent = "";
         if (fromRawText) {
@@ -336,7 +341,6 @@
 
                 tempOutages.push({ 
                     startMin, endMin, startStr, 
-                    // Якщо графік до кінця доби, пишемо 24:00 замість 00:00
                     displayEndStr: (endStr === "24:00" || endMin === 1440 ? "24:00" : endStr)
                 });
             });
@@ -424,9 +428,7 @@
         }
     }
 
-        
-
-// === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
+    // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
     function renderTimeline(intervals, totalHoursOff) {
         let headerContent = getStandardHeader(lastDateStr);
         headerContent += `<div class="source-top">${iconLink} Джерело: Харківобленерго</div>`;
@@ -445,7 +447,7 @@
             const redBanIcon = `<span style="color: var(--c-red); display: flex; align-items: center;">${iconBan}</span>`;
             
             let badgeHtml = '';
-            let intervalTextStyle = ''; /* Стиль для перекреслення годин */
+            let intervalTextStyle = '';
 
             if (int.type === 'off') {
                 if (int.isModified) {
@@ -472,13 +474,11 @@
                 }
                 dotsHtml += `<div class="tl-dot-large ${nextStateClass}"></div>`;
             } else {
-                /* Ефект затухання для останнього елемента (показує, що це до кінця доби) */
                 dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="opacity: 0.6"></div>`;
                 dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="opacity: 0.3"></div>`;
                 dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="opacity: 0.1"></div>`;
             }
 
-            /* Додаємо примітку, якщо це кінець доби */
             let endTextAddon = (int.endMin === 1440 || int.displayEndStr === "24:00") 
                 ? ` <span style="font-size: 11px; opacity: 0.6; font-weight: 500; margin-left: 6px; text-transform: lowercase;">(до кінця доби)</span>` 
                 : ``;
@@ -617,5 +617,6 @@
         outputWrapper.style.display = 'none';
     }
 </script>
+
 </body>
 </html>
