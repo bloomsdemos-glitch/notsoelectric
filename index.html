@@ -81,22 +81,23 @@
     .logo-wrapper { display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; margin-left: 15px; }
     .logo-fixed { width: 42px; height: 42px; object-fit: contain; border-radius: 50%; background: #ffffff; padding: 4px; box-sizing: border-box; flex-shrink: 0; }
 
-    /* === ФУТЕР === */
-    .footer-info { margin-top: 10px; padding-top: 20px; border-top: 1px solid #2a2a2a; display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 2; padding-right: 35px; }
-    .disclaimer-box { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #888; line-height: 1.4; font-weight: 500; }
+        /* === ФУТЕР І ДЖЕРЕЛО === */
+    .footer-info { margin-top: 10px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; align-items: center; gap: 15px; position: relative; z-index: 2; width: 100%; padding-bottom: 5px; }
+    .disclaimer-box { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #888; line-height: 1.4; font-weight: 500; width: 100%; }
     .disclaimer-icon { width: 14px; height: 14px; flex-shrink: 0; color: #888; margin-top: 1px; }
-    .footer-source { display: none; }
     
-    /* Джерело: тепер читається збоку (повертаєш телефон вправо — і читаєш) */
-    .source-vertical { position: absolute; right: 5px; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: center; font-size: 11px; color: #888; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 6px 10px; display: flex; align-items: center; justify-content: center; gap: 6px; background: rgba(0,0,0,0.4); z-index: 10; font-weight: 600; letter-spacing: 0.5px; white-space: nowrap; }
+    /* Джерело тепер акуратно по центру в самому низу */
+    .source-bottom { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 14px; background: rgba(0,0,0,0.3); font-weight: 600; letter-spacing: 0.5px; margin-top: 5px; }
+    .source-bottom svg { display: block; }
 
     /* === ТЕМА 1: СМАРТ-ДІМ (ТАЙМЛАЙН) === */
-    .total-time-center { display: flex; align-items: center; justify-content: center; gap: 6px; font-family: monospace; font-size: 14px; color: #a1a1aa; margin-top: 25px; margin-bottom: 5px; position: relative; z-index: 2; font-weight: 400; }
-    #timelineContainer { padding-top: 5px; }
+    .total-time-center { display: flex; align-items: center; justify-content: center; gap: 6px; font-family: monospace; font-size: 14px; color: #a1a1aa; margin-top: 25px; margin-bottom: 10px; position: relative; z-index: 2; font-weight: 400; }
+    #timelineContainer { padding-top: 5px; display: flex; flex-direction: column; gap: 0; }
     
     .tl-item { display: flex; flex-direction: column; z-index: 2; margin-bottom: 0; }
+    .tl-item:last-child .tl-body { display: none; } /* Останній елемент не має лінії вниз */
     
-    /* Рядок під лінійку: Час, Хатинка, Бейдж */
+    /* Рядок 1: Час, Хатинка, Бейдж (всі жорстко по центру) */
     .tl-head { display: flex; align-items: center; min-height: 40px; }
     .time-col { width: 60px; text-align: right; padding-right: 15px; font-weight: 700; font-size: 18px; flex-shrink: 0; line-height: 1; margin: 0; }
     .time-col.off { color: var(--c-red); }
@@ -110,19 +111,18 @@
     
     .badge-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
     
-    /* Блок кружечків та інтервалу */
-    .tl-body { display: flex; align-items: stretch; min-height: 45px; }
-    .line-node { display: flex; flex-direction: column; align-items: center; width: 36px; flex-shrink: 0; }
+    /* Рядок 2: Кружечки та Інтервали */
+    .tl-body { display: flex; align-items: stretch; min-height: 55px; }
+    .line-node { display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; width: 36px; flex-shrink: 0; padding: 4px 0; }
     
-    /* Пунктир кружечками замість ліній */
-    .tl-line-dotted { width: 0px; flex-grow: 1; margin: 4px 0; border-left: 6px dotted; }
-    .tl-line-dotted.on { border-left-color: var(--c-yellow); opacity: 0.8; }
-    .tl-line-dotted.off { border-left-color: #555; opacity: 0.8; }
+    /* Малі та великий кружечки */
+    .tl-dot-micro { width: 4px; height: 4px; border-radius: 50%; opacity: 0.7; }
+    .tl-dot-micro.on { background: var(--c-yellow); }
+    .tl-dot-micro.off { background: #555; }
     
-    /* Фінальний великий кружечок */
-    .tl-end-dot { width: 10px; height: 10px; border-radius: 50%; z-index: 3; margin-top: 2px; }
-    .tl-end-dot.on { background: var(--c-yellow); box-shadow: 0 0 6px var(--c-yellow); }
-    .tl-end-dot.off { background: #555; }
+    .tl-dot-large { width: 8px; height: 8px; border-radius: 50%; z-index: 3; }
+    .tl-dot-large.on { background: var(--c-yellow); box-shadow: 0 0 6px rgba(251, 191, 36, 0.6); }
+    .tl-dot-large.off { background: #666; }
     
     .interval-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
     .interval { display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; }
@@ -130,7 +130,7 @@
     .interval.off { color: var(--c-red); }
     .interval.on { color: var(--c-yellow); }
 
-    /* Обтікаючі бейджі (іконки тепер не висять) */
+    /* Плашки */
     .badge { display: flex; align-items: center; justify-content: center; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; width: max-content; line-height: 1; text-transform: uppercase; gap: 4px; }
     .badge.off { background: #1a1a1c; border: 1px solid #333; color: #a1a1aa; }
     .badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 10px rgba(251, 191, 36, 0.2); border: 1px solid var(--c-yellow); }
@@ -138,6 +138,7 @@
     .badge-modifier { font-size: 12px; font-weight: 800; text-transform: uppercase; }
     .badge-modifier.rescued { color: var(--c-yellow); }
     .badge-modifier.emergency { color: var(--c-red); }
+
 
 
     /* === ТЕМА 2: ДВІ КОЛОНКИ === */
@@ -319,13 +320,20 @@
     }
 
 
-    // === СПІЛЬНИЙ ФУТЕР ===
-        function getStandardFooter() {
+        // === СПІЛЬНИЙ ФУТЕР ===
+    function getStandardFooter() {
         return `
             <div class="footer-info">
-                <div class="disclaimer-box">${iconInfo}<div>Час і тривалість відключень можуть змінюватися залежно від стану енергосистеми / аварійних ситуацій</div></div>
+                <div class="disclaimer-box">
+                    ${iconInfo}
+                    <div>Час і тривалість відключень можуть змінюватися залежно від стану енергосистеми / аварійних ситуацій</div>
+                </div>
+                <div class="source-bottom">
+                    ${iconLink} Джерело: Харківобленерго
+                </div>
             </div>`;
     }
+
 
 
     // === ГОЛОВНИЙ ПРОЦЕС ===
@@ -450,18 +458,26 @@
         }
     }
 
-        // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
-        // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
+            // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
     function renderTimeline(intervals, totalHoursOff) {
         let html = getStandardHeader(lastDateStr) + `<div id="timelineContainer">`;
         intervals.forEach((int, i) => {
             const isVisuallyOn = int.type === 'on';
             const stateClass = isVisuallyOn ? 'on' : 'off';
             
+            // Визначаємо колір для наступної хатинки (щоб пофарбувати останній 6-й кружечок)
+            let nextStateClass = stateClass;
+            if (i < intervals.length - 1) {
+                nextStateClass = intervals[i+1].type === 'on' ? 'on' : 'off';
+            }
+            
+            // Фарбуємо іконку відключення в червоний
+            const redBanIcon = `<span style="color: var(--c-red); display: flex; align-items: center;">${iconBan}</span>`;
+            
             let badgeHtml = '';
             if (int.type === 'off') {
-                if (int.isModified) badgeHtml = `<div class="badge-row"><div class="badge off" style="text-decoration: line-through; opacity: 0.55;">${iconBan} ВІДКЛЮЧЕННЯ</div><span class="badge-modifier rescued">💡 Світло було</span></div>`;
-                else badgeHtml = `<div class="badge off">${iconBan} ВІДКЛЮЧЕННЯ</div>`;
+                if (int.isModified) badgeHtml = `<div class="badge-row"><div class="badge off" style="text-decoration: line-through; opacity: 0.55;">${redBanIcon} ВІДКЛЮЧЕННЯ</div><span class="badge-modifier rescued">💡 Світло було</span></div>`;
+                else badgeHtml = `<div class="badge off">${redBanIcon} ВІДКЛЮЧЕННЯ</div>`;
             } else {
                 if (int.isModified) badgeHtml = `<div class="badge-row"><div class="badge on" style="text-decoration: line-through; opacity: 0.55; color: #000;">${iconLightningSVG} СВІТЛО Є</div><span class="badge-modifier emergency">⚠️ Аварійне</span></div>`;
                 else badgeHtml = `<div class="badge on" style="color: #000;">${iconLightningSVG} СВІТЛО Є</div>`;
@@ -469,16 +485,13 @@
                 
             const intIcon = isVisuallyOn ? iconBulb : iconZapOff;
             
-            // Логіка для фінального великого кружечка
-            let endDotHtml = '';
-            let lineHtml = '';
-            
-            if (i === intervals.length - 1) {
-                // Останній елемент: тільки фінальний кружечок, без пунктирної лінії
-                endDotHtml = `<div class="tl-end-dot ${stateClass}"></div>`;
-            } else {
-                // Всі інші: малюємо пунктирну лінію
-                lineHtml = `<div class="tl-line-dotted ${stateClass}"></div>`;
+            // Генеруємо 6 кружечків: 5 під поточну хатинку, 1 більший під наступну
+            let dotsHtml = '';
+            if (i < intervals.length - 1) { 
+                for(let d = 0; d < 5; d++) {
+                    dotsHtml += `<div class="tl-dot-micro ${stateClass}"></div>`;
+                }
+                dotsHtml += `<div class="tl-dot-large ${nextStateClass}"></div>`;
             }
             
             html += `
@@ -493,8 +506,7 @@
                 <div class="tl-body">
                     <div class="time-col"></div>
                     <div class="line-node">
-                        ${lineHtml}
-                        ${endDotHtml}
+                        ${dotsHtml}
                     </div>
                     <div class="interval-col">
                         <div class="interval ${stateClass}">${intIcon} <span>${int.startStr} - ${int.displayEndStr}</span></div>
@@ -504,19 +516,13 @@
         });
 
         html += `</div>`;
-        // Іконка годинника перед текстом
         html += `<div class="total-time-center">${iconClockSVG} <span>Загальний час без світла: ~${totalHoursOff} год</span></div>`;
-        html += getStandardFooter();
-        // Джерело збоку
-        html += `<div class="source-vertical">${iconLink} Джерело: Харківобленерго</div>`;
+        html += getStandardFooter(); // Тут вже автоматично додається "Джерело"
         captureTarget.innerHTML = html;
     }
 
-
-
-
     // === РЕНДЕР ТЕМА 2: ДВІ КОЛОНКИ ===
-        function renderColumns(intervals, totalHoursOff, totalHoursOn) {
+    function renderColumns(intervals, totalHoursOff, totalHoursOn) {
         let offHtml = ''; let onHtml = '';
         intervals.forEach(int => {
             let timeText = `${int.startStr} - ${int.displayEndStr}`;
@@ -531,23 +537,22 @@
 
         captureTarget.innerHTML = getStandardHeader(lastDateStr) + `
             <div class="tc-wrapper">
-                ${iconLightning}
+                ${iconLightningSVG}
                 <div class="tc-col">
-                    <div class="tc-badge off">⛔️ СВІТЛА НЕ БУДЕ</div>
+                    <div class="tc-badge off"><span style="color: var(--c-red); display: inline-block;">${iconBan}</span> СВІТЛА НЕ БУДЕ</div>
                     <div class="tc-times-wrapper"><div class="tc-bracket-line"></div>${offHtml}<div class="tc-bracket-bottom"></div><div class="tc-bracket-tick"></div></div>
-                    <div class="tc-total">${iconClock} ~${totalHoursOff} год</div>
+                    <div class="tc-total">${iconClockSVG} ~${totalHoursOff} год</div>
                 </div>
                 <div class="tc-col">
-                    <div class="tc-badge on">✨ СВІТЛО БУДЕ</div>
+                    <div class="tc-badge on" style="color: #000;">${iconLightningSVG} СВІТЛО БУДЕ</div>
                     <div class="tc-times-wrapper"><div class="tc-bracket-line"></div>${onHtml}<div class="tc-bracket-bottom"></div><div class="tc-bracket-tick"></div></div>
-                    <div class="tc-total">${iconClock} ~${totalHoursOn} год</div>
+                    <div class="tc-total">${iconClockSVG} ~${totalHoursOn} год</div>
                 </div>
-            </div>` + getStandardFooter() + `<div class="source-vertical">${iconSource} Джерело: Харківобленерго</div>`;
+            </div>` + getStandardFooter();
     }
 
-
     // === РЕНДЕР ТЕМА 3: ЕМОДЗІ МІНІМАЛІЗМ ===
-        function renderEmojis(intervals) {
+    function renderEmojis(intervals) {
         const emList = ['⚡️', '💡', '🔌', '🔦', '🔋'];
         let bgHtml = '<div class="emoji-bg">';
         const generateSide = (baseLeft) => {
@@ -571,7 +576,7 @@
             else rowsHtml += `<div class="em-row"><div class="em-time is-off">${timeText}</div></div>`;
         });
 
-        captureTarget.innerHTML = `${bgHtml}<div style="position:relative; z-index:2;">${getStandardHeader(lastDateStr)}</div><div class="emoji-content-wrapper"><div class="em-rows">${rowsHtml}</div></div>${getStandardFooter()}<div class="source-vertical">${iconSource} Джерело: Харківобленерго</div>`;
+        captureTarget.innerHTML = `${bgHtml}<div style="position:relative; z-index:2;">${getStandardHeader(lastDateStr)}</div><div class="emoji-content-wrapper"><div class="em-rows">${rowsHtml}</div></div>${getStandardFooter()}`;
     }
 
 
