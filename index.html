@@ -510,7 +510,7 @@
     .badge-modifier.rescued { color: var(--c-yellow); }
     .badge-modifier.emergency { color: var(--c-red); }
 
-    // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
+        // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
     function renderTimeline(intervals, totalHoursOff) {
         let headerContent = getStandardHeader(lastDateStr);
         headerContent += `<div class="source-top">${iconLink} Джерело: Харківобленерго</div>`;
@@ -529,7 +529,7 @@
             const redBanIcon = `<span style="color: var(--c-red); display: flex; align-items: center;">${iconBan}</span>`;
             
             let badgeHtml = '';
-            let intervalTextStyle = ''; // Стиль для перекреслення годин
+            let intervalTextStyle = ''; /* Стиль для перекреслення годин */
 
             if (int.type === 'off') {
                 if (int.isModified) {
@@ -549,7 +549,7 @@
                 
             const intIcon = isVisuallyOn ? iconBulb : iconZapOff;
             
-            // Ланцюг: рівно 5 малих і 1 великий. Вони розтягнуться завдяки flexbox і negative margin
+            /* Ланцюг: рівно 5 малих і 1 великий. Вони розтягнуться завдяки flexbox і negative margin */
             let dotsHtml = '';
             if (i < intervals.length - 1) { 
                 for(let d = 0; d < 5; d++) {
@@ -588,6 +588,7 @@
         html += getStandardFooter(false); 
         captureTarget.innerHTML = html;
     }
+
 
 
     // === РЕНДЕР ТЕМА 2: ДВІ КОЛОНКИ ===
