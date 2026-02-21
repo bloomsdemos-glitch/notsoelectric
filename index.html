@@ -53,9 +53,17 @@
     .copy-content { font-family: monospace; font-size: 14px; color: #333; white-space: pre-wrap; line-height: 1.4; pointer-events: none; }
     .copy-hint { margin-top: 10px; font-size: 12px; color: #007aff; text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* === БАЗОВИЙ ТЕМНИЙ ШАБЛОН === */
-    #captureTarget { background: var(--c-dark); color: #ffffff; padding: 20px 25px 20px 25px; position: absolute; left: -9999px; top: 0; width: 480px; box-sizing: border-box; -webkit-font-smoothing: antialiased; overflow: hidden; border-radius: 0; }
-    
+        /* === БАЗОВИЙ ТЕМНИЙ ШАБЛОН === */
+    #captureTarget { 
+        background: var(--c-dark); color: #ffffff; 
+        padding: 40px 20px; /* Більше повітря зверху і знизу для сторіз */
+        position: absolute; left: -9999px; top: 0; 
+        width: 480px; 
+        min-height: 854px; /* Ідеальна пропорція 9:16 (480x854) */
+        box-sizing: border-box; -webkit-font-smoothing: antialiased; overflow: hidden; border-radius: 0; 
+        display: flex; flex-direction: column; justify-content: center; /* Центрує графік по вертикалі, якщо він короткий */
+    }
+
     /* === ХЕДЕР === */
     .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; position: relative; z-index: 2; padding-right: 5px; }
     .header-title { display: flex; flex-direction: column; gap: 6px; font-size: 22px; font-weight: 900; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; margin: 0; flex: 1; color: #ffffff; }
@@ -461,18 +469,20 @@
                 
             const intIcon = isVisuallyOn ? iconBulb : iconZapOff;
             
-            /* Золота середина: 4 кружечки. Завдяки space-between вони ляжуть ідеально. */
+               /* Ланцюг: 3 кружечки для компактності */
             let dotsHtml = '';
             if (i < intervals.length - 1) { 
-                for(let d = 0; d < 4; d++) {
+                for(let d = 0; d < 3; d++) {
                     dotsHtml += `<div class="tl-dot-micro ${stateClass}"></div>`;
                 }
             } else {
-                /* Затухання: 3 крапочки в кінці */
-                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="opacity: 0.6"></div>`;
-                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="opacity: 0.3"></div>`;
-                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="opacity: 0.1"></div>`;
+                /* Ефект затухання: 4 крапки, які плавно зменшуються і розчиняються */
+                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="width: 4px; height: 4px; opacity: 0.6"></div>`;
+                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="width: 3px; height: 3px; opacity: 0.4"></div>`;
+                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="width: 2px; height: 2px; opacity: 0.2"></div>`;
+                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="width: 1px; height: 1px; opacity: 0.1"></div>`;
             }
+
 
             let endTextAddon = (int.endMin === 1440 || int.displayEndStr === "24:00") 
                 ? ` <span style="font-size: 11px; opacity: 0.6; font-weight: 500; margin-left: 6px; text-transform: lowercase;">(до кінця доби)</span>` 
