@@ -81,51 +81,54 @@
     .logo-wrapper { display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; margin-left: 15px; }
     .logo-fixed { width: 42px; height: 42px; object-fit: contain; border-radius: 50%; background: #ffffff; padding: 4px; box-sizing: border-box; flex-shrink: 0; }
 
-            /* === ФУТЕР І ДЖЕРЕЛО === */
-    .footer-info { margin-top: 10px; padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; position: relative; z-index: 2; width: 100%; }
-    .disclaimer-box { display: flex; align-items: center; justify-content: center; text-align: center; gap: 8px; font-size: 13px; color: #888; line-height: 1.4; font-weight: 500; width: 100%; }
-    .disclaimer-icon { width: 14px; height: 14px; flex-shrink: 0; color: #888; }
+                /* === ФУТЕР І ДЖЕРЕЛО === */
+    .footer-info { margin-top: 15px; padding-top: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; position: relative; z-index: 2; width: 100%; }
     
-    .source-bottom { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 14px; background: rgba(0,0,0,0.3); font-weight: 600; letter-spacing: 0.5px; }
-    
-    /* Нове джерело під заголовком */
-    .source-top { display: flex; align-items: center; justify-content: flex-start; gap: 6px; font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 600; letter-spacing: 0.5px; margin-top: 8px; }
-    
-    /* Акуратний дівайдер */
+    /* Робимо стильний корпус для примітки */
+    .disclaimer-box { display: flex; align-items: flex-start; justify-content: flex-start; text-align: left; gap: 10px; font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.4; font-weight: 500; width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 12px 15px; border-radius: 12px; box-sizing: border-box; }
+    .disclaimer-icon { width: 14px; height: 14px; flex-shrink: 0; color: rgba(255,255,255,0.6); margin-top: 1px; }
+
+    /* Джерело для інших тем (знизу) */
+    .source-bottom { display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-size: 12px; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 14px; background: rgba(0,0,0,0.3); font-weight: 600; letter-spacing: 0.5px; }
+
+    /* Джерело під заголовком (для Смарт-дому) */
+    .source-top { display: flex; align-items: center; justify-content: flex-start; gap: 4px; font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 600; letter-spacing: 0.5px; margin-top: 8px; text-transform: uppercase; }
+
     .header-divider { height: 1px; width: 100%; background: rgba(255,255,255,0.1); margin: 15px 0; }
 
     /* === ТЕМА 1: СМАРТ-ДІМ (ТАЙМЛАЙН) === */
-    .total-time-center { display: flex; align-items: center; justify-content: center; gap: 6px; font-family: monospace; font-size: 15px; color: #ffffff; margin-top: 25px; margin-bottom: 10px; position: relative; z-index: 2; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    /* Приглушили текст загального часу і змінили шрифт */
+    .total-time-center { display: flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; font-size: 13px; color: #888; margin-top: 25px; margin-bottom: 15px; position: relative; z-index: 2; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
     #timelineContainer { padding-top: 0px; display: flex; flex-direction: column; gap: 0; }
-    
+
     .tl-item { display: flex; flex-direction: column; z-index: 2; margin-bottom: 0; }
     .tl-item:last-child .tl-body { display: none; }
-    
-    .tl-head { display: flex; align-items: center; min-height: 40px; }
+
+    .tl-head { display: flex; align-items: center; min-height: 38px; position: relative; z-index: 2; }
     .time-col { width: 60px; text-align: right; padding-right: 15px; font-weight: 700; font-size: 18px; flex-shrink: 0; line-height: 1; margin: 0; }
     .time-col.off { color: var(--c-red); }
     .time-col.on { color: var(--c-yellow); text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
-    
+
     .icon-node { display: flex; flex-direction: column; align-items: center; width: 36px; flex-shrink: 0; }
-    .icon-circle { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--c-dark); z-index: 3; }
+    .icon-circle { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--c-dark); z-index: 3; position: relative; }
     .icon-house { width: 22px; height: 22px; }
     .on .icon-house { fill: var(--c-yellow); filter: drop-shadow(0 0 5px var(--c-yellow)); }
     .off .icon-house { fill: #555; }
-    
+
     .badge-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
-    
-    .tl-body { display: flex; align-items: stretch; min-height: 55px; }
-    /* Метро-ланцюг: розтягуємо кружечки */
-    .line-node { display: flex; flex-direction: column; align-items: center; justify-content: space-between; width: 36px; flex-shrink: 0; padding: 4px 0; }
-    
+
+    /* Розтягуємо лінію впритул до хатинок (негативні марджини роблять магію) */
+    .tl-body { display: flex; align-items: stretch; min-height: 50px; margin-top: -4px; margin-bottom: -4px; position: relative; z-index: 1; }
+    .line-node { display: flex; flex-direction: column; align-items: center; justify-content: space-between; width: 36px; flex-shrink: 0; padding: 6px 0; }
+
     .tl-dot-micro { width: 5px; height: 5px; border-radius: 50%; opacity: 0.8; }
     .tl-dot-micro.on { background: var(--c-yellow); }
     .tl-dot-micro.off { background: #555; }
-    
+
     .tl-dot-large { width: 9px; height: 9px; border-radius: 50%; z-index: 3; }
     .tl-dot-large.on { background: var(--c-yellow); box-shadow: 0 0 6px rgba(251, 191, 36, 0.6); }
     .tl-dot-large.off { background: #666; }
-    
+
     .interval-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
     .interval { display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; }
     .interval-icon { width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -235,7 +238,8 @@
     const iconClock = `🕘`;
     const iconSparkles = `<svg viewBox="0 0 512 512" width="12" height="12" fill="currentColor" style="margin-right:4px; margin-bottom:1px;"><path d="M327.5 104.2l-14-42.6c-2.5-7.6-13.4-7.6-15.9 0l-14 42.6c-4.4 13.5-15 24.1-28.5 28.5l-42.6 14c-7.6 2.5-7.6 13.4 0 15.9l42.6 14c13.5 4.4 24.1 15 28.5 28.5l14 42.6c2.5 7.6 13.4 7.6 15.9 0l14-42.6c4.4-13.5 15-24.1 28.5-28.5l42.6-14c7.6-2.5 7.6-13.4 0-15.9l-42.6-14c-13.5-4.4-24.1-15-28.5-28.5zM433.8 335.5l-9.1-27.6c-1.6-4.9-8.7-4.9-10.3 0l-9.1 27.6c-2.9 8.7-9.8 15.7-18.5 18.5l-27.6 9.1c-4.9 1.6-4.9 8.7 0 10.3l27.6 9.1c8.7 2.9 15.7 9.8 18.5 18.5l9.1 27.6c1.6 4.9 8.7 4.9 10.3 0l9.1-27.6c2.9-8.7 9.8-15.7 18.5-18.5l27.6-9.1c4.9-1.6 4.9-8.7 0-10.3l-27.6-9.1c-8.7-2.9-15.7-9.8-18.5-18.5zM152 352l-20.4-61.9c-3.6-11-19.5-11-23.1 0L88 352c-6.4 19.5-21.6 34.8-41.2 41.2l-61.9 20.4c-11 3.6-11 19.5 0 23.1l61.9 20.4c19.5 6.4 34.8 21.6 41.2 41.2l20.4 61.9c3.6 11 19.5 11 23.1 0l20.4-61.9c6.4-19.5 21.6-34.8 41.2-41.2l61.9-20.4c11-3.6 11-19.5 0-23.1l-61.9-20.4c-19.5-6.4-34.8-21.6-41.2-41.2z"/></svg>`;
     const iconBan = `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px; margin-bottom:1px;"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>`;
-    const iconLink = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>`;
+        const iconLink = `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block; margin-right:2px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>`;
+
     const iconLightningSVG = `<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" stroke="none" style="margin-right:4px; display:inline-block; vertical-align:middle;"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`;
     const iconClockSVG = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`;
 
@@ -322,6 +326,7 @@
 
 
             // === СПІЛЬНИЙ ФУТЕР ===
+    // === СПІЛЬНИЙ ФУТЕР ===
     function getStandardFooter(showSourceAtBottom = true) {
         let sourceHtml = showSourceAtBottom ? `<div class="source-bottom">${iconLink} Джерело: Харківобленерго</div>` : '';
         return `
@@ -333,7 +338,6 @@
                 ${sourceHtml}
             </div>`;
     }
-
 
 
     // === ГОЛОВНИЙ ПРОЦЕС ===
@@ -461,7 +465,6 @@
                 // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
     function renderTimeline(intervals, totalHoursOff) {
         let headerContent = getStandardHeader(lastDateStr);
-        // Джерело під заголовком (без рамки) + Дівайдер
         headerContent += `<div class="source-top">${iconLink} Джерело: Харківобленерго</div>`;
         headerContent += `<div class="header-divider"></div>`;
 
@@ -488,10 +491,10 @@
                 
             const intIcon = isVisuallyOn ? iconBulb : iconZapOff;
             
-            // Ланцюг: 7 мікро-кружечків і 1 фінальний великий (впритул до хатинок)
+            // Ланцюг: 4 малих кружечки (щоб вони дихали) і 1 фінальний великий
             let dotsHtml = '';
             if (i < intervals.length - 1) { 
-                for(let d = 0; d < 7; d++) {
+                for(let d = 0; d < 4; d++) {
                     dotsHtml += `<div class="tl-dot-micro ${stateClass}"></div>`;
                 }
                 dotsHtml += `<div class="tl-dot-large ${nextStateClass}"></div>`;
@@ -521,10 +524,10 @@
         html += `</div>`;
         html += `<div class="total-time-center">${iconClockSVG} <span>Загальний час без світла: ~${totalHoursOff} год</span></div>`;
         
-        // Викликаємо футер БЕЗ джерела знизу (передаємо false)
         html += getStandardFooter(false); 
         captureTarget.innerHTML = html;
     }
+
 
 
     // === РЕНДЕР ТЕМА 2: ДВІ КОЛОНКИ ===
