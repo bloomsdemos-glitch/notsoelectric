@@ -53,11 +53,12 @@
     .copy-content { font-family: monospace; font-size: 14px; color: #333; white-space: pre-wrap; line-height: 1.4; pointer-events: none; }
     .copy-hint { margin-top: 10px; font-size: 12px; color: #007aff; text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* === БАЗОВИЙ ТЕМНИЙ ШАБЛОН === */
-    #captureTarget { background: var(--c-dark); color: #ffffff; padding: 20px 25px 25px 25px; position: absolute; left: -9999px; top: 0; width: 440px; box-sizing: border-box; -webkit-font-smoothing: antialiased; overflow: hidden; border-radius: 0; }
+        /* === БАЗОВИЙ ТЕМНИЙ ШАБЛОН === */
+    /* Зробили ширшим (480px) і зменшили падінги */
+    #captureTarget { background: var(--c-dark); color: #ffffff; padding: 18px 20px; position: absolute; left: -9999px; top: 0; width: 480px; box-sizing: border-box; -webkit-font-smoothing: antialiased; overflow: hidden; border-radius: 0; }
     
     /* === ХЕДЕР === */
-    .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; position: relative; z-index: 2; padding-right: 10px; }
+    .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; position: relative; z-index: 2; padding-right: 5px; }
     .header-title { display: flex; flex-direction: column; gap: 6px; font-size: 22px; font-weight: 900; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; margin: 0; flex: 1; color: #ffffff; }
     .title-date-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .title-date-line span.date-text { color: var(--c-yellow); line-height: 1; }
@@ -69,22 +70,24 @@
     .logo-fixed { width: 42px; height: 42px; object-fit: contain; border-radius: 50%; background: #ffffff; padding: 4px; box-sizing: border-box; flex-shrink: 0; }
 
     /* === ФУТЕР І ДЖЕРЕЛО === */
-    .footer-info { margin-top: 15px; padding-top: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; position: relative; z-index: 2; width: 100%; }
-    .disclaimer-box { display: flex; align-items: flex-start; justify-content: flex-start; text-align: left; gap: 10px; font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.4; font-weight: 500; width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 12px 15px; border-radius: 12px; box-sizing: border-box; }
+    .footer-info { margin-top: 10px; padding-top: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; position: relative; z-index: 2; width: 100%; }
+    
+    /* Корпус примітки став компактнішим */
+    .disclaimer-box { display: flex; align-items: flex-start; justify-content: flex-start; text-align: left; gap: 10px; font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.35; font-weight: 500; width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 10px 12px; border-radius: 12px; box-sizing: border-box; }
     .disclaimer-icon { width: 14px; height: 14px; flex-shrink: 0; color: rgba(255,255,255,0.6); margin-top: 1px; }
-    .source-bottom { display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-size: 12px; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 14px; background: rgba(0,0,0,0.3); font-weight: 600; letter-spacing: 0.5px; }
-    .source-top { display: flex; align-items: center; justify-content: flex-start; gap: 4px; font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 600; letter-spacing: 0.5px; margin-top: 8px; text-transform: uppercase; }
-    .header-divider { height: 1px; width: 100%; background: rgba(255,255,255,0.1); margin: 15px 0; }
 
-        /* === ТЕМА 1: СМАРТ-ДІМ (ТАЙМЛАЙН) === */
-    .total-time-center { display: flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; font-size: 13px; color: #888; margin-top: 25px; margin-bottom: 15px; position: relative; z-index: 2; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .source-bottom { display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-size: 12px; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 14px; background: rgba(0,0,0,0.3); font-weight: 600; letter-spacing: 0.5px; }
+    .source-top { display: flex; align-items: center; justify-content: flex-start; gap: 4px; font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 600; letter-spacing: 0.5px; margin-top: 6px; text-transform: uppercase; }
+    .header-divider { height: 1px; width: 100%; background: rgba(255,255,255,0.1); margin: 10px 0; }
+
+    /* === ТЕМА 1: СМАРТ-ДІМ (ТАЙМЛАЙН) === */
+    .total-time-center { display: flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; font-size: 13px; color: #888; margin-top: 12px; margin-bottom: 5px; position: relative; z-index: 2; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
     #timelineContainer { padding-top: 0px; display: flex; flex-direction: column; gap: 0; }
 
     .tl-item { display: flex; flex-direction: column; z-index: 2; margin-bottom: 0; }
 
-    .tl-head { display: flex; align-items: center; min-height: 38px; position: relative; z-index: 2; }
+    .tl-head { display: flex; align-items: center; min-height: 34px; position: relative; z-index: 2; }
     
-    /* Прибрали tabular-nums, щоб двокрапки не липли до цифр */
     .time-col { width: 60px; text-align: right; padding-right: 15px; font-weight: 700; font-size: 18px; flex-shrink: 0; line-height: 1; margin: 0; letter-spacing: 0; }
     .time-col.off { color: var(--c-red); }
     .time-col.on { color: var(--c-yellow); text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
@@ -97,11 +100,9 @@
 
     .badge-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
 
-        /* Тіло таймлайну повертаємо в нормальний стан (текст буде строго по центру) */
-    .tl-body { display: flex; align-items: stretch; min-height: 52px; position: relative; z-index: 1; }
-    
-    /* Магія переїхала сюди: негативні відступи тягнуть ТІЛЬКИ кружечки до хатинок, не чіпаючи текст */
-    .line-node { display: flex; flex-direction: column; align-items: center; justify-content: space-between; width: 36px; flex-shrink: 0; padding: 0; margin-top: -12px; margin-bottom: -12px; }
+    /* Різко зменшили висоту блоку з кружечками */
+    .tl-body { display: flex; align-items: stretch; min-height: 32px; position: relative; z-index: 1; }
+    .line-node { display: flex; flex-direction: column; align-items: center; justify-content: space-between; width: 36px; flex-shrink: 0; padding: 0; margin-top: -8px; margin-bottom: -8px; }
 
     .tl-dot-micro { width: 5px; height: 5px; border-radius: 50%; opacity: 0.8; }
     .tl-dot-micro.on { background: var(--c-yellow); box-shadow: 0 0 3px rgba(251, 191, 36, 0.4); }
@@ -109,10 +110,6 @@
 
     .interval-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
     
-    /* Іконки прибиті до тексту намертво */
-    .interval { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; line-height: 1; }
-
-    /* Іконки прибиті до тексту намертво */
     .interval { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; line-height: 1; }
     .interval-icon { display: flex; align-items: center; justify-content: center; width: 16px; height: 16px; flex-shrink: 0; }
     .interval-icon svg { width: 100%; height: 100%; display: block; }
@@ -128,6 +125,7 @@
     .badge-modifier { font-size: 12px; font-weight: 800; text-transform: uppercase; }
     .badge-modifier.rescued { color: var(--c-yellow); }
     .badge-modifier.emergency { color: var(--c-red); }
+
 
     /* === ТЕМА 2: ДВІ КОЛОНКИ === */
     .tc-wrapper { display: flex; gap: 20px; text-align: center; margin-bottom: 10px; position: relative; z-index: 2; margin-top: 15px; }
@@ -428,7 +426,7 @@
         }
     }
 
-        // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
+    // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
     function renderTimeline(intervals, totalHoursOff) {
         let headerContent = getStandardHeader(lastDateStr);
         headerContent += `<div class="source-top">${iconLink} Джерело: Харківобленерго</div>`;
@@ -462,17 +460,16 @@
                 
             const intIcon = isVisuallyOn ? iconBulb : iconZapOff;
             
-            /* Ланцюг: рівно 6 однакових кружечків. Завдяки space-between вони доторкнуться до хатинок */
+            /* Ланцюг: скоротили до 3 кружечків, щоб картинка була компактною */
             let dotsHtml = '';
             if (i < intervals.length - 1) { 
-                for(let d = 0; d < 6; d++) {
+                for(let d = 0; d < 3; d++) {
                     dotsHtml += `<div class="tl-dot-micro ${stateClass}"></div>`;
                 }
             } else {
-                /* Ефект затухання для останнього елемента (показує, що це до кінця доби) */
-                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="opacity: 0.6"></div>`;
-                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="opacity: 0.3"></div>`;
-                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="opacity: 0.1"></div>`;
+                /* Ефект затухання: лишили 2 крапки */
+                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="opacity: 0.5"></div>`;
+                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="opacity: 0.15"></div>`;
             }
 
             /* Додаємо примітку, якщо це кінець доби */
@@ -510,6 +507,7 @@
         html += getStandardFooter(false); 
         captureTarget.innerHTML = html;
     }
+
 
 
     // === РЕНДЕР ТЕМА 2: ДВІ КОЛОНКИ ===
