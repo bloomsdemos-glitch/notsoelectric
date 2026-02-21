@@ -68,45 +68,41 @@
         border-radius: 0; 
     }
     
-        /* === ХЕДЕР === */
+            /* === ХЕДЕР === */
     .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; position: relative; z-index: 2; padding-right: 10px; }
-    .header-title { display: flex; flex-direction: column; gap: 4px; font-size: 22px; font-weight: 900; line-height: 1.1; letter-spacing: 0.5px; text-transform: uppercase; margin: 0; flex: 1; color: #ffffff; }
+    .header-title { display: flex; flex-direction: column; gap: 6px; font-size: 22px; font-weight: 900; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; margin: 0; flex: 1; color: #ffffff; }
     .title-date-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .title-date-line span.date-text { color: var(--c-yellow); }
-    .valky-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 15px; color: rgba(255,255,255,0.9); font-weight: 800; text-transform: none; letter-spacing: 0; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 8px; }
+    .title-date-line span.date-text { color: var(--c-yellow); line-height: 1; }
+    
+    /* Нова стильна рамка для Валок */
+    .valky-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; color: rgba(255,255,255,0.9); font-weight: 800; text-transform: none; letter-spacing: 0; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); line-height: 1; }
     .valky-tag svg { width: 14px; height: 14px; fill: rgba(255,255,255,0.8); flex-shrink: 0; }
     
     .logo-wrapper { display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; margin-left: 15px; }
     .logo-fixed { width: 42px; height: 42px; object-fit: contain; border-radius: 50%; background: #ffffff; padding: 4px; box-sizing: border-box; flex-shrink: 0; }
 
     /* === ФУТЕР === */
-    .footer-info { margin-top: 20px; padding-top: 20px; border-top: 1px solid #2a2a2a; display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 2; padding-right: 35px; }
+    .footer-info { margin-top: 10px; padding-top: 20px; border-top: 1px solid #2a2a2a; display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 2; padding-right: 35px; }
     .disclaimer-box { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #888; line-height: 1.4; font-weight: 500; }
-    .disclaimer-icon { width: 14px; height: 14px; flex-shrink: 0; color: #888; margin-top: 1px; overflow: visible; }
+    .disclaimer-icon { width: 14px; height: 14px; flex-shrink: 0; color: #888; margin-top: 1px; }
     .footer-source { display: none; }
     
-    /* Вертикальне джерело справа */
-    .source-vertical { position: absolute; right: 5px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; text-orientation: mixed; font-size: 11px; color: #888; border: 1px solid #333; border-radius: 4px; padding: 8px 4px; display: flex; align-items: center; justify-content: center; background: var(--c-dark); z-index: 10; font-weight: 600; letter-spacing: 0.5px; }
+    /* Джерело: тепер читається збоку (повертаєш телефон вправо — і читаєш) */
+    .source-vertical { position: absolute; right: 5px; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: center; font-size: 11px; color: #888; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 6px 10px; display: flex; align-items: center; justify-content: center; gap: 6px; background: rgba(0,0,0,0.4); z-index: 10; font-weight: 600; letter-spacing: 0.5px; white-space: nowrap; }
 
     /* === ТЕМА 1: СМАРТ-ДІМ (ТАЙМЛАЙН) === */
-    .total-time-center { text-align: center; font-family: monospace; font-size: 14px; color: #a1a1aa; margin-top: 15px; margin-bottom: 5px; position: relative; z-index: 2; font-weight: 400; }
+    .total-time-center { display: flex; align-items: center; justify-content: center; gap: 6px; font-family: monospace; font-size: 14px; color: #a1a1aa; margin-top: 25px; margin-bottom: 5px; position: relative; z-index: 2; font-weight: 400; }
     #timelineContainer { padding-top: 5px; }
     
     .tl-item { display: flex; flex-direction: column; z-index: 2; margin-bottom: 0; }
-    .tl-item:last-child .tl-body { display: none; }
     
-    .tl-head { display: flex; align-items: center; min-height: 38px; }
-    .time-col { width: 60px; text-align: right; padding-right: 15px; font-weight: 700; font-size: 18px; flex-shrink: 0; }
+    /* Рядок під лінійку: Час, Хатинка, Бейдж */
+    .tl-head { display: flex; align-items: center; min-height: 40px; }
+    .time-col { width: 60px; text-align: right; padding-right: 15px; font-weight: 700; font-size: 18px; flex-shrink: 0; line-height: 1; margin: 0; }
     .time-col.off { color: var(--c-red); }
     .time-col.on { color: var(--c-yellow); text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
     
-    /* Блок іконок: великий кружечок + будинок + маленький кружечок внизу */
-    .icon-node { display: flex; flex-direction: column; align-items: center; width: 36px; flex-shrink: 0; gap: 4px; margin-top: 4px; }
-    .tl-dot { width: 6px; height: 6px; border-radius: 50%; }
-    .tl-dot-small { width: 4px; height: 4px; border-radius: 50%; }
-    .dot-on { background: var(--c-yellow); box-shadow: 0 0 5px var(--c-yellow); }
-    .dot-off { background: #555; }
-    
+    .icon-node { display: flex; flex-direction: column; align-items: center; width: 36px; flex-shrink: 0; }
     .icon-circle { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--c-dark); z-index: 3; }
     .icon-house { width: 22px; height: 22px; }
     .on .icon-house { fill: var(--c-yellow); filter: drop-shadow(0 0 5px var(--c-yellow)); }
@@ -114,12 +110,19 @@
     
     .badge-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
     
-    /* Блок лінії та інтервалу: Flexbox центрує їх ідеально */
+    /* Блок кружечків та інтервалу */
     .tl-body { display: flex; align-items: stretch; min-height: 45px; }
     .line-node { display: flex; flex-direction: column; align-items: center; width: 36px; flex-shrink: 0; }
-    .tl-line { width: 2px; flex-grow: 1; margin: 2px 0; }
-    .tl-line.dotted { background-image: linear-gradient(to bottom, #444 50%, transparent 50%); background-size: 2px 10px; }
-    .tl-line.solid { background: var(--c-yellow); box-shadow: 0 0 8px var(--c-yellow); }
+    
+    /* Пунктир кружечками замість ліній */
+    .tl-line-dotted { width: 0px; flex-grow: 1; margin: 4px 0; border-left: 6px dotted; }
+    .tl-line-dotted.on { border-left-color: var(--c-yellow); opacity: 0.8; }
+    .tl-line-dotted.off { border-left-color: #555; opacity: 0.8; }
+    
+    /* Фінальний великий кружечок */
+    .tl-end-dot { width: 10px; height: 10px; border-radius: 50%; z-index: 3; margin-top: 2px; }
+    .tl-end-dot.on { background: var(--c-yellow); box-shadow: 0 0 6px var(--c-yellow); }
+    .tl-end-dot.off { background: #555; }
     
     .interval-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
     .interval { display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; }
@@ -127,14 +130,15 @@
     .interval.off { color: var(--c-red); }
     .interval.on { color: var(--c-yellow); }
 
-    /* Обтікаючі бейджі */
-    .badge { display: inline-flex; align-items: center; justify-content: center; padding: 2px 6px; border-radius: 6px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; width: max-content; line-height: 1.2; text-transform: uppercase; }
+    /* Обтікаючі бейджі (іконки тепер не висять) */
+    .badge { display: flex; align-items: center; justify-content: center; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; width: max-content; line-height: 1; text-transform: uppercase; gap: 4px; }
     .badge.off { background: #1a1a1c; border: 1px solid #333; color: #a1a1aa; }
     .badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 10px rgba(251, 191, 36, 0.2); border: 1px solid var(--c-yellow); }
     .badge-row { display: flex; align-items: center; gap: 8px; }
     .badge-modifier { font-size: 12px; font-weight: 800; text-transform: uppercase; }
     .badge-modifier.rescued { color: var(--c-yellow); }
     .badge-modifier.emergency { color: var(--c-red); }
+
 
     /* === ТЕМА 2: ДВІ КОЛОНКИ === */
     .tc-wrapper { display: flex; gap: 20px; text-align: center; margin-bottom: 10px; position: relative; z-index: 2; margin-top: 15px; }
@@ -230,6 +234,8 @@
     const iconSparkles = `<svg viewBox="0 0 512 512" width="12" height="12" fill="currentColor" style="margin-right:4px; margin-bottom:1px;"><path d="M327.5 104.2l-14-42.6c-2.5-7.6-13.4-7.6-15.9 0l-14 42.6c-4.4 13.5-15 24.1-28.5 28.5l-42.6 14c-7.6 2.5-7.6 13.4 0 15.9l42.6 14c13.5 4.4 24.1 15 28.5 28.5l14 42.6c2.5 7.6 13.4 7.6 15.9 0l14-42.6c4.4-13.5 15-24.1 28.5-28.5l42.6-14c7.6-2.5 7.6-13.4 0-15.9l-42.6-14c-13.5-4.4-24.1-15-28.5-28.5zM433.8 335.5l-9.1-27.6c-1.6-4.9-8.7-4.9-10.3 0l-9.1 27.6c-2.9 8.7-9.8 15.7-18.5 18.5l-27.6 9.1c-4.9 1.6-4.9 8.7 0 10.3l27.6 9.1c8.7 2.9 15.7 9.8 18.5 18.5l9.1 27.6c1.6 4.9 8.7 4.9 10.3 0l9.1-27.6c2.9-8.7 9.8-15.7 18.5-18.5l27.6-9.1c4.9-1.6 4.9-8.7 0-10.3l-27.6-9.1c-8.7-2.9-15.7-9.8-18.5-18.5zM152 352l-20.4-61.9c-3.6-11-19.5-11-23.1 0L88 352c-6.4 19.5-21.6 34.8-41.2 41.2l-61.9 20.4c-11 3.6-11 19.5 0 23.1l61.9 20.4c19.5 6.4 34.8 21.6 41.2 41.2l20.4 61.9c3.6 11 19.5 11 23.1 0l20.4-61.9c6.4-19.5 21.6-34.8 41.2-41.2l61.9-20.4c11-3.6 11-19.5 0-23.1l-61.9-20.4c-19.5-6.4-34.8-21.6-41.2-41.2z"/></svg>`;
     const iconBan = `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px; margin-bottom:1px;"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>`;
     const iconLink = `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:6px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>`;
+    const iconLightningSVG = `<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" stroke="none" style="margin-right:4px; display:inline-block; vertical-align:middle;"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`;
+    const iconClockSVG = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`;
 
     
     // Іконки однакового розміру з текстом (14px)
@@ -445,43 +451,50 @@
     }
 
         // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
+        // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
     function renderTimeline(intervals, totalHoursOff) {
         let html = getStandardHeader(lastDateStr) + `<div id="timelineContainer">`;
         intervals.forEach((int, i) => {
             const isVisuallyOn = int.type === 'on';
             const stateClass = isVisuallyOn ? 'on' : 'off';
-            const dotClass = isVisuallyOn ? 'dot-on' : 'dot-off';
             
             let badgeHtml = '';
             if (int.type === 'off') {
                 if (int.isModified) badgeHtml = `<div class="badge-row"><div class="badge off" style="text-decoration: line-through; opacity: 0.55;">${iconBan} ВІДКЛЮЧЕННЯ</div><span class="badge-modifier rescued">💡 Світло було</span></div>`;
                 else badgeHtml = `<div class="badge off">${iconBan} ВІДКЛЮЧЕННЯ</div>`;
             } else {
-                if (int.isModified) badgeHtml = `<div class="badge-row"><div class="badge on" style="text-decoration: line-through; opacity: 0.55;">${iconSparkles} СВІТЛО Є</div><span class="badge-modifier emergency">⚠️ Аварійне</span></div>`;
-                else badgeHtml = `<div class="badge on">${iconSparkles} СВІТЛО Є</div>`;
+                if (int.isModified) badgeHtml = `<div class="badge-row"><div class="badge on" style="text-decoration: line-through; opacity: 0.55; color: #000;">${iconLightningSVG} СВІТЛО Є</div><span class="badge-modifier emergency">⚠️ Аварійне</span></div>`;
+                else badgeHtml = `<div class="badge on" style="color: #000;">${iconLightningSVG} СВІТЛО Є</div>`;
             }
                 
-            const lineClass = isVisuallyOn ? 'solid' : 'dotted';
             const intIcon = isVisuallyOn ? iconBulb : iconZapOff;
             
-            // Верхній кружечок не малюємо для самого першого елемента
-            let topDot = i === 0 ? '' : `<div class="tl-dot ${dotClass}"></div>`;
+            // Логіка для фінального великого кружечка
+            let endDotHtml = '';
+            let lineHtml = '';
+            
+            if (i === intervals.length - 1) {
+                // Останній елемент: тільки фінальний кружечок, без пунктирної лінії
+                endDotHtml = `<div class="tl-end-dot ${stateClass}"></div>`;
+            } else {
+                // Всі інші: малюємо пунктирну лінію
+                lineHtml = `<div class="tl-line-dotted ${stateClass}"></div>`;
+            }
             
             html += `
             <div class="tl-item ${stateClass}">
                 <div class="tl-head">
                     <div class="time-col ${stateClass}">${int.startStr}</div>
                     <div class="icon-node">
-                        ${topDot}
                         <div class="icon-circle">${houseSvg}</div>
-                        <div class="tl-dot-small ${dotClass}"></div>
                     </div>
                     <div class="badge-col">${badgeHtml}</div>
                 </div>
                 <div class="tl-body">
                     <div class="time-col"></div>
                     <div class="line-node">
-                        <div class="tl-line ${lineClass}"></div>
+                        ${lineHtml}
+                        ${endDotHtml}
                     </div>
                     <div class="interval-col">
                         <div class="interval ${stateClass}">${intIcon} <span>${int.startStr} - ${int.displayEndStr}</span></div>
@@ -491,12 +504,14 @@
         });
 
         html += `</div>`;
-        html += `<div class="total-time-center">${iconClock} Загальний час без світла: ~${totalHoursOff} год</div>`;
+        // Іконка годинника перед текстом
+        html += `<div class="total-time-center">${iconClockSVG} <span>Загальний час без світла: ~${totalHoursOff} год</span></div>`;
         html += getStandardFooter();
-        // Джерело тепер акуратно збоку
+        // Джерело збоку
         html += `<div class="source-vertical">${iconLink} Джерело: Харківобленерго</div>`;
         captureTarget.innerHTML = html;
     }
+
 
 
 
