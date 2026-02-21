@@ -53,16 +53,23 @@
     .copy-content { font-family: monospace; font-size: 14px; color: #333; white-space: pre-wrap; line-height: 1.4; pointer-events: none; }
     .copy-hint { margin-top: 10px; font-size: 12px; color: #007aff; text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* === БАЗОВИЙ ТЕМНИЙ ШАБЛОН === */
+            /* === БАЗОВИЙ ТЕМНИЙ ШАБЛОН === */
     #captureTarget { 
-        background: var(--c-dark); color: #ffffff; 
-        padding: 40px 20px; /* Більше повітря зверху і знизу для сторіз */
-        position: absolute; left: -9999px; top: 0; 
-        width: 480px; 
-        min-height: 854px; /* Ідеальна пропорція 9:16 (480x854) */
-        box-sizing: border-box; -webkit-font-smoothing: antialiased; overflow: hidden; border-radius: 0; 
-        display: flex; flex-direction: column; justify-content: center; /* Центрує графік по вертикалі, якщо він короткий */
+        background: var(--c-dark);
+        color: #ffffff; 
+        padding: 25px 30px; /* Менше зайвого повітря, акуратні рамки */
+        position: absolute;
+        left: -9999px; top: 0; 
+        width: 600px; /* Ідеальна ширина для телеги, щоб не було блюр-полів */
+        height: auto; /* Висота автоматично підлаштовується під контент */
+        min-height: auto; /* Вбиваємо чек з АТБ */
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased; 
+        overflow: hidden; 
+        border-radius: 0; 
+        display: flex; flex-direction: column; justify-content: flex-start; /* Йдемо зверху вниз, без центрування дірок */
     }
+
 
     /* === ХЕДЕР === */
     .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; position: relative; z-index: 2; padding-right: 5px; }
@@ -111,7 +118,12 @@
     .tl-body { display: flex; align-items: stretch; min-height: 46px; position: relative; z-index: 1; }
     
     /* Марджини тягнуть ЛИШЕ кружечки до хатинок */
-    .line-node { display: flex; flex-direction: column; align-items: center; justify-content: space-between; width: 36px; flex-shrink: 0; padding: 0; margin-top: -8px; margin-bottom: -8px; }
+      .line-node { 
+        display: flex;
+        flex-direction: column; align-items: center; justify-content: space-evenly; 
+        width: 36px; flex-shrink: 0; padding: 4px 0; margin: 0; /* Прибрали мінусові відступи! */
+    }
+
 
     .tl-dot-micro { width: 5px; height: 5px; border-radius: 50%; opacity: 0.8; }
     .tl-dot-micro.on { background: var(--c-yellow); box-shadow: 0 0 3px rgba(251, 191, 36, 0.4); }
@@ -469,13 +481,14 @@
                 
             const intIcon = isVisuallyOn ? iconBulb : iconZapOff;
             
-               /* Ланцюг: 3 кружечки для компактності */
+                           /* Ланцюг: 4 кружечки для компактності */
             let dotsHtml = '';
             if (i < intervals.length - 1) { 
-                for(let d = 0; d < 3; d++) {
+                for(let d = 0; d < 4; d++) { /* ТУТ ЗМІНИВ 3 НА 4 */
                     dotsHtml += `<div class="tl-dot-micro ${stateClass}"></div>`;
                 }
             } else {
+
                 /* Ефект затухання: 4 крапки, які плавно зменшуються і розчиняються */
                 dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="width: 4px; height: 4px; opacity: 0.6"></div>`;
                 dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="width: 3px; height: 3px; opacity: 0.4"></div>`;
@@ -523,8 +536,11 @@
 
 
     // === РЕНДЕР ТЕМА 2: ДВІ КОЛОНКИ ===
+        // === РЕНДЕР ТЕМА 2: ДВІ КОЛОНКИ ===
     function renderColumns(intervals, totalHoursOff, totalHoursOn) {
-        let offHtml = ''; let onHtml = '';
+        let offHtml = '';
+        let onHtml = '';
+        
         intervals.forEach(int => {
             let timeText = `${int.startStr} - ${int.displayEndStr}`;
             if (int.type === 'on') {
@@ -536,21 +552,27 @@
             }
         });
 
+        // Створюємо хатинки
+        const houseOff = `<div class="icon-node" style="margin: 0 auto 15px;"><div class="icon-circle" style="background: #1a1a1c;"><svg class="icon-house" viewBox="0 0 24 24" fill="#555"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div></div>`;
+        const houseOn = `<div class="icon-node" style="margin: 0 auto 15px;"><div class="icon-circle"><svg class="icon-house" viewBox="0 0 24 24" fill="var(--c-yellow)" style="filter: drop-shadow(0 0 5px var(--c-yellow));"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div></div>`;
+
         captureTarget.innerHTML = getStandardHeader(lastDateStr) + `
             <div class="tc-wrapper">
-                ${iconLightningSVG}
                 <div class="tc-col">
-                    <div class="tc-badge off"><span style="color: var(--c-red); display: inline-block;">${iconBan}</span> СВІТЛА НЕ БУДЕ</div>
+                    ${houseOff}
+                    <div class="tc-badge off"><span style="color: var(--c-red); display: inline-block; margin-right: 4px;">${iconBan}</span> СВІТЛА НЕ БУДЕ</div>
                     <div class="tc-times-wrapper"><div class="tc-bracket-line"></div>${offHtml}<div class="tc-bracket-bottom"></div><div class="tc-bracket-tick"></div></div>
                     <div class="tc-total">${iconClockSVG} ~${totalHoursOff} год</div>
                 </div>
                 <div class="tc-col">
+                    ${houseOn}
                     <div class="tc-badge on" style="color: #000;">${iconLightningSVG} СВІТЛО БУДЕ</div>
                     <div class="tc-times-wrapper"><div class="tc-bracket-line"></div>${onHtml}<div class="tc-bracket-bottom"></div><div class="tc-bracket-tick"></div></div>
                     <div class="tc-total">${iconClockSVG} ~${totalHoursOn} год</div>
                 </div>
             </div>` + getStandardFooter();
     }
+
 
     // === РЕНДЕР ТЕМА 3: ЕМОДЗІ МІНІМАЛІЗМ ===
     function renderEmojis(intervals) {
