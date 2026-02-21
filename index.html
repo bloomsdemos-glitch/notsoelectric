@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+т<!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
@@ -308,7 +308,7 @@
             </div>`;
     }
 
-    // === ГОЛОВНИЙ ПРОЦЕС ===
+        // === ГОЛОВНИЙ ПРОЦЕС ===
     function processDataAndGenerate(fromRawText = true) {
         debug.textContent = "";
         if (fromRawText) {
@@ -336,7 +336,8 @@
 
                 tempOutages.push({ 
                     startMin, endMin, startStr, 
-                    displayEndStr: (endStr === "24:00" || endMin === 1440 ? "00:00" : endStr)
+                    // Якщо графік до кінця доби, пишемо 24:00 замість 00:00
+                    displayEndStr: (endStr === "24:00" || endMin === 1440 ? "24:00" : endStr)
                 });
             });
             tempOutages.sort((a, b) => a.startMin - b.startMin);
@@ -362,7 +363,7 @@
                 globalIntervals.push({ 
                     type: 'on', isModified: false, 
                     startMin: currentTime, endMin: 1440,
-                    startStr: minutesToTime(currentTime), displayEndStr: "00:00"
+                    startStr: minutesToTime(currentTime), displayEndStr: "24:00"
                 });
             }
         }
@@ -394,7 +395,7 @@
         outputWrapper.style.display = 'block';
         setTimeout(generateImageOutput, 300);
     }
-
+    
     // Рендер кнопок редагування
     function renderEditorChips() {
         editorChips.innerHTML = '';
@@ -423,7 +424,61 @@
         }
     }
 
-    // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
+        /* === ТЕМА 1: СМАРТ-ДІМ (ТАЙМЛАЙН) === */
+    .total-time-center { display: flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; font-size: 13px; color: #888; margin-top: 25px; margin-bottom: 15px; position: relative; z-index: 2; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    #timelineContainer { padding-top: 0px; display: flex; flex-direction: column; gap: 0; }
+
+    .tl-item { display: flex; flex-direction: column; z-index: 2; margin-bottom: 0; }
+    /* Прибрали display:none для останнього елемента, щоб було видно час до кінця доби! */
+
+    .tl-head { display: flex; align-items: center; min-height: 38px; position: relative; z-index: 2; }
+    
+    /* Табулярні цифри, щоб двокрапки не стрибали */
+    .time-col { width: 60px; text-align: right; padding-right: 15px; font-weight: 700; font-size: 18px; flex-shrink: 0; line-height: 1; margin: 0; font-variant-numeric: tabular-nums; letter-spacing: 0.5px; }
+    .time-col.off { color: var(--c-red); }
+    .time-col.on { color: var(--c-yellow); text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
+
+    .icon-node { display: flex; flex-direction: column; align-items: center; width: 36px; flex-shrink: 0; }
+    .icon-circle { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--c-dark); z-index: 3; position: relative; }
+    .icon-house { width: 22px; height: 22px; }
+    .on .icon-house { fill: var(--c-yellow); filter: drop-shadow(0 0 5px var(--c-yellow)); }
+    .off .icon-house { fill: #555; }
+
+    .badge-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
+
+    /* Кружечки тепер не обрізаються завдяки правильним відступам */
+    .tl-body { display: flex; align-items: stretch; min-height: 48px; margin-top: -3px; margin-bottom: -3px; position: relative; z-index: 1; }
+    .line-node { display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; width: 36px; flex-shrink: 0; padding: 4px 0; gap: 4px; }
+
+    .tl-dot-micro { width: 4px; height: 4px; border-radius: 50%; opacity: 0.8; }
+    .tl-dot-micro.on { background: var(--c-yellow); }
+    .tl-dot-micro.off { background: #555; }
+
+    .tl-dot-large { width: 7px; height: 7px; border-radius: 50%; z-index: 3; }
+    .tl-dot-large.on { background: var(--c-yellow); box-shadow: 0 0 5px rgba(251, 191, 36, 0.6); }
+    .tl-dot-large.off { background: #666; }
+
+    .interval-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; height: 100%; }
+    
+    /* Фікс іконки: тепер вона намертво на одному рівні з текстом */
+    .interval { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; line-height: 1; height: 20px; }
+    .interval-icon { display: flex; align-items: center; justify-content: center; width: 15px; height: 15px; flex-shrink: 0; margin-top: -1px; }
+    .interval-icon svg { width: 100%; height: 100%; display: block; }
+    
+    /* Фікс годин: ідеально рівні двокрапки */
+    .interval-text { display: flex; align-items: center; font-variant-numeric: tabular-nums; letter-spacing: 0.5px; line-height: 1; }
+    .interval.off { color: var(--c-red); }
+    .interval.on { color: var(--c-yellow); }
+
+    .badge { display: flex; align-items: center; justify-content: center; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; width: max-content; line-height: 1; text-transform: uppercase; gap: 4px; }
+    .badge.off { background: #1a1a1c; border: 1px solid #333; color: #a1a1aa; }
+    .badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 10px rgba(251, 191, 36, 0.2); border: 1px solid var(--c-yellow); }
+    .badge-row { display: flex; align-items: center; gap: 8px; }
+    .badge-modifier { font-size: 12px; font-weight: 800; text-transform: uppercase; }
+    .badge-modifier.rescued { color: var(--c-yellow); }
+    .badge-modifier.emergency { color: var(--c-red); }
+
+// === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
     function renderTimeline(intervals, totalHoursOff) {
         let headerContent = getStandardHeader(lastDateStr);
         headerContent += `<div class="source-top">${iconLink} Джерело: Харківобленерго</div>`;
@@ -462,15 +517,24 @@
                 
             const intIcon = isVisuallyOn ? iconBulb : iconZapOff;
             
-            /* Ланцюг: рівно 5 малих і 1 великий. Вони розтягнуться завдяки flexbox і negative margin */
             let dotsHtml = '';
             if (i < intervals.length - 1) { 
-                for(let d = 0; d < 5; d++) {
+                for(let d = 0; d < 4; d++) {
                     dotsHtml += `<div class="tl-dot-micro ${stateClass}"></div>`;
                 }
                 dotsHtml += `<div class="tl-dot-large ${nextStateClass}"></div>`;
+            } else {
+                /* Ефект затухання для останнього елемента (показує, що це до кінця доби) */
+                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="opacity: 0.6"></div>`;
+                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="opacity: 0.3"></div>`;
+                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="opacity: 0.1"></div>`;
             }
-            
+
+            /* Додаємо примітку, якщо це кінець доби */
+            let endTextAddon = (int.endMin === 1440 || int.displayEndStr === "24:00") 
+                ? ` <span style="font-size: 11px; opacity: 0.6; font-weight: 500; margin-left: 6px; text-transform: lowercase;">(до кінця доби)</span>` 
+                : ``;
+
             html += `
             <div class="tl-item ${stateClass}">
                 <div class="tl-head">
@@ -488,7 +552,7 @@
                     <div class="interval-col">
                         <div class="interval ${stateClass}">
                             <div class="interval-icon">${intIcon}</div>
-                            <span style="${intervalTextStyle}">${int.startStr} - ${int.displayEndStr}</span>
+                            <span class="interval-text" style="${intervalTextStyle}">${int.startStr} - ${int.displayEndStr}${endTextAddon}</span>
                         </div>
                     </div>
                 </div>
