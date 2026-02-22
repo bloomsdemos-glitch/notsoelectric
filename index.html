@@ -176,10 +176,14 @@
 
     <textarea id="rawText" class="input-neumorph" placeholder="Встав текст графіку від Харківобленерго сюди (з чергою 1.2)..."></textarea>
     
-    <div class="btn-group">
+        <div class="btn-group">
         <button class="btn-neu btn-primary" onclick="processDataAndGenerate(true)">⚡ Створити</button>
         <button class="btn-neu btn-danger" onclick="clearAll()">❌</button>
     </div>
+    <div class="btn-group" style="margin-top: 10px;">
+        <button class="btn-neu" style="color: #28a745; width: 100%;" onclick="pushToMiniApp()">🚀 Оновити додаток в ТГ</button>
+    </div>
+
 
     <div id="editorWrapper">
         <label class="form-label">РЕДАКТОР ГРАФІКУ (натисни на блок, щоб змінити стан):<br><span style="font-weight:normal; font-size:11px; color:#888; text-transform:none;">Сірі — відключення (клік = світло було). Жовті — світло є (клік = аварійне).</span></label>
@@ -686,6 +690,44 @@
             else { const link = document.createElement("a"); link.href = generatedImage.src; link.download = "grafik_valky.png"; document.body.appendChild(link); link.click(); document.body.removeChild(link); }
         } catch (err) { alert("Помилка збереження. Спробуй зробити скріншот."); }
     }
+
+    async function pushToMiniApp() {
+        // ТВОЇ ДАНІ З JSONBIN
+        const BIN_ID = '699b0c39d0ea881f40cf2acc'; 
+        const API_KEY = '$2a$10$eJ1fwUqfEQDl/1c.6w1GTOuCkNADdRjDwvpKTuXaRXaUeIZu0MD.W'; 
+        
+        if (globalIntervals.length === 0) {
+            alert("Спочатку згенеруй графік!");
+            return;
+        }
+
+        const dataToSave = {
+            date: lastDateStr,
+            intervals: globalIntervals,
+            updatedAt: new Date().toISOString()
+        };
+
+        try {
+            const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': API_KEY
+                },
+                body: JSON.stringify(dataToSave)
+            });
+
+            if (response.ok) {
+                alert("✅ Графік успішно залетів у Mini App!");
+            } else {
+                alert("❌ Помилка: " + response.statusText);
+            }
+        } catch (error) {
+            alert("❌ Сталася помилка при відправці.");
+            console.error(error);
+        }
+    }
+
 
     function clearAll() {
         document.getElementById('rawText').value = '';
