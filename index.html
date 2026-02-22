@@ -26,7 +26,7 @@
         .edit-chip { padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; background: var(--bg-app); transition: 0.2s; user-select: none; box-shadow: 3px 3px 6px var(--neumorph-shadow-dark), -3px -3px 6px var(--neumorph-shadow-light); }
         .edit-chip:active { transform: scale(0.95); }
         .edit-chip.off-state { border: 2px solid #888; color: #888; }
-        .edit-chip.on-state { border: 2px solid var(--c-yellow); color: var(--c-yellow); }
+     .edit-chip.on-state { border: 2px solid #d97706; color: #d97706; }
         .edit-chip.rescued { border-color: var(--c-yellow); background: var(--c-yellow); color: #000; box-shadow: none; }
         .edit-chip.emergency { border-color: var(--c-red); background: var(--c-red); color: #fff; box-shadow: none; }
         .copy-block { padding: 20px; border-radius: 15px; background: rgba(255,255,255,0.5); cursor: pointer; text-align: left; margin-bottom: 20px; border: 1px dashed #aaa;}
@@ -117,7 +117,7 @@
             let t = `${int.startStr} - ${int.displayEndStr}`;
             const btn = document.createElement('div');
             btn.className = `edit-chip ${int.type==='off' ? (int.isModified?'rescued':'off-state') : (int.isModified?'emergency':'on-state')}`;
-            btn.innerHTML = `${int.type==='off'?'🌑':'💡'} ${t} ${int.isModified?(int.type==='off'?'💡':'⚠️'):''}`;
+            btn.innerHTML = `${int.type==='off'?'🌑':'💡'} ${t} ${int.isModified?(int.type==='off'?'💡':'⛔️ АВАРІЙНЕ'):''}`;
             btn.onclick = () => { int.isModified = !int.isModified; updateUI(); };
             chips.appendChild(btn);
 
