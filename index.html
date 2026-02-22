@@ -65,7 +65,9 @@
                 <div style="font-size:11px; color:#007aff; margin-top:10px; font-weight:bold; text-align:center;" id="copyHint">ТАПНИ, ЩОБ СКОПІЮВАТИ ПОСТ</div>
             </div>
 
-            <button class="btn-neu btn-success" id="btnPush" onclick="pushToMiniApp()" style="margin:0;">🚀 ОПУБЛІКУВАТИ В APP</button>
+            <button class="btn-neu btn-success" id="btnPush" onclick="pushToMiniApp()" style="margin:0;">🚀 ОПУБЛІКУВАТИ В ДОДАТКУ</button>
+            <button class="btn-neu" id="btnReset" onclick="resetToWaiting()" style="margin-top:15px; color: #ff3b30; border: 2px dashed rgba(255, 59, 48, 0.3);">🗑 Танос графіку (Очікування)</button>
+
         </div>
     </div>
 </div>
@@ -172,10 +174,32 @@
                 body: JSON.stringify({ date: lastDateStr, intervals: globalIntervals, emergency: { active: false }, updatedAt: new Date().toISOString() })
             });
             if(res.ok) alert("✅ Опубліковано!"); else alert("❌ Помилка!");
-        } catch(e) { alert("❌ Помилка з'єднання"); } finally { btn.textContent = "🚀 ОПУБЛІКУВАТИ В APP"; }
+        } catch(e) { alert("❌ Помилка з'єднання"); } finally { btn.textContent = "🚀 ОПУБЛІКУВАТИ В ДОДАТКУ"; }
     }
 
     function copyToClipboard() { navigator.clipboard.writeText(document.getElementById('finalText').textContent); document.getElementById('copyHint').textContent = "СКОПІЙОВАНО! ✅"; }
+    
+        async function resetToWaiting() {
+        if(!confirm("Точно хочеш знести поточний графік і включити режим 'Очікуємо графік на завтра'?")) return;
+        const btn = document.getElementById('btnReset'); 
+        btn.textContent = "⏳ Знесення...";
+        try {
+            const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+                // Відправляємо пустий масив intervals, щоб додаток перейшов у режим очікування
+                body: JSON.stringify({ date: "ОЧІКУЄМО", intervals: [], emergency: { active: false }, updatedAt: new Date().toISOString() })
+            });
+            if(res.ok) { 
+                alert("✅ Графік успішно знесено!"); 
+                clearAll(); // Очищаємо адмінку візуально
+            } else alert("❌ Помилка при знесенні!");
+        } catch(e) { 
+            alert("❌ Помилка з'єднання"); 
+        } finally { 
+            btn.innerHTML = "🗑 Знести графік (Очікування)"; 
+        }
+    }
+
     
     function clearAll() { 
         document.getElementById('rawText').value=''; 
