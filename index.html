@@ -53,7 +53,8 @@
                     <input type="text" id="emStart" class="input-neumorph" placeholder="З якої (15:00)" style="padding: 10px; text-align:center;">
                     <input type="text" id="emEnd" class="input-neumorph" placeholder="По яку (18:00)" style="padding: 10px; text-align:center;">
                 </div>
-                <button class="btn-neu" id="btnEmToggle" onclick="toggleEmergency()" style="margin: 0; color: var(--c-red);">Увімкнути аварію</button>
+            <button class="btn-neu" onclick="injectEmergency()" style="margin: 0; color: var(--c-red);">Додати аварійне в графік</button>
+
             </div>
 
             <label class="form-label">РУЧНЕ РЕДАГУВАННЯ (Клік по блоку):</label>
@@ -70,12 +71,11 @@
 </div>
 
 <script>
-const BIN_ID = '699b325fd0ea881f40cf7aaf'; 
-        const API_KEY = '$2a$10$LtEcs8xMXZsRCDbVKHwou..M4xtkpoEM/3CJuf76Q0gK3gZ0I607C';
+    const BIN_ID = '699b325fd0ea881f40cf7aaf'; 
+    const API_KEY = '$2a$10$LtEcs8xMXZsRCDbVKHwou..M4xtkpoEM/3CJuf76Q0gK3gZ0I607C';
 
     let lastDateStr = "СЬОГОДНІ";
     let globalIntervals = [];
-    let isEmergencyActive = false;
 
     function timeToMinutes(timeStr) { const [h, m] = timeStr.replace(/[^\d:]/g, '').split(':').map(Number); return (h || 0) * 60 + (m || 0); }
     function minutesToTime(mins) { const h = Math.floor(mins / 60); const m = mins % 60; return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`; }
@@ -128,11 +128,38 @@ const BIN_ID = '699b325fd0ea881f40cf7aaf';
         document.getElementById('finalText').textContent = `**ГРАФІК ВІДКЛЮЧЕНЬ [${lastDateStr}]**\n\n${textInts.join('\n')}\n\n⚡️ Інтерактивний графік: https://t.me/valkyelectrifybot/grafik\n\n💬 Чат: t.me/valkychat\n📣 Базарчик: t.me/valkybazar`;
     }
 
-    function toggleEmergency() {
-        isEmergencyActive = !isEmergencyActive;
-        const block = document.getElementById('emergencyBlock'); const btn = document.getElementById('btnEmToggle');
-        if(isEmergencyActive) { block.classList.add('active'); btn.textContent = "✅ Вимкнути аварію"; btn.style.color = "#333"; } 
-        else { block.classList.remove('active'); btn.textContent = "Увімкнути аварію"; btn.style.color = "var(--c-red)"; document.getElementById('emStart').value = ""; document.getElementById('emEnd').value = ""; }
+    function injectEmergency() {
+        const sStr = document.getElementById('emStart').value.trim();
+        const eStr = document.getElementById('emEnd').value.trim();
+        if (!sStr || !eStr) { alert("Введи час від і до (наприклад, 16:00 та 18:30)!"); return; }
+        
+        let sM = timeToMinutes(sStr); 
+        let eM = timeToMinutes(eStr);
+        if (eM <= sM) eM += 1440; // Якщо перехід через опівніч
+
+        let newInts = [];
+        globalIntervals.forEach(int => {
+            if (int.endMin <= sM || int.startMin >= eM) {
+                newInts.push(int);
+            } else {
+                if (int.startMin < sM) {
+                    newInts.push({...int, endMin: sM, displayEndStr: minutesToTime(sM)});
+                }
+                
+                let emStart = Math.max(int.startMin, sM);
+                let emEnd = Math.min(int.endMin, eM);
+                newInts.push({ type: 'on', isModified: true, startMin: emStart, endMin: emEnd, startStr: minutesToTime(emStart), displayEndStr: minutesToTime(emEnd) });
+
+                if (int.endMin > eM) {
+                    newInts.push({...int, startMin: eM, startStr: minutesToTime(eM)});
+                }
+            }
+        });
+
+        globalIntervals = newInts.sort((a,b) => a.startMin - b.startMin);
+        updateUI();
+        document.getElementById('emStart').value = "";
+        document.getElementById('emEnd').value = "";
     }
 
     async function pushToMiniApp() {
@@ -141,14 +168,21 @@ const BIN_ID = '699b325fd0ea881f40cf7aaf';
         try {
             const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
                 method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-                body: JSON.stringify({ date: lastDateStr, intervals: globalIntervals, emergency: { active: isEmergencyActive, start: document.getElementById('emStart').value.trim(), end: document.getElementById('emEnd').value.trim() }, updatedAt: new Date().toISOString() })
+                // emergency: { active: false } залишаємо пустим, щоб додаток не вибивав помилок, бо він чекає цей об'єкт
+                body: JSON.stringify({ date: lastDateStr, intervals: globalIntervals, emergency: { active: false }, updatedAt: new Date().toISOString() })
             });
             if(res.ok) alert("✅ Опубліковано!"); else alert("❌ Помилка!");
         } catch(e) { alert("❌ Помилка з'єднання"); } finally { btn.textContent = "🚀 ОПУБЛІКУВАТИ В APP"; }
     }
 
     function copyToClipboard() { navigator.clipboard.writeText(document.getElementById('finalText').textContent); document.getElementById('copyHint').textContent = "СКОПІЙОВАНО! ✅"; }
-    function clearAll() { document.getElementById('rawText').value=''; globalIntervals=[]; isEmergencyActive=false; document.getElementById('dashboardControls').style.display='none'; document.getElementById('emergencyBlock').classList.remove('active'); document.getElementById('btnEmToggle').textContent="Увімкнути аварію"; }
+    
+    function clearAll() { 
+        document.getElementById('rawText').value=''; 
+        globalIntervals=[]; 
+        document.getElementById('dashboardControls').style.display='none'; 
+    }
 </script>
+
 </body>
 </html>
