@@ -102,32 +102,16 @@
 
     .tl-head { display: flex; align-items: center; min-height: 38px; position: relative; z-index: 2; }
     
-    .time-col { width: 60px; text-align: right; padding-right: 15px; font-weight: 700; font-size: 18px; flex-shrink: 0; line-height: 1; margin: 0; letter-spacing: 0; }
-    .time-col.off { color: var(--c-red); }
-    .time-col.on { color: var(--c-yellow); text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
-
-    .icon-node { display: flex; flex-direction: column; align-items: center; width: 36px; flex-shrink: 0; }
-    .icon-circle { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--c-dark); z-index: 3; position: relative; }
-    .icon-house { width: 22px; height: 22px; }
-    .on .icon-house { fill: var(--c-yellow); filter: drop-shadow(0 0 5px var(--c-yellow)); }
-    .off .icon-house { fill: #555; }
-
-    .badge-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
-
-    /* Повертаємо комфортну висоту 46px для повітря, текст буде ідеально по центру */
-    .tl-body { display: flex; align-items: stretch; min-height: 46px; position: relative; z-index: 1; }
+    /* === ЗБІЛЬШЕНІ ШРИФТИ І НОВІ КРУЖЕЧКИ === */
+    .time-col { width: 75px; text-align: right; padding-right: 15px; font-weight: 800; font-size: 24px; flex-shrink: 0; line-height: 1; margin: 0; letter-spacing: -0.5px; } /* Було 60px і 18px */
+    .interval { display: flex; align-items: center; gap: 8px; font-size: 22px; font-weight: 700; line-height: 1; } /* Було 16px */
+    .badge { display: flex; align-items: center; justify-content: center; padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: 800; letter-spacing: 0.5px; width: max-content; line-height: 1; text-transform: uppercase; gap: 6px; } /* Було 11px */
+    .header-title { display: flex; flex-direction: column; gap: 6px; font-size: 26px; font-weight: 900; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; margin: 0; flex: 1; color: #ffffff; } /* Було 22px */
     
-    /* Марджини тягнуть ЛИШЕ кружечки до хатинок */
-      .line-node { 
-        display: flex;
-        flex-direction: column; align-items: center; justify-content: space-evenly; 
-        width: 36px; flex-shrink: 0; padding: 4px 0; margin: 0; /* Прибрали мінусові відступи! */
-    }
+    .tl-body { display: flex; align-items: stretch; min-height: 60px; position: relative; z-index: 1; } /* Трохи більше висоти, щоб кружечкам було де жити */
+    .line-node { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 36px; flex-shrink: 0; padding: 8px 0; margin: 0; }
+    .tl-dot-micro { width: 8px; height: 8px; border-radius: 50%; opacity: 0.9; flex-shrink: 0;} /* Зробили більшими для помітності */
 
-
-    .tl-dot-micro { width: 5px; height: 5px; border-radius: 50%; opacity: 0.8; }
-    .tl-dot-micro.on { background: var(--c-yellow); box-shadow: 0 0 3px rgba(251, 191, 36, 0.4); }
-    .tl-dot-micro.off { background: #555; }
 
     .interval-col { padding-left: 15px; flex-grow: 1; display: flex; align-items: center; }
     
@@ -448,16 +432,23 @@
     }
 
         // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
+        // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ ===
     function renderTimeline(intervals, totalHoursOff) {
         let headerContent = getStandardHeader(lastDateStr);
         headerContent += `<div class="source-top">${iconLink} Джерело: Харківобленерго</div>`;
         headerContent += `<div class="header-divider"></div>`;
 
-        let html = headerContent + `<div id="timelineContainer">`;
+        // Вотермарка на фон (з твого файлу logo.png)
+        let bgWatermark = `<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; display: flex; align-items: center; justify-content: center; opacity: 0.04; pointer-events: none;">
+            <img src="./logo.png" style="width: 90%; max-width: 400px; object-fit: contain; filter: grayscale(100%);">
+        </div>`;
+
+        // Обертаємо весь контент у relative блок, щоб він був над вотермаркою
+        let html = bgWatermark + `<div style="position: relative; z-index: 2;">` + headerContent + `<div id="timelineContainer">`;
+        
         intervals.forEach((int, i) => {
             const isVisuallyOn = int.type === 'on';
             const stateClass = isVisuallyOn ? 'on' : 'off';
-            
             const redBanIcon = `<span style="color: var(--c-red); display: flex; align-items: center;">${iconBan}</span>`;
             
             let badgeHtml = '';
@@ -481,24 +472,37 @@
                 
             const intIcon = isVisuallyOn ? iconBulb : iconZapOff;
             
-                           /* Ланцюг: 4 кружечки для компактності */
+            /* === РОЗУМНІ КРУЖЕЧКИ (1 год = 1 кружечок) === */
+            let durationMins = int.endMin - int.startMin;
+            if (durationMins < 0) durationMins += 1440; 
+            let hours = durationMins / 60;
+            let fullDots = Math.floor(hours);
+            let hasHalfDot = (hours - fullDots) >= 0.4; // Якщо залишок більше 24 хвилин — малюємо половинку
+
             let dotsHtml = '';
             if (i < intervals.length - 1) { 
-                for(let d = 0; d < 4; d++) { /* ТУТ ЗМІНИВ 3 НА 4 */
+                // Малюємо цілі години
+                for(let d = 0; d < fullDots; d++) {
                     dotsHtml += `<div class="tl-dot-micro ${stateClass}"></div>`;
                 }
+                // Малюємо половинку, якщо треба
+                if(hasHalfDot) {
+                    let halfColor = isVisuallyOn ? "var(--c-yellow)" : "#555";
+                    let shadow = isVisuallyOn ? "box-shadow: 0 0 4px rgba(251, 191, 36, 0.5);" : "";
+                    dotsHtml += `<div class="tl-dot-micro" style="background: linear-gradient(to bottom, ${halfColor} 50%, transparent 50%); border: 1px solid ${halfColor}; box-sizing: border-box; ${shadow}"></div>`;
+                }
+                // Якщо тривалість настільки мізерна, що вийшов 0 (хоча такого не буває в графіках, але для сейфті)
+                if(fullDots === 0 && !hasHalfDot) {
+                    dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="transform: scale(0.6);"></div>`;
+                }
             } else {
-
-                /* Ефект затухання: 4 крапки, які плавно зменшуються і розчиняються */
-                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="width: 4px; height: 4px; opacity: 0.6"></div>`;
-                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="width: 3px; height: 3px; opacity: 0.4"></div>`;
-                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="width: 2px; height: 2px; opacity: 0.2"></div>`;
-                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="width: 1px; height: 1px; opacity: 0.1"></div>`;
+                // Останній інтервал доби: просто затухання
+                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="width: 5px; height: 5px; opacity: 0.6"></div>`;
+                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="width: 3px; height: 3px; opacity: 0.3"></div>`;
             }
 
-
             let endTextAddon = (int.endMin === 1440 || int.displayEndStr === "24:00") 
-                ? ` <span style="font-size: 11px; opacity: 0.6; font-weight: 500; margin-left: 6px; text-transform: lowercase;">(до кінця доби)</span>` 
+                ? ` <span style="font-size: 13px; opacity: 0.6; font-weight: 500; margin-left: 6px; text-transform: lowercase;">(до кінця доби)</span>` 
                 : ``;
 
             html += `
@@ -525,12 +529,13 @@
             </div>`;
         });
 
-        html += `</div>`;
-        html += `<div class="total-time-center">${iconClockSVG} <span>Загальний час без світла: ~${totalHoursOff} год</span></div>`;
+        html += `</div></div>`; // Закриваємо timelineContainer і relative блок вотермарки
         
+        // Вивели футер без загального часу
         html += getStandardFooter(false); 
         captureTarget.innerHTML = html;
     }
+
 
 
 
