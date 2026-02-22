@@ -53,71 +53,69 @@
     .copy-content { font-family: monospace; font-size: 14px; color: #333; white-space: pre-wrap; line-height: 1.4; pointer-events: none; }
     .copy-hint { margin-top: 10px; font-size: 12px; color: #007aff; text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-                            /* === БАЗОВИЙ ТЕМНИЙ ШАБЛОН (ІДЕАЛЬНИЙ КВАДРАТ 1080x1080) === */
+                                /* === БАЗОВИЙ ТЕМНИЙ ШАБЛОН (ПОРТРЕТ 944x1280) === */
     .capture-canvas { 
         background: var(--c-dark); color: #ffffff; 
-        padding: 50px 60px; /* Великі відступи для повітря */
+        padding: 50px 60px; /* Повітря по краях */
         position: absolute; left: -9999px; top: 0; 
-        width: 1080px; height: 1080px; /* Жорсткий квадрат */
+        width: 944px; height: 1280px; /* Твій ідеальний розмір */
         box-sizing: border-box; -webkit-font-smoothing: antialiased; 
         overflow: hidden; border-radius: 0; 
         display: flex; flex-direction: column; justify-content: flex-start;
     }
 
-    /* === ЗБІЛЬШЕНІ ШРИФТИ ДЛЯ КВАДРАТІВ === */
+    /* === ГІГАНТСЬКИЙ ХЕДЕР === */
     .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; position: relative; z-index: 2; }
-    .header-title { display: flex; flex-direction: column; gap: 8px; font-size: 42px; font-weight: 900; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; margin: 0; flex: 1; color: #ffffff; } 
-    .title-date-line { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .header-title { display: flex; flex-direction: column; gap: 10px; font-size: 46px; font-weight: 900; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; margin: 0; flex: 1; color: #ffffff; } 
+    .title-date-line { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
     .title-date-line span.date-text { color: var(--c-yellow); line-height: 1; }
     
-    .valky-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 24px; color: rgba(255,255,255,0.9); font-weight: 800; text-transform: none; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 8px 18px; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); line-height: 1; }
-    .valky-tag svg { width: 22px; height: 22px; fill: rgba(255,255,255,0.8); flex-shrink: 0; }
+    .valky-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 24px; color: rgba(255,255,255,0.9); font-weight: 800; text-transform: none; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 10px 20px; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); line-height: 1; }
+    .valky-tag svg { width: 24px; height: 24px; fill: rgba(255,255,255,0.8); flex-shrink: 0; }
     
     .logo-wrapper { display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; margin-left: 20px; }
-    .logo-fixed { width: 70px; height: 70px; object-fit: contain; border-radius: 50%; background: #ffffff; padding: 6px; box-sizing: border-box; flex-shrink: 0; }
-
+    .logo-fixed { width: 76px; height: 76px; object-fit: contain; border-radius: 50%; background: #ffffff; padding: 8px; box-sizing: border-box; flex-shrink: 0; }
     .header-divider { height: 2px; width: 100%; background: rgba(255,255,255,0.1); margin: 20px 0; }
 
-    /* Таймлайн адаптований під квадрат */
-    #timelineContainer { padding-top: 10px; display: flex; flex-direction: column; gap: 0; flex-grow: 1; justify-content: center; } /* justify-content: center розтягне їх гарно по вертикалі */
+    /* === ТАЙМЛАЙН (АДАПТАЦІЯ ПІД 944x1280) === */
+    #timelineContainer { padding-top: 10px; display: flex; flex-direction: column; gap: 0; flex-grow: 1; justify-content: center; } 
     .tl-item { display: flex; flex-direction: column; z-index: 2; margin-bottom: 0; }
-    .tl-head { display: flex; align-items: center; min-height: 60px; position: relative; z-index: 2; }
+    .tl-head { display: flex; align-items: center; min-height: 70px; position: relative; z-index: 2; }
     
-    .time-col { width: 130px; text-align: right; padding-right: 25px; font-weight: 800; font-size: 38px; flex-shrink: 0; line-height: 1; margin: 0; letter-spacing: -1px; } 
+    .time-col { width: 140px; text-align: right; padding-right: 25px; font-weight: 800; font-size: 42px; flex-shrink: 0; line-height: 1; margin: 0; letter-spacing: -1px; } 
     .time-col.off { color: var(--c-red); }
     .time-col.on { color: var(--c-yellow); text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
 
-    .icon-node { display: flex; flex-direction: column; align-items: center; width: 50px; flex-shrink: 0; }
-    .icon-circle { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--c-dark); z-index: 3; position: relative; }
-    .icon-house { width: 32px; height: 32px; }
+    .icon-node { display: flex; flex-direction: column; align-items: center; width: 56px; flex-shrink: 0; }
+    .icon-circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--c-dark); z-index: 3; position: relative; }
+    .icon-house { width: 34px; height: 34px; }
     .on .icon-house { fill: var(--c-yellow); filter: drop-shadow(0 0 5px var(--c-yellow)); }
     .off .icon-house { fill: #555; }
 
     .badge-col { padding-left: 25px; flex-grow: 1; display: flex; align-items: center; justify-content: space-between; }
-
-    .badge { display: flex; align-items: center; justify-content: center; padding: 10px 20px; border-radius: 12px; font-size: 20px; font-weight: 800; letter-spacing: 0.5px; width: max-content; line-height: 1; text-transform: uppercase; gap: 8px; } 
+    .badge { display: flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: 12px; font-size: 22px; font-weight: 800; letter-spacing: 0.5px; width: max-content; line-height: 1; text-transform: uppercase; gap: 8px; } 
     .badge.off { background: #1a1a1c; border: 2px solid #333; color: #a1a1aa; }
     .badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 10px rgba(251, 191, 36, 0.2); border: 2px solid var(--c-yellow); }
     .badge-row { display: flex; align-items: center; gap: 12px; }
-    .badge-modifier { font-size: 18px; font-weight: 800; text-transform: uppercase; }
+    .badge-modifier { font-size: 20px; font-weight: 800; text-transform: uppercase; }
     .badge-modifier.rescued { color: var(--c-yellow); }
     .badge-modifier.emergency { color: var(--c-red); }
 
-    .tl-body { display: flex; align-items: stretch; min-height: 50px; position: relative; z-index: 1; } 
-    .line-node { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 50px; flex-shrink: 0; padding: 6px 0; margin: 0; }
+    .tl-body { display: flex; align-items: stretch; min-height: 60px; position: relative; z-index: 1; } 
+    .line-node { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 56px; flex-shrink: 0; padding: 6px 0; margin: 0; }
     
-    .tl-dot-micro { width: 12px; height: 12px; border-radius: 50%; opacity: 0.9; flex-shrink: 0;} 
+    .tl-dot-micro { width: 14px; height: 14px; border-radius: 50%; opacity: 0.9; flex-shrink: 0;} 
     .tl-dot-micro.on { background: var(--c-yellow); box-shadow: 0 0 6px rgba(251, 191, 36, 0.5); }
     .tl-dot-micro.off { background: #555; }
 
     .interval-col { padding-left: 25px; flex-grow: 1; display: flex; align-items: center; }
-    .interval { display: flex; align-items: center; gap: 12px; font-size: 34px; font-weight: 700; line-height: 1; } 
-    .interval-icon { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; flex-shrink: 0; }
+    .interval { display: flex; align-items: center; gap: 12px; font-size: 38px; font-weight: 700; line-height: 1; } 
+    .interval-icon { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; flex-shrink: 0; }
     .interval-icon svg { width: 100%; height: 100%; display: block; }
     .interval.off { color: var(--c-red); }
     .interval.on { color: var(--c-yellow); }
 
-    .part-label { font-size: 24px; font-weight: 800; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 2px; }
+    .part-label { font-size: 26px; font-weight: 800; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 2px; }
 
     /* === ТЕМА 2: ДВІ КОЛОНКИ === */
     .tc-wrapper { display: flex; gap: 20px; text-align: center; margin-bottom: 10px; position: relative; z-index: 2; margin-top: 15px; }
@@ -193,7 +191,7 @@
 
 <div id="outputWrapper">
     <div class="tools-row">
-        <button class="btn-neu" onclick="saveImagesToGallery()">💾 Зберегти обидві (ZIP/Окремо)</button>
+        <button class="btn-neu" onclick="saveImagesToGallery()">💾 Зберегти графік (2 фото)</button>
     </div>
     <div style="display: flex; gap: 10px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 10px;">
         <img id="generatedImage1" src="" style="width: 48%; height: auto; border-radius: 8px; box-shadow: 3px 3px 10px rgba(0,0,0,0.1);">
@@ -233,16 +231,15 @@
     const finalTextDiv = document.getElementById('finalText');
     const copyBlock = document.getElementById('copyBlock');
     const copyHint = document.getElementById('copyHint');
+        const captureTarget1 = document.getElementById('captureTarget1');
+    const captureTarget2 = document.getElementById('captureTarget2');
+    const generatedImage1 = document.getElementById('generatedImage1');
+    const generatedImage2 = document.getElementById('generatedImage2');
     const captureTarget = document.getElementById('captureTarget');
     const outputWrapper = document.getElementById('outputWrapper');
     const generatedImage = document.getElementById('generatedImage');
     const designSelect = document.getElementById('designSelect');
     const postTitleInput = document.getElementById('postTitleInput');
-        const captureTarget1 = document.getElementById('captureTarget1');
-    const captureTarget2 = document.getElementById('captureTarget2');
-    const generatedImage1 = document.getElementById('generatedImage1');
-    const generatedImage2 = document.getElementById('generatedImage2');
-
     const editorWrapper = document.getElementById('editorWrapper');
     const editorChips = document.getElementById('editorChips');
 
@@ -449,20 +446,38 @@
     }
 
     // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ (ДВІ КАРТИНКИ) ===
+        // Функція-м'ясник: ділить добу навпіл
+    function splitIntervalsForTwoImages(intervals) {
+        let part1 = []; // 00:00 - 12:00
+        let part2 = []; // 12:00 - 24:00
+
+        intervals.forEach(int => {
+            if (int.endMin <= 720) {
+                part1.push({...int});
+            } else if (int.startMin >= 720) {
+                part2.push({...int});
+            } else {
+                // Відключення перетинає екватор 12:00 (розрубуємо)
+                let firstHalf = {...int, endMin: 720, displayEndStr: "12:00"};
+                let secondHalf = {...int, startMin: 720, startStr: "12:00"};
+                part1.push(firstHalf);
+                part2.push(secondHalf);
+            }
+        });
+        return { part1, part2 };
+    }
+
+    // === РЕНДЕР: ДВІ КАРТИНКИ (944х1280) ===
     function renderTimeline(intervals, totalHoursOff) {
         const { part1, part2 } = splitIntervalsForTwoImages(intervals);
-        
-        // Рендеримо першу половину в target 1
         renderSingleCanvas(captureTarget1, part1, "ЧАСТИНА 1: 00:00 - 12:00");
-        // Рендеримо другу половину в target 2
         renderSingleCanvas(captureTarget2, part2, "ЧАСТИНА 2: 12:00 - 00:00");
     }
 
-    // Допоміжна функція генерації HTML для одного квадрата
     function renderSingleCanvas(targetElement, halfIntervals, partTitle) {
         let headerContent = getStandardHeader(lastDateStr);
         headerContent += `
-        <div style="display:flex; justify-content: space-between; align-items:center; margin-top: 10px;">
+        <div style="display:flex; justify-content: space-between; align-items:center; margin-top: 15px;">
             <div class="part-label">${partTitle}</div>
             <div class="source-top" style="margin:0;">${iconLink} Харківобленерго</div>
         </div>
@@ -549,11 +564,6 @@
     }
 
 
-
-
-
-
-    // === РЕНДЕР ТЕМА 2: ДВІ КОЛОНКИ ===
         // === РЕНДЕР ТЕМА 2: ДВІ КОЛОНКИ ===
     function renderColumns(intervals, totalHoursOff, totalHoursOn) {
         let offHtml = '';
@@ -630,8 +640,7 @@
     }
 
 
-        function generateImageOutput() {
-        // Рендеримо обидві канви одночасно зі scale: 2 (цього вистачить для ідеальної чіткості в ТГ)
+            function generateImageOutput() {
         Promise.all([
             html2canvas(captureTarget1, { scale: 2, backgroundColor: '#060606', logging: false, useCORS: true }),
             html2canvas(captureTarget2, { scale: 2, backgroundColor: '#060606', logging: false, useCORS: true })
@@ -645,18 +654,17 @@
         if (!generatedImage1.src || !generatedImage2.src) return;
         try {
             const link1 = document.createElement("a");
-            link1.href = generatedImage1.src; 
-            link1.download = `grafik_valky_part1.png`; 
+            link1.href = generatedImage1.src; link1.download = `grafik_part1.png`; 
             document.body.appendChild(link1); link1.click(); document.body.removeChild(link1);
 
             setTimeout(() => {
                 const link2 = document.createElement("a");
-                link2.href = generatedImage2.src; 
-                link2.download = `grafik_valky_part2.png`; 
+                link2.href = generatedImage2.src; link2.download = `grafik_part2.png`; 
                 document.body.appendChild(link2); link2.click(); document.body.removeChild(link2);
-            }, 300); // Невелика затримка, щоб браузер не заблокував друге завантаження
+            }, 300);
         } catch (err) { alert("Помилка збереження."); }
     }
+
 
 
     function copyToClipboard() {
