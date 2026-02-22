@@ -53,67 +53,71 @@
     .copy-content { font-family: monospace; font-size: 14px; color: #333; white-space: pre-wrap; line-height: 1.4; pointer-events: none; }
     .copy-hint { margin-top: 10px; font-size: 12px; color: #007aff; text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-                        /* === БАЗОВИЙ ТЕМНИЙ ШАБЛОН (1080x1350 VIP ФОРМАТ) === */
-    #captureTarget { 
-        background: var(--c-dark); color: #ffffff; padding: 60px 80px; 
+                            /* === БАЗОВИЙ ТЕМНИЙ ШАБЛОН (ІДЕАЛЬНИЙ КВАДРАТ 1080x1080) === */
+    .capture-canvas { 
+        background: var(--c-dark); color: #ffffff; 
+        padding: 50px 60px; /* Великі відступи для повітря */
         position: absolute; left: -9999px; top: 0; 
-        width: 1080px; min-height: 1350px; /* Залізобетонні пропорції */
+        width: 1080px; height: 1080px; /* Жорсткий квадрат */
         box-sizing: border-box; -webkit-font-smoothing: antialiased; 
         overflow: hidden; border-radius: 0; 
-        display: flex; flex-direction: column; 
+        display: flex; flex-direction: column; justify-content: flex-start;
     }
 
-    /* === ГІГАНТСЬКИЙ ХЕДЕР === */
-    .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; position: relative; z-index: 2; }
-    .header-title { display: flex; flex-direction: column; gap: 12px; font-size: 52px; font-weight: 900; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; margin: 0; flex: 1; color: #ffffff; } 
-    .title-date-line { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .title-date-line span.date-text { color: var(--c-yellow); }
+    /* === ЗБІЛЬШЕНІ ШРИФТИ ДЛЯ КВАДРАТІВ === */
+    .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; position: relative; z-index: 2; }
+    .header-title { display: flex; flex-direction: column; gap: 8px; font-size: 42px; font-weight: 900; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; margin: 0; flex: 1; color: #ffffff; } 
+    .title-date-line { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .title-date-line span.date-text { color: var(--c-yellow); line-height: 1; }
     
-    .valky-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 28px; color: rgba(255,255,255,0.9); font-weight: 800; text-transform: none; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); line-height: 1; }
-    .valky-tag svg { width: 28px; height: 28px; fill: rgba(255,255,255,0.8); flex-shrink: 0; }
+    .valky-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 24px; color: rgba(255,255,255,0.9); font-weight: 800; text-transform: none; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 8px 18px; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); line-height: 1; }
+    .valky-tag svg { width: 22px; height: 22px; fill: rgba(255,255,255,0.8); flex-shrink: 0; }
     
-    .logo-wrapper { display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; margin-left: 30px; }
-    .logo-fixed { width: 90px; height: 90px; object-fit: contain; border-radius: 50%; background: #ffffff; padding: 10px; box-sizing: border-box; flex-shrink: 0; }
+    .logo-wrapper { display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; margin-left: 20px; }
+    .logo-fixed { width: 70px; height: 70px; object-fit: contain; border-radius: 50%; background: #ffffff; padding: 6px; box-sizing: border-box; flex-shrink: 0; }
+
     .header-divider { height: 2px; width: 100%; background: rgba(255,255,255,0.1); margin: 20px 0; }
 
-    /* === ТЕМА 1: ШИРОКІ ПЛАШКИ (АВІАКВИТКИ) === */
-    #timelineContainer { 
-        display: flex; flex-direction: column; gap: 30px; 
-        flex-grow: 1; justify-content: center; /* Центрує плашки по вертикалі, якщо їх мало */
-        position: relative; z-index: 2; margin-top: 20px;
-    }
+    /* Таймлайн адаптований під квадрат */
+    #timelineContainer { padding-top: 10px; display: flex; flex-direction: column; gap: 0; flex-grow: 1; justify-content: center; } /* justify-content: center розтягне їх гарно по вертикалі */
+    .tl-item { display: flex; flex-direction: column; z-index: 2; margin-bottom: 0; }
+    .tl-head { display: flex; align-items: center; min-height: 60px; position: relative; z-index: 2; }
+    
+    .time-col { width: 130px; text-align: right; padding-right: 25px; font-weight: 800; font-size: 38px; flex-shrink: 0; line-height: 1; margin: 0; letter-spacing: -1px; } 
+    .time-col.off { color: var(--c-red); }
+    .time-col.on { color: var(--c-yellow); text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
 
-    .ticket-row { 
-        display: flex; align-items: center; justify-content: space-between;
-        background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 32px; padding: 40px 50px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
+    .icon-node { display: flex; flex-direction: column; align-items: center; width: 50px; flex-shrink: 0; }
+    .icon-circle { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--c-dark); z-index: 3; position: relative; }
+    .icon-house { width: 32px; height: 32px; }
+    .on .icon-house { fill: var(--c-yellow); filter: drop-shadow(0 0 5px var(--c-yellow)); }
+    .off .icon-house { fill: #555; }
 
-    /* Блок часу зліва */
-    .ticket-time { font-size: 64px; font-weight: 900; letter-spacing: -2px; width: 380px; flex-shrink: 0; line-height: 1; margin: 0; }
-    .ticket-time.off { color: var(--c-red); }
-    .ticket-time.on { color: var(--c-yellow); text-shadow: 0 0 20px rgba(251, 191, 36, 0.4); }
+    .badge-col { padding-left: 25px; flex-grow: 1; display: flex; align-items: center; justify-content: space-between; }
 
-    /* Блок з кружечками і хатинкою по центру */
-    .ticket-visual { display: flex; align-items: center; gap: 16px; flex-grow: 1; justify-content: flex-start; padding: 0 20px; }
-    .ticket-dot { width: 16px; height: 16px; border-radius: 50%; opacity: 0.9; flex-shrink: 0; }
-    .ticket-dot.on { background: var(--c-yellow); box-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
-    .ticket-dot.off { background: #555; }
-    .icon-circle-big { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; }
-    .icon-circle-big svg { width: 36px; height: 36px; }
-    .on .icon-circle-big svg { fill: var(--c-yellow); filter: drop-shadow(0 0 8px var(--c-yellow)); }
-    .off .icon-circle-big svg { fill: #888; }
-
-    /* Блок бейджа справа */
-    .ticket-badge-wrapper { width: 340px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 10px; flex-shrink: 0; }
-    .ticket-badge { display: flex; align-items: center; justify-content: center; padding: 16px 28px; border-radius: 16px; font-size: 24px; font-weight: 800; letter-spacing: 0.5px; line-height: 1; text-transform: uppercase; gap: 12px; } 
-    .ticket-badge.off { background: #1a1a1c; border: 2px solid #333; color: #a1a1aa; }
-    .ticket-badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 15px rgba(251, 191, 36, 0.2); border: 2px solid var(--c-yellow); }
-    .badge-modifier { font-size: 20px; font-weight: 800; text-transform: uppercase; }
+    .badge { display: flex; align-items: center; justify-content: center; padding: 10px 20px; border-radius: 12px; font-size: 20px; font-weight: 800; letter-spacing: 0.5px; width: max-content; line-height: 1; text-transform: uppercase; gap: 8px; } 
+    .badge.off { background: #1a1a1c; border: 2px solid #333; color: #a1a1aa; }
+    .badge.on { background: var(--c-yellow); color: #000; box-shadow: 0 0 10px rgba(251, 191, 36, 0.2); border: 2px solid var(--c-yellow); }
+    .badge-row { display: flex; align-items: center; gap: 12px; }
+    .badge-modifier { font-size: 18px; font-weight: 800; text-transform: uppercase; }
     .badge-modifier.rescued { color: var(--c-yellow); }
     .badge-modifier.emergency { color: var(--c-red); }
 
+    .tl-body { display: flex; align-items: stretch; min-height: 50px; position: relative; z-index: 1; } 
+    .line-node { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 50px; flex-shrink: 0; padding: 6px 0; margin: 0; }
+    
+    .tl-dot-micro { width: 12px; height: 12px; border-radius: 50%; opacity: 0.9; flex-shrink: 0;} 
+    .tl-dot-micro.on { background: var(--c-yellow); box-shadow: 0 0 6px rgba(251, 191, 36, 0.5); }
+    .tl-dot-micro.off { background: #555; }
+
+    .interval-col { padding-left: 25px; flex-grow: 1; display: flex; align-items: center; }
+    .interval { display: flex; align-items: center; gap: 12px; font-size: 34px; font-weight: 700; line-height: 1; } 
+    .interval-icon { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; flex-shrink: 0; }
+    .interval-icon svg { width: 100%; height: 100%; display: block; }
+    .interval.off { color: var(--c-red); }
+    .interval.on { color: var(--c-yellow); }
+
+    .part-label { font-size: 24px; font-weight: 800; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 2px; }
 
     /* === ТЕМА 2: ДВІ КОЛОНКИ === */
     .tc-wrapper { display: flex; gap: 20px; text-align: center; margin-bottom: 10px; position: relative; z-index: 2; margin-top: 15px; }
@@ -189,19 +193,23 @@
 
 <div id="outputWrapper">
     <div class="tools-row">
-        <button class="btn-neu" onclick="saveImageToGallery()">💾 Зберегти</button>
+        <button class="btn-neu" onclick="saveImagesToGallery()">💾 Зберегти обидві (ZIP/Окремо)</button>
     </div>
-    <img id="generatedImage" src="">
+    <div style="display: flex; gap: 10px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 10px;">
+        <img id="generatedImage1" src="" style="width: 48%; height: auto; border-radius: 8px; box-shadow: 3px 3px 10px rgba(0,0,0,0.1);">
+        <img id="generatedImage2" src="" style="width: 48%; height: auto; border-radius: 8px; box-shadow: 3px 3px 10px rgba(0,0,0,0.1);">
+    </div>
     <div class="copy-block" id="copyBlock" onclick="copyToClipboard()">
         <div class="copy-content" id="finalText">Тут буде текст...</div>
         <div class="copy-hint" id="copyHint">Тапни, щоб скопіювати текст</div>
     </div>
 </div>
 
-
 </div>
 
-<div id="captureTarget"></div>
+<div id="captureTarget1" class="capture-canvas"></div>
+<div id="captureTarget2" class="capture-canvas"></div>
+
 
 <script>
     // === ІКОНКИ ===
@@ -230,7 +238,11 @@
     const generatedImage = document.getElementById('generatedImage');
     const designSelect = document.getElementById('designSelect');
     const postTitleInput = document.getElementById('postTitleInput');
-    
+        const captureTarget1 = document.getElementById('captureTarget1');
+    const captureTarget2 = document.getElementById('captureTarget2');
+    const generatedImage1 = document.getElementById('generatedImage1');
+    const generatedImage2 = document.getElementById('generatedImage2');
+
     const editorWrapper = document.getElementById('editorWrapper');
     const editorChips = document.getElementById('editorChips');
 
@@ -415,39 +427,79 @@
     }
 
             // === РЕНДЕР ТЕМА 1: ШИРОКІ ПЛАШКИ ===
-    function renderTimeline(intervals, totalHoursOff) {
-        let headerContent = getStandardHeader(lastDateStr);
-        headerContent += `<div class="header-divider"></div>`;
+        // Функція, яка рубає день навпіл
+    function splitIntervalsForTwoImages(intervals) {
+        let part1 = []; // 00:00 - 12:00
+        let part2 = []; // 12:00 - 24:00
 
-        // Вотермарка на фон 
-        let bgWatermark = `<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; display: flex; align-items: center; justify-content: center; opacity: 0.03; pointer-events: none;">
-            <img src="./logo.png" style="width: 120%; max-width: 800px; object-fit: contain; filter: grayscale(100%);">
+        intervals.forEach(int => {
+            if (int.endMin <= 720) {
+                part1.push({...int});
+            } else if (int.startMin >= 720) {
+                part2.push({...int});
+            } else {
+                // Відключення перетинає екватор 12:00 (розрубуємо)
+                let firstHalf = {...int, endMin: 720, displayEndStr: "12:00"};
+                let secondHalf = {...int, startMin: 720, startStr: "12:00"};
+                part1.push(firstHalf);
+                part2.push(secondHalf);
+            }
+        });
+        return { part1, part2 };
+    }
+
+    // === РЕНДЕР ТЕМА 1: СМАРТ ДІМ (ДВІ КАРТИНКИ) ===
+    function renderTimeline(intervals, totalHoursOff) {
+        const { part1, part2 } = splitIntervalsForTwoImages(intervals);
+        
+        // Рендеримо першу половину в target 1
+        renderSingleCanvas(captureTarget1, part1, "ЧАСТИНА 1: 00:00 - 12:00");
+        // Рендеримо другу половину в target 2
+        renderSingleCanvas(captureTarget2, part2, "ЧАСТИНА 2: 12:00 - 00:00");
+    }
+
+    // Допоміжна функція генерації HTML для одного квадрата
+    function renderSingleCanvas(targetElement, halfIntervals, partTitle) {
+        let headerContent = getStandardHeader(lastDateStr);
+        headerContent += `
+        <div style="display:flex; justify-content: space-between; align-items:center; margin-top: 10px;">
+            <div class="part-label">${partTitle}</div>
+            <div class="source-top" style="margin:0;">${iconLink} Харківобленерго</div>
+        </div>
+        <div class="header-divider"></div>`;
+
+        let bgWatermark = `<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; display: flex; align-items: center; justify-content: center; opacity: 0.04; pointer-events: none;">
+            <img src="./logo.png" style="width: 90%; max-width: 600px; object-fit: contain; filter: grayscale(100%);">
         </div>`;
 
         let html = bgWatermark + `<div style="position: relative; z-index: 2; display: flex; flex-direction: column; height: 100%;">` + headerContent + `<div id="timelineContainer">`;
 
-        intervals.forEach((int, i) => {
+        halfIntervals.forEach((int, i) => {
             const isVisuallyOn = int.type === 'on';
             const stateClass = isVisuallyOn ? 'on' : 'off';
             const redBanIcon = `<span style="color: var(--c-red); display: flex; align-items: center;">${iconBan}</span>`;
             
             let badgeHtml = '';
-            
+            let intervalTextStyle = '';
+
             if (int.type === 'off') {
                 if (int.isModified) {
-                    badgeHtml = `<div class="ticket-badge off" style="text-decoration: line-through; opacity: 0.55;">${redBanIcon} ВІДКЛЮЧЕННЯ</div><span class="badge-modifier rescued">💡 Світло було</span>`;
+                    badgeHtml = `<div class="badge-row"><div class="badge off" style="text-decoration: line-through; opacity: 0.55;">${redBanIcon} ВІДКЛЮЧЕННЯ</div><span class="badge-modifier rescued">💡 Світло було</span></div>`;
+                    intervalTextStyle = `color: rgba(251, 191, 36, 0.7); text-decoration: line-through; text-decoration-color: rgba(251, 191, 36, 0.7); text-decoration-thickness: 2px;`;
                 } else {
-                    badgeHtml = `<div class="ticket-badge off">${redBanIcon} ВІДКЛЮЧЕННЯ</div>`;
+                    badgeHtml = `<div class="badge off">${redBanIcon} ВІДКЛЮЧЕННЯ</div>`;
                 }
             } else {
                 if (int.isModified) {
-                    badgeHtml = `<div class="ticket-badge on" style="text-decoration: line-through; opacity: 0.55; color: #000;">${iconLightningSVG} СВІТЛО Є</div><span class="badge-modifier emergency">⚠️ Аварійне</span>`;
+                    badgeHtml = `<div class="badge-row"><div class="badge on" style="text-decoration: line-through; opacity: 0.55; color: #000;">${iconLightningSVG} СВІТЛО Є</div><span class="badge-modifier emergency">⚠️ Аварійне</span></div>`;
+                    intervalTextStyle = `color: #888; text-decoration: line-through; text-decoration-color: #888; text-decoration-thickness: 2px;`;
                 } else {
-                    badgeHtml = `<div class="ticket-badge on" style="color: #000;">${iconLightningSVG} СВІТЛО Є</div>`;
+                    badgeHtml = `<div class="badge on" style="color: #000;">${iconLightningSVG} СВІТЛО Є</div>`;
                 }
             }
                 
-            /* === РОЗУМНІ КРУЖЕЧКИ (1 год = 1 кружечок) === */
+            const intIcon = isVisuallyOn ? iconBulb : iconZapOff;
+            
             let durationMins = int.endMin - int.startMin;
             if (durationMins < 0) durationMins += 1440; 
             let hours = durationMins / 60;
@@ -455,52 +507,46 @@
             let hasHalfDot = (hours - fullDots) >= 0.4; 
 
             let dotsHtml = '';
-            if (i < intervals.length - 1) { 
+            if (i < halfIntervals.length - 1) { 
                 for(let d = 0; d < fullDots; d++) {
-                    dotsHtml += `<div class="ticket-dot ${stateClass}"></div>`;
+                    dotsHtml += `<div class="tl-dot-micro ${stateClass}"></div>`;
                 }
                 if(hasHalfDot) {
                     let halfColor = isVisuallyOn ? "var(--c-yellow)" : "#555";
                     let shadow = isVisuallyOn ? "box-shadow: 0 0 6px rgba(251, 191, 36, 0.5);" : "";
-                    dotsHtml += `<div class="ticket-dot" style="background: linear-gradient(to right, ${halfColor} 50%, transparent 50%); border: 2px solid ${halfColor}; box-sizing: border-box; ${shadow}"></div>`;
+                    dotsHtml += `<div class="tl-dot-micro" style="background: linear-gradient(to bottom, ${halfColor} 50%, transparent 50%); border: 1px solid ${halfColor}; box-sizing: border-box; ${shadow}"></div>`;
                 }
                 if(fullDots === 0 && !hasHalfDot) {
-                    dotsHtml += `<div class="ticket-dot ${stateClass}" style="transform: scale(0.6);"></div>`;
+                    dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="transform: scale(0.6);"></div>`;
                 }
             } else {
-                // Останній інтервал доби: просто 3 крапки, що затухають
-                dotsHtml += `<div class="ticket-dot ${stateClass}" style="opacity: 0.6; transform: scale(0.8);"></div>`;
-                dotsHtml += `<div class="ticket-dot ${stateClass}" style="opacity: 0.3; transform: scale(0.6);"></div>`;
-                dotsHtml += `<div class="ticket-dot ${stateClass}" style="opacity: 0.1; transform: scale(0.4);"></div>`;
+                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="width: 8px; height: 8px; opacity: 0.6"></div>`;
+                dotsHtml += `<div class="tl-dot-micro ${stateClass}" style="width: 5px; height: 5px; opacity: 0.3"></div>`;
             }
 
-            let endTextAddon = (int.endMin === 1440 || int.displayEndStr === "24:00") 
-                ? `<div style="font-size: 20px; opacity: 0.6; font-weight: 500; text-transform: lowercase; margin-top: 8px;">(до кінця доби)</div>` 
-                : ``;
-
-            // Збираємо плашку
             html += `
-            <div class="ticket-row ${stateClass}">
-                <div class="ticket-time ${stateClass}">
-                    ${int.startStr} - ${int.displayEndStr}
-                    ${endTextAddon}
+            <div class="tl-item ${stateClass}">
+                <div class="tl-head">
+                    <div class="time-col ${stateClass}">${int.startStr}</div>
+                    <div class="icon-node"><div class="icon-circle">${houseSvg}</div></div>
+                    <div class="badge-col">${badgeHtml}</div>
                 </div>
-                
-                <div class="ticket-visual ${stateClass}">
-                    <div class="icon-circle-big">${houseSvg}</div>
-                    ${dotsHtml}
-                </div>
-
-                <div class="ticket-badge-wrapper">
-                    ${badgeHtml}
+                <div class="tl-body">
+                    <div class="time-col"></div>
+                    <div class="line-node">${dotsHtml}</div>
+                    <div class="interval-col">
+                        <div class="interval ${stateClass}">
+                            <div class="interval-icon">${intIcon}</div>
+                            <span class="interval-text" style="${intervalTextStyle}">${int.startStr} - ${int.displayEndStr}</span>
+                        </div>
+                    </div>
                 </div>
             </div>`;
         });
 
-        html += `</div></div>`; // Закриваємо контейнери
-        captureTarget.innerHTML = html;
+        html += `</div></div>`; 
+        targetElement.innerHTML = html;
     }
-
 
 
 
@@ -584,13 +630,34 @@
     }
 
 
-    function generateImageOutput() {
-        html2canvas(captureTarget, {
-            scale: 3, backgroundColor: null, logging: false, useCORS: true
-        }).then(canvas => {
-            generatedImage.src = canvas.toDataURL('image/png');
+        function generateImageOutput() {
+        // Рендеримо обидві канви одночасно зі scale: 2 (цього вистачить для ідеальної чіткості в ТГ)
+        Promise.all([
+            html2canvas(captureTarget1, { scale: 2, backgroundColor: '#060606', logging: false, useCORS: true }),
+            html2canvas(captureTarget2, { scale: 2, backgroundColor: '#060606', logging: false, useCORS: true })
+        ]).then(([canvas1, canvas2]) => {
+            generatedImage1.src = canvas1.toDataURL('image/png');
+            generatedImage2.src = canvas2.toDataURL('image/png');
         });
     }
+
+    async function saveImagesToGallery() {
+        if (!generatedImage1.src || !generatedImage2.src) return;
+        try {
+            const link1 = document.createElement("a");
+            link1.href = generatedImage1.src; 
+            link1.download = `grafik_valky_part1.png`; 
+            document.body.appendChild(link1); link1.click(); document.body.removeChild(link1);
+
+            setTimeout(() => {
+                const link2 = document.createElement("a");
+                link2.href = generatedImage2.src; 
+                link2.download = `grafik_valky_part2.png`; 
+                document.body.appendChild(link2); link2.click(); document.body.removeChild(link2);
+            }, 300); // Невелика затримка, щоб браузер не заблокував друге завантаження
+        } catch (err) { alert("Помилка збереження."); }
+    }
+
 
     function copyToClipboard() {
         navigator.clipboard.writeText(finalTextDiv.textContent).then(() => {
