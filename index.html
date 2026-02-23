@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
@@ -9,29 +10,36 @@
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-app); color: var(--text-main); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         .app-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; }
         .card { background: var(--bg-app); padding: 25px; border-radius: var(--radius); box-shadow: 9px 9px 16px var(--neumorph-shadow-dark), -9px -9px 16px var(--neumorph-shadow-light); border: 1px solid rgba(255,255,255,0.2); }
-        h2 { margin: 0 0 5px 0; font-weight: 900; color: #333; letter-spacing: -0.5px; display: flex; align-items: center; justify-content: space-between;}
+        h2 { margin: 0 0 5px 0; font-weight: 900; color: #333; letter-spacing: -0.5px; display: flex; align-items: center; justify-content: space-between; }
         .subtitle { font-size: 12px; color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
         .form-label { font-size: 12px; font-weight: bold; color: #666; margin-left: 5px; display: block; margin-bottom: 5px; text-transform: uppercase; }
-        .input-neumorph { width: 100%; border: none; border-radius: 12px; padding: 15px; font-family: inherit; background: var(--bg-app); box-shadow: inset 6px 6px 10px var(--neumorph-shadow-dark), -6px -6px 10px var(--neumorph-shadow-light); box-sizing: border-box; color: #333; outline: none; transition: 0.3s; font-weight: 500; }
-        textarea.input-neumorph { height: 100px; resize: none; margin-bottom: 15px;}
-        .btn-neu { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; background: var(--bg-app); box-shadow: 6px 6px 10px var(--neumorph-shadow-dark), -6px -6px 10px var(--neumorph-shadow-light); color: #333; transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 15px;}
+        .input-neumorph { width: 100%; border: none; border-radius: 12px; padding: 15px; font-family: inherit; background: var(--bg-app); box-shadow: inset 6px 6px 10px var(--neumorph-shadow-dark), inset -6px -6px 10px var(--neumorph-shadow-light); box-sizing: border-box; color: #333; outline: none; transition: 0.3s; font-weight: 500; }
+        textarea.input-neumorph { height: 100px; resize: none; margin-bottom: 15px; }
+        .btn-neu { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; background: var(--bg-app); box-shadow: 6px 6px 10px var(--neumorph-shadow-dark), -6px -6px 10px var(--neumorph-shadow-light); color: #333; transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 15px; }
         .btn-neu:active { box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), inset -4px -4px 8px var(--neumorph-shadow-light); transform: scale(0.98); }
-        .btn-primary { color: #007aff; } .btn-danger { color: #ff3b30; } .btn-success { color: #28a745; font-size: 18px; padding: 20px;}
-        
-        #dashboardControls { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05); }
-        .emergency-card { background: rgba(217, 70, 59, 0.1); border: 2px dashed var(--c-red); border-radius: 15px; padding: 20px; margin-bottom: 20px; }
-        .emergency-card.active { background: var(--c-red); color: #fff; border-style: solid; }
-        .em-inputs { display: flex; gap: 10px; margin-bottom: 15px; }
-        .edit-chips-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;}
-        .edit-chip { padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; background: var(--bg-app); transition: 0.2s; user-select: none; box-shadow: 3px 3px 6px var(--neumorph-shadow-dark), -3px -3px 6px var(--neumorph-shadow-light); }
-        .edit-chip:active { transform: scale(0.95); }
-        .edit-chip.off-state { border: 2px solid #888; color: #888; }
-     .edit-chip.on-state { border: 2px solid #d97706; color: #d97706; }
-        .edit-chip.rescued { border-color: var(--c-yellow); background: var(--c-yellow); color: #000; box-shadow: none; }
-        .edit-chip.emergency { border-color: var(--c-red); background: var(--c-red); color: #fff; box-shadow: none; }
-        .copy-block { padding: 20px; border-radius: 15px; background: rgba(255,255,255,0.5); cursor: pointer; text-align: left; margin-bottom: 20px; border: 1px dashed #aaa;}
-        .copy-content { font-family: monospace; font-size: 13px; color: #333; white-space: pre-wrap; pointer-events: none; }
-    </style>
+        .btn-primary { color: #007aff; } .btn-danger { color: #ff3b30; } .btn-success { color: #28a745; font-size: 18px; padding: 20px; }
+
+```
+    #dashboardControls { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05); }
+    .emergency-card { background: rgba(217, 70, 59, 0.1); border: 2px dashed var(--c-red); border-radius: 15px; padding: 20px; margin-bottom: 20px; }
+    .emergency-card.active { background: var(--c-red); color: #fff; border-style: solid; }
+    .em-inputs { display: flex; gap: 10px; margin-bottom: 15px; }
+    .edit-chips-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .edit-chip { padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; background: var(--bg-app); transition: 0.2s; user-select: none; box-shadow: 3px 3px 6px var(--neumorph-shadow-dark), -3px -3px 6px var(--neumorph-shadow-light); }
+    .edit-chip:active { transform: scale(0.95); }
+    .edit-chip.off-state { border: 2px solid #888; color: #888; }
+    .edit-chip.on-state { border: 2px solid #d97706; color: #d97706; }
+    .edit-chip.rescued { border-color: var(--c-yellow); background: var(--c-yellow); color: #000; box-shadow: none; }
+    .edit-chip.emergency { border-color: var(--c-red); background: var(--c-red); color: #fff; box-shadow: none; }
+    .copy-block { padding: 20px; border-radius: 15px; background: rgba(255,255,255,0.5); cursor: pointer; text-align: left; margin-bottom: 20px; border: 1px dashed #aaa; }
+    .copy-content { font-family: monospace; font-size: 13px; color: #333; white-space: pre-wrap; pointer-events: none; }
+
+    .em-status-bar { display: none; background: rgba(217,70,59,0.1); border: 2px solid var(--c-red); border-radius: 12px; padding: 12px 16px; margin-bottom: 15px; font-size: 13px; font-weight: 700; color: var(--c-red); display: none; align-items: center; justify-content: space-between; gap: 10px; }
+    .em-status-bar.visible { display: flex; }
+    .em-status-bar button { background: var(--c-red); color: #fff; border: none; border-radius: 8px; padding: 6px 12px; font-weight: 800; font-size: 12px; cursor: pointer; flex-shrink: 0; }
+</style>
+```
+
 </head>
 <body>
 <div class="app-container">
@@ -44,63 +52,74 @@
             <button class="btn-neu btn-danger" style="flex: 0.3; margin:0;" onclick="clearAll()">❌</button>
         </div>
 
-        <div id="dashboardControls">
-            <div class="subtitle">Крок 2: Панель керування</div>
-            
-            <div class="emergency-card" id="emergencyBlock">
-                <h3 style="margin: 0 0 10px 0; font-size: 16px;">🚨 ЕКСТРЕНА АВАРІЯ</h3>
-                <div class="em-inputs">
-                    <input type="text" id="emStart" class="input-neumorph" placeholder="З якої (15:00)" style="padding: 10px; text-align:center;">
-                    <input type="text" id="emEnd" class="input-neumorph" placeholder="По яку (18:00)" style="padding: 10px; text-align:center;">
-                </div>
+```
+    <div id="dashboardControls">
+        <div class="subtitle">Крок 2: Панель керування</div>
+
+        <div class="emergency-card" id="emergencyBlock">
+            <h3 style="margin: 0 0 10px 0; font-size: 16px;">🚨 ЕКСТРЕНА АВАРІЯ</h3>
+            <div class="em-inputs">
+                <input type="text" id="emStart" class="input-neumorph" placeholder="З якої (15:00)" style="padding: 10px; text-align:center;">
+                <input type="text" id="emEnd" class="input-neumorph" placeholder="По яку (18:00)" style="padding: 10px; text-align:center;">
+            </div>
             <button class="btn-neu" onclick="injectEmergency()" style="margin: 0; color: var(--c-red);">Додати аварійне в графік</button>
-
-            </div>
-
-            <label class="form-label">РУЧНЕ РЕДАГУВАННЯ (Клік по блоку):</label>
-            <div class="edit-chips-container" id="editorChips"></div>
-
-            <div class="copy-block" id="copyBlock" onclick="copyToClipboard()">
-                <div class="copy-content" id="finalText">Текст генерується...</div>
-                <div style="font-size:11px; color:#007aff; margin-top:10px; font-weight:bold; text-align:center;" id="copyHint">ТАПНИ, ЩОБ СКОПІЮВАТИ ПОСТ</div>
-            </div>
-
-            <button class="btn-neu btn-success" id="btnPush" onclick="pushToMiniApp()" style="margin:0;">🚀 ОПУБЛІКУВАТИ В ДОДАТКУ</button>
-            <button class="btn-neu" id="btnReset" onclick="resetToWaiting()" style="margin-top:15px; color: #ff3b30; border: 2px dashed rgba(255, 59, 48, 0.3);">🗑 Танос графіку (Очікування)</button>
-
         </div>
+
+        <div class="em-status-bar" id="emStatusBar">
+            <span id="emStatusText">⛔️ Аварійне активне: --:-- – --:--</span>
+            <button onclick="clearEmergency()">Зняти аварійне</button>
+        </div>
+
+        <label class="form-label">РУЧНЕ РЕДАГУВАННЯ (Клік по блоку):</label>
+        <div class="edit-chips-container" id="editorChips"></div>
+
+        <div class="copy-block" id="copyBlock" onclick="copyToClipboard()">
+            <div class="copy-content" id="finalText">Текст генерується...</div>
+            <div style="font-size:11px; color:#007aff; margin-top:10px; font-weight:bold; text-align:center;" id="copyHint">ТАПНИ, ЩОБ СКОПІЮВАТИ ПОСТ</div>
+        </div>
+
+        <button class="btn-neu btn-success" id="btnPush" onclick="pushToMiniApp()" style="margin:0;">🚀 ОПУБЛІКУВАТИ В ДОДАТКУ</button>
+        <button class="btn-neu" id="btnReset" onclick="resetToWaiting()" style="margin-top:15px; color: #ff3b30; border: 2px dashed rgba(255, 59, 48, 0.3);">🗑 Танос графіку (Очікування)</button>
     </div>
+</div>
+```
+
 </div>
 
 <script>
-    const BIN_ID = '699b325fd0ea881f40cf7aaf'; 
+    const BIN_ID = '699b325fd0ea881f40cf7aaf';
     const API_KEY = '$2a$10$LtEcs8xMXZsRCDbVKHwou..M4xtkpoEM/3CJuf76Q0gK3gZ0I607C';
 
     let lastDateStr = "СЬОГОДНІ";
     let globalIntervals = [];
+    let activeEmergency = null;
 
     function timeToMinutes(timeStr) { const [h, m] = timeStr.replace(/[^\d:]/g, '').split(':').map(Number); return (h || 0) * 60 + (m || 0); }
     function minutesToTime(mins) { const h = Math.floor(mins / 60); const m = mins % 60; return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`; }
-    function getClockEmoji(timeStr) { let [h, m] = timeStr.split(':').map(Number); if(isNaN(m)) m=0; let h12 = h%12||12; const f=['🕛','🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚']; const h_em=['🕧','🕜','🕝','🕞','🕟','🕠','🕡','🕢','🕣','🕤','🕥','🕦']; return (m>=30)?h_em[h12===12?0:h12]:f[h12===12?0:h12]; }
+    function getClockEmoji(timeStr) { let [h, m] = timeStr.split(':').map(Number); if (isNaN(m)) m = 0; let h12 = h % 12 || 12; const f = ['🕛','🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚']; const h_em = ['🕧','🕜','🕝','🕞','🕟','🕠','🕡','🕢','🕣','🕤','🕥','🕦']; return (m >= 30) ? h_em[h12 === 12 ? 0 : h12] : f[h12 === 12 ? 0 : h12]; }
 
     function processData() {
         const text = document.getElementById('rawText').value;
         const dateMatch = text.match(/(\d{1,2})\s+(січня|лютого|березня|квітня|травня|червня|липня|серпня|вересня|жовтня|листопада|грудня)/i);
-        if(dateMatch) lastDateStr = dateMatch[0].toUpperCase();
+        if (dateMatch) lastDateStr = dateMatch[0].toUpperCase();
 
         const match = text.match(/(?:^|\n)\s*1\.2\s+([^\n]+)/);
         if (!match) { alert("Не знайдено чергу 1.2!"); return; }
 
         let tempOutages = [];
         match[1].trim().split(';').forEach(range => {
-            let parts = range.split(/[\-\–\—]/); if (parts.length < 2) return;
-            let sM = timeToMinutes(parts[0].trim()); let eM = timeToMinutes(parts[1].trim());
-            if (eM === 0 || parts[1].trim() === "24:00") eM = 1440; if (eM < sM) eM = 1440; 
+            let parts = range.split(/[\-\–\—]/);
+            if (parts.length < 2) return;
+            let sM = timeToMinutes(parts[0].trim());
+            let eM = timeToMinutes(parts[1].trim());
+            if (eM === 0 || parts[1].trim() === "24:00") eM = 1440;
+            if (eM < sM) eM = 1440;
             tempOutages.push({ startMin: sM, endMin: eM, startStr: parts[0].trim(), displayEndStr: (parts[1].trim() === "24:00" || eM === 1440 ? "00:00" : parts[1].trim()) });
         });
         tempOutages.sort((a, b) => a.startMin - b.startMin);
 
-        globalIntervals = []; let cT = 0;
+        globalIntervals = [];
+        let cT = 0;
         tempOutages.forEach(outage => {
             if (cT < outage.startMin) globalIntervals.push({ type: 'on', isModified: false, startMin: cT, endMin: outage.startMin, startStr: minutesToTime(cT), displayEndStr: minutesToTime(outage.startMin) });
             globalIntervals.push({ type: 'off', isModified: false, startMin: outage.startMin, endMin: outage.endMin, displayEndStr: outage.displayEndStr, startStr: outage.startStr });
@@ -108,36 +127,64 @@
         });
         if (cT < 1440) globalIntervals.push({ type: 'on', isModified: false, startMin: cT, endMin: 1440, startStr: minutesToTime(cT), displayEndStr: "00:00" });
 
+        activeEmergency = null;
+        updateEmStatusBar();
         updateUI();
         document.getElementById('dashboardControls').style.display = 'block';
     }
 
+    function updateEmStatusBar() {
+        const bar = document.getElementById('emStatusBar');
+        const text = document.getElementById('emStatusText');
+        if (activeEmergency) {
+            text.textContent = `⛔️ Аварійне активне: ${activeEmergency.start} – ${activeEmergency.end}`;
+            bar.classList.add('visible');
+        } else {
+            bar.classList.remove('visible');
+        }
+    }
+
+    function clearEmergency() {
+        if (!confirm("Зняти аварійне відключення з графіку?")) return;
+        activeEmergency = null;
+        updateEmStatusBar();
+        updateUI();
+    }
+
     function updateUI() {
-        const chips = document.getElementById('editorChips'); chips.innerHTML = '';
+        const chips = document.getElementById('editorChips');
+        chips.innerHTML = '';
         let textInts = [];
+
         globalIntervals.forEach((int) => {
             let t = `${int.startStr} - ${int.displayEndStr}`;
             const btn = document.createElement('div');
-            btn.className = `edit-chip ${int.type==='off' ? (int.isModified?'rescued':'off-state') : (int.isModified?'emergency':'on-state')}`;
-            btn.innerHTML = `${int.type==='off'?'🌑':'💡'} ${t} ${int.isModified?(int.type==='off'?'💡':'⛔️ АВАРІЙНЕ'):''}`;
+            btn.className = `edit-chip ${int.type === 'off' ? (int.isModified ? 'rescued' : 'off-state') : (int.isModified ? 'emergency' : 'on-state')}`;
+            btn.innerHTML = `${int.type === 'off' ? '🌑' : '💡'} ${t} ${int.isModified ? (int.type === 'off' ? '💡' : '⛔️ АВАРІЙНЕ') : ''}`;
             btn.onclick = () => { int.isModified = !int.isModified; updateUI(); };
             chips.appendChild(btn);
 
-            if ((int.type==='off'&&!int.isModified) || (int.type==='on'&&int.isModified)) {
-                textInts.push(`${getClockEmoji(int.startStr)} ${t}${(int.type==='on')?" (аварійне ⚠️)":""}`);
+            if ((int.type === 'off' && !int.isModified) || (int.type === 'on' && int.isModified)) {
+                textInts.push(`${getClockEmoji(int.startStr)} ${t}${(int.type === 'on') ? " (аварійне ⚠️)" : ""}`);
             }
         });
-        document.getElementById('finalText').textContent = `💡⚡️ ГРАФІК ВІДКЛЮЧЕНЬ ${lastDateStr}\n\n${textInts.join('\n')}\n\n📱🆕 Динамічний онлайн-графік в нашому міні-додатку: t.me/valkyelectrifybot/electric\n\n💬 Чат: t.me/valkychat\n📣 Базарчик: t.me/valkybazar`;
+
+        let emLine = '';
+        if (activeEmergency) {
+            emLine = `\n⛔️ АВАРІЙНЕ ВІДКЛЮЧЕННЯ: ${activeEmergency.start} – ${activeEmergency.end}\n`;
+        }
+
+        document.getElementById('finalText').textContent = `💡⚡️ ГРАФІК ВІДКЛЮЧЕНЬ ${lastDateStr}\n${emLine}\n${textInts.join('\n')}\n\n📱🆕 Динамічний онлайн-графік в нашому міні-додатку: t.me/valkyelectrifybot/electric\n\n💬 Чат: t.me/valkychat\n📣 Базарчик: t.me/valkybazar`;
     }
 
     function injectEmergency() {
         const sStr = document.getElementById('emStart').value.trim();
         const eStr = document.getElementById('emEnd').value.trim();
         if (!sStr || !eStr) { alert("Введи час від і до (наприклад, 16:00 та 18:30)!"); return; }
-        
-        let sM = timeToMinutes(sStr); 
+
+        let sM = timeToMinutes(sStr);
         let eM = timeToMinutes(eStr);
-        if (eM <= sM) eM += 1440; // Якщо перехід через опівніч
+        if (eM <= sM) eM += 1440;
 
         let newInts = [];
         globalIntervals.forEach(int => {
@@ -145,66 +192,67 @@
                 newInts.push(int);
             } else {
                 if (int.startMin < sM) {
-                    newInts.push({...int, endMin: sM, displayEndStr: minutesToTime(sM)});
+                    newInts.push({ ...int, endMin: sM, displayEndStr: minutesToTime(sM) });
                 }
-                
-                let emStart = Math.max(int.startMin, sM);
-                let emEnd = Math.min(int.endMin, eM);
-                newInts.push({ type: 'on', isModified: true, startMin: emStart, endMin: emEnd, startStr: minutesToTime(emStart), displayEndStr: minutesToTime(emEnd) });
-
                 if (int.endMin > eM) {
-                    newInts.push({...int, startMin: eM, startStr: minutesToTime(eM)});
+                    newInts.push({ ...int, startMin: eM, startStr: minutesToTime(eM) });
                 }
             }
         });
 
-        globalIntervals = newInts.sort((a,b) => a.startMin - b.startMin);
+        globalIntervals = newInts.sort((a, b) => a.startMin - b.startMin);
+
+        activeEmergency = { start: sStr, end: eStr };
+        updateEmStatusBar();
         updateUI();
+
         document.getElementById('emStart').value = "";
         document.getElementById('emEnd').value = "";
     }
 
     async function pushToMiniApp() {
         if (!globalIntervals.length) return alert("Немає даних!");
-        const btn = document.getElementById('btnPush'); btn.textContent = "⏳ Відправка...";
+        const btn = document.getElementById('btnPush');
+        btn.textContent = "⏳ Відправка...";
+
+        const emergencyPayload = activeEmergency
+            ? { active: true, start: activeEmergency.start, end: activeEmergency.end }
+            : { active: false };
+
         try {
             const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-                // emergency: { active: false } залишаємо пустим, щоб додаток не вибивав помилок, бо він чекає цей об'єкт
-                body: JSON.stringify({ date: lastDateStr, intervals: globalIntervals, emergency: { active: false }, updatedAt: new Date().toISOString() })
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+                body: JSON.stringify({ date: lastDateStr, intervals: globalIntervals, emergency: emergencyPayload, updatedAt: new Date().toISOString() })
             });
-            if(res.ok) alert("✅ Опубліковано!"); else alert("❌ Помилка!");
+            if (res.ok) alert("✅ Опубліковано!"); else alert("❌ Помилка!");
         } catch(e) { alert("❌ Помилка з'єднання"); } finally { btn.textContent = "🚀 ОПУБЛІКУВАТИ В ДОДАТКУ"; }
     }
 
-    function copyToClipboard() { navigator.clipboard.writeText(document.getElementById('finalText').textContent); document.getElementById('copyHint').textContent = "СКОПІЙОВАНО! ✅"; }
-    
-        async function resetToWaiting() {
-        if(!confirm("Точно хочеш знести поточний графік і включити режим 'Очікуємо графік на завтра'?")) return;
-        const btn = document.getElementById('btnReset'); 
+    function copyToClipboard() {
+        navigator.clipboard.writeText(document.getElementById('finalText').textContent);
+        document.getElementById('copyHint').textContent = "СКОПІЙОВАНО! ✅";
+    }
+
+    async function resetToWaiting() {
+        if (!confirm("Точно хочеш знести поточний графік і включити режим 'Очікуємо графік на завтра'?")) return;
+        const btn = document.getElementById('btnReset');
         btn.textContent = "⏳ Знесення...";
         try {
             const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-                // Відправляємо пустий масив intervals, щоб додаток перейшов у режим очікування
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
                 body: JSON.stringify({ date: "ОЧІКУЄМО", intervals: [], emergency: { active: false }, updatedAt: new Date().toISOString() })
             });
-            if(res.ok) { 
-                alert("✅ Графік успішно знесено!"); 
-                clearAll(); // Очищаємо адмінку візуально
-            } else alert("❌ Помилка при знесенні!");
-        } catch(e) { 
-            alert("❌ Помилка з'єднання"); 
-        } finally { 
-            btn.innerHTML = "🗑 Знести графік (Очікування)"; 
-        }
+            if (res.ok) { alert("✅ Графік успішно знесено!"); clearAll(); } else alert("❌ Помилка при знесенні!");
+        } catch(e) { alert("❌ Помилка з'єднання"); } finally { btn.innerHTML = "🗑 Танос графіку (Очікування)"; }
     }
 
-    
-    function clearAll() { 
-        document.getElementById('rawText').value=''; 
-        globalIntervals=[]; 
-        document.getElementById('dashboardControls').style.display='none'; 
+    function clearAll() {
+        document.getElementById('rawText').value = '';
+        globalIntervals = [];
+        activeEmergency = null;
+        document.getElementById('dashboardControls').style.display = 'none';
     }
 </script>
 
