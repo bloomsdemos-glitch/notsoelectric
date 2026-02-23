@@ -375,33 +375,40 @@
         }
     }
 
-    function saveModal() {
+        function saveModal() {
         const int = globalIntervals[editingIndex];
-        if (selectedFactType === 'plan') {
+        const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/; // Формат HH:MM
+
+        if (selectedFactType === 'emergency') {
+            const startVal = document.getElementById('emStartInput').value.trim();
+            const endVal = document.getElementById('emEndInput').value.trim();
+
+            if (!timeRegex.test(startVal) || (!timeRegex.test(endVal) && endVal !== "00:00" && endVal !== "24:00")) {
+                alert("Будь ласка, введи коректний час у форматі ЧЧ:ММ (наприклад, 14:30)");
+                return;
+            }
+            
+            int.factType = 'emergency';
+            int.emStart = startVal;
+            int.emEnd = endVal;
+            activeEmergency = { active: true, start: startVal, end: endVal };
+        } else if (selectedFactType === 'plan') {
             int.factType = null;
             int.emStart = null;
             int.emEnd = null;
-        } else if (selectedFactType === 'emergency') {
-            int.factType = 'emergency';
-            int.emStart = document.getElementById('emStartInput').value.trim() || int.startStr;
-            int.emEnd = document.getElementById('emEndInput').value.trim() || int.displayEndStr;
-            activeEmergency = { active: true, start: int.emStart, end: int.emEnd };
         } else {
             int.factType = selectedFactType;
-            int.emStart = null;
-            int.emEnd = null;
         }
 
-        if (selectedFactType !== 'emergency') {
-            const hasEmergency = globalIntervals.some(i => i.factType === 'emergency');
-            if (!hasEmergency) activeEmergency = null;
-        }
+        const hasEmergency = globalIntervals.some(i => i.factType === 'emergency');
+        if (!hasEmergency) activeEmergency = null;
 
         closeModal();
         renderTimelineEditor();
         buildPostText();
         autoSave();
     }
+
 
     function closeModal() {
         document.getElementById('factModalOverlay').classList.remove('open');
@@ -412,7 +419,7 @@
         if (e.target === document.getElementById('factModalOverlay')) closeModal();
     }
 
-    function buildPostText() {
+        function buildPostText() {
         let lines = [];
         globalIntervals.forEach(int => {
             const fact = int.factType;
@@ -420,19 +427,19 @@
             const t = `${int.startStr} - ${int.displayEndStr}`;
 
             if (fact === 'emergency') {
-                lines.push(`${getClockEmoji(int.emStart || int.startStr)} ${int.emStart || int.startStr} - ${int.emEnd || int.displayEndStr} (аварійне ⚠️)`);
-            } else if (fact === 'on' && plan === 'off') {
-                // відключення скасоване — не показуємо (було світло)
+                lines.push(`⚠️ ${int.emStart || int.startStr} - ${int.emEnd || int.displayEndStr} (АВАРІЙНЕ)`);
             } else if (fact === 'off' && plan === 'on') {
-                lines.push(`${getClockEmoji(int.startStr)} ${t}`);
+                lines.push(`${getClockEmoji(int.startStr)} ${t} (ДОДАТКОВО)`);
             } else if (plan === 'off' && !fact) {
                 lines.push(`${getClockEmoji(int.startStr)} ${t}`);
             }
+            // "Світло було" (fact 'on' при plan 'off') просто не входить у список відключень
         });
 
         document.getElementById('finalText').textContent =
-            `💡⚡️ ГРАФІК ВІДКЛЮЧЕНЬ ${lastDateStr}\n\n${lines.join('\n')}\n\n📱🆕 Динамічний онлайн-графік в нашому міні-додатку: t.me/valkyelectrifybot/electric\n\n💬 Чат: t.me/valkychat\n📣 Базарчик: t.me/valkybazar`;
+            `💡⚡️ ГРАФІК ВІДКЛЮЧЕНЬ • ${lastDateStr}\n\n${lines.length > 0 ? lines.join('\n') : '✅ Відключень не заплановано'}\n\n📱 Онлайн-графік: t.me/valkyelectrifybot/electric\n💬 Чат: t.me/valkychat`;
     }
+
 
         function buildPublicIntervals() {
         let result = [];
