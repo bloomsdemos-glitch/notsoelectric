@@ -283,23 +283,39 @@
         }, 1000);
     }
 
-    async function pushToMiniApp() {
+        async function pushToMiniApp() {
         if (!confirm("Опублікувати для людей?")) return;
         
-        // Трансформуємо дані для Mini App (твоя логіка buildPublicIntervals)
-        const publicIntervals = globalIntervals.map(int => {
-            if (int.factType === 'on' && int.planType === 'off') return { type: 'off', isModified: true, ...int };
-            if (int.factType === 'off' && int.planType === 'on') return { type: 'on', isModified: true, ...int };
-            return { type: int.planType, isModified: false, ...int };
-        });
+        let publicDays = {};
+        
+        // Перебираємо всі дні, які є в чернетках Адмінки, і готуємо їх для людей
+        for (let d in db.days) {
+            const dayData = db.days[d];
+            const publicIntervals = dayData.intervals.map(int => {
+                if (int.factType === 'on' && int.planType === 'off') return { type: 'off', isModified: true, ...int };
+                if (int.factType === 'off' && int.planType === 'on') return { type: 'on', isModified: true, ...int };
+                return { type: int.planType, isModified: false, ...int };
+            });
+            publicDays[d] = {
+                intervals: publicIntervals,
+                emergency: dayData.emergency || {active:false},
+                updatedAt: new Date().toISOString()
+            };
+        }
 
-        await fetch(`https://api.jsonbin.io/v3/b/${BIN_PUBLIC}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-            body: JSON.stringify({ date: currentViewDate, intervals: publicIntervals, emergency: activeEmergency || {active:false}, updatedAt: new Date().toISOString() })
-        });
-        alert("✅ ОПУБЛІКОВАНО!");
+        try {
+            // Публікуємо весь об'єкт days
+            await fetch(`https://api.jsonbin.io/v3/b/${BIN_PUBLIC}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+                body: JSON.stringify({ days: publicDays, updatedAt: new Date().toISOString() })
+            });
+            alert("✅ ОПУБЛІКОВАНО!");
+        } catch(e) {
+            alert("❌ Помилка з'єднання");
+        }
     }
+
 
     function copyToClipboard() { navigator.clipboard.writeText(document.getElementById('finalText').textContent); alert("Скопійовано!"); }
     function closeModal() { document.getElementById('factModalOverlay').style.display = 'none'; }
