@@ -6,108 +6,236 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ELECTRIFY • ADMIN</title>
     <style>
-        :root { --bg-app: #e0e5ec; --text-main: #4a4a4a; --radius: 20px; --neumorph-shadow-light: #ffffff; --neumorph-shadow-dark: #a3b1c6; --c-yellow: #fbbf24; --c-red: #d9463b; --c-dark: #060606; }
+        :root { --bg-app: #e0e5ec; --text-main: #4a4a4a; --radius: 20px; --neumorph-shadow-light: #ffffff; --neumorph-shadow-dark: #a3b1c6; --c-yellow: #fbbf24; --c-red: #d9463b; --c-green: #28a745; }
+        * { box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-app); color: var(--text-main); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         .app-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; }
         .card { background: var(--bg-app); padding: 25px; border-radius: var(--radius); box-shadow: 9px 9px 16px var(--neumorph-shadow-dark), -9px -9px 16px var(--neumorph-shadow-light); border: 1px solid rgba(255,255,255,0.2); }
         h2 { margin: 0 0 5px 0; font-weight: 900; color: #333; letter-spacing: -0.5px; display: flex; align-items: center; justify-content: space-between; }
         .subtitle { font-size: 12px; color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
-        .form-label { font-size: 12px; font-weight: bold; color: #666; margin-left: 5px; display: block; margin-bottom: 5px; text-transform: uppercase; }
-        .input-neumorph { width: 100%; border: none; border-radius: 12px; padding: 15px; font-family: inherit; background: var(--bg-app); box-shadow: inset 6px 6px 10px var(--neumorph-shadow-dark), inset -6px -6px 10px var(--neumorph-shadow-light); box-sizing: border-box; color: #333; outline: none; transition: 0.3s; font-weight: 500; }
+        .form-label { font-size: 12px; font-weight: bold; color: #666; margin-left: 5px; display: block; margin-bottom: 8px; text-transform: uppercase; }
+        .input-neumorph { width: 100%; border: none; border-radius: 12px; padding: 15px; font-family: inherit; background: var(--bg-app); box-shadow: inset 6px 6px 10px var(--neumorph-shadow-dark), inset -6px -6px 10px var(--neumorph-shadow-light); color: #333; outline: none; transition: 0.3s; font-weight: 500; }
         textarea.input-neumorph { height: 100px; resize: none; margin-bottom: 15px; }
         .btn-neu { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; background: var(--bg-app); box-shadow: 6px 6px 10px var(--neumorph-shadow-dark), -6px -6px 10px var(--neumorph-shadow-light); color: #333; transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 15px; }
         .btn-neu:active { box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), inset -4px -4px 8px var(--neumorph-shadow-light); transform: scale(0.98); }
-        .btn-primary { color: #007aff; } .btn-danger { color: #ff3b30; } .btn-success { color: #28a745; font-size: 18px; padding: 20px; }
+        .btn-primary { color: #007aff; }
+        .btn-danger { color: #ff3b30; }
+        .btn-success { color: var(--c-green); font-size: 18px; padding: 20px; }
 
+```
+    .loader-screen { text-align: center; padding: 40px 20px; color: #888; font-weight: 700; font-size: 14px; }
 
-    #dashboardControls { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05); }
-    .emergency-card { background: rgba(217, 70, 59, 0.1); border: 2px dashed var(--c-red); border-radius: 15px; padding: 20px; margin-bottom: 20px; }
-    .emergency-card.active { background: var(--c-red); color: #fff; border-style: solid; }
-    .em-inputs { display: flex; gap: 10px; margin-bottom: 15px; }
-    .edit-chips-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-    .edit-chip { padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; background: var(--bg-app); transition: 0.2s; user-select: none; box-shadow: 3px 3px 6px var(--neumorph-shadow-dark), -3px -3px 6px var(--neumorph-shadow-light); }
-    .edit-chip:active { transform: scale(0.95); }
-    .edit-chip.off-state { border: 2px solid #888; color: #888; }
-    .edit-chip.on-state { border: 2px solid #d97706; color: #d97706; }
-    .edit-chip.rescued { border-color: var(--c-yellow); background: var(--c-yellow); color: #000; box-shadow: none; }
-    .edit-chip.emergency { border-color: var(--c-red); background: var(--c-red); color: #fff; box-shadow: none; }
+    .step-indicator { display: flex; gap: 8px; margin-bottom: 20px; }
+    .step-pill { flex: 1; padding: 8px; border-radius: 10px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; background: var(--bg-app); box-shadow: 3px 3px 6px var(--neumorph-shadow-dark), -3px -3px 6px var(--neumorph-shadow-light); color: #aaa; }
+    .step-pill.active { background: #333; color: #fff; box-shadow: none; }
+    .step-pill.done { color: var(--c-green); }
+
+    .today-banner { background: rgba(40, 167, 69, 0.1); border: 2px solid var(--c-green); border-radius: 12px; padding: 14px 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .today-banner-text { font-size: 13px; font-weight: 700; color: #1e7e34; line-height: 1.4; }
+    .today-banner-date { font-size: 11px; color: #555; font-weight: 600; margin-top: 2px; }
+    .today-banner button { background: #333; color: #fff; border: none; border-radius: 8px; padding: 7px 12px; font-weight: 800; font-size: 12px; cursor: pointer; flex-shrink: 0; }
+
+    .section-divider { height: 1px; background: rgba(0,0,0,0.06); margin: 20px 0; }
+
+    .timeline-editor { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+    .tl-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; background: var(--bg-app); box-shadow: 4px 4px 8px var(--neumorph-shadow-dark), -4px -4px 8px var(--neumorph-shadow-light); cursor: pointer; user-select: none; transition: 0.15s; position: relative; }
+    .tl-row:active { transform: scale(0.98); }
+    .tl-row.type-on { border-left: 3px solid var(--c-yellow); }
+    .tl-row.type-off { border-left: 3px solid #999; }
+    .tl-row.type-emergency { border-left: 3px solid var(--c-red); background: rgba(217,70,59,0.05); }
+    .tl-row.fact-modified { opacity: 0.9; }
+    .tl-time { font-size: 15px; font-weight: 800; color: #333; min-width: 110px; letter-spacing: -0.3px; }
+    .tl-badges { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; }
+    .tl-badge { font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.3px; }
+    .tl-badge.plan-on { background: rgba(251,191,36,0.15); color: #b45309; border: 1px solid rgba(251,191,36,0.4); }
+    .tl-badge.plan-off { background: #e8e8e8; color: #777; border: 1px solid #ccc; }
+    .tl-badge.fact-on { background: rgba(40,167,69,0.12); color: #1e7e34; border: 1px solid rgba(40,167,69,0.3); }
+    .tl-badge.fact-emergency { background: rgba(217,70,59,0.12); color: var(--c-red); border: 1px solid rgba(217,70,59,0.3); }
+    .tl-badge.strikethrough { text-decoration: line-through; opacity: 0.5; }
+    .tl-arrow { font-size: 12px; color: #bbb; flex-shrink: 0; }
+
+    .fact-modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); z-index: 200; align-items: flex-end; justify-content: center; }
+    .fact-modal-overlay.open { display: flex; }
+    .fact-modal { background: var(--bg-app); border-radius: 20px 20px 0 0; padding: 25px; width: 100%; max-width: 500px; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); }
+    .fact-modal h3 { margin: 0 0 5px 0; font-size: 16px; font-weight: 900; color: #333; }
+    .fact-modal .modal-time { font-size: 13px; color: #888; font-weight: 600; margin-bottom: 20px; }
+    .fact-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .fact-option { padding: 14px 16px; border-radius: 12px; border: 2px solid transparent; cursor: pointer; font-weight: 700; font-size: 14px; background: var(--bg-app); box-shadow: 4px 4px 8px var(--neumorph-shadow-dark), -4px -4px 8px var(--neumorph-shadow-light); transition: 0.15s; display: flex; align-items: center; gap: 10px; }
+    .fact-option:active { transform: scale(0.98); }
+    .fact-option.selected { box-shadow: none; }
+    .fact-option.opt-plan { color: #555; }
+    .fact-option.opt-on { border-color: var(--c-yellow); color: #b45309; }
+    .fact-option.opt-on.selected { background: rgba(251,191,36,0.15); }
+    .fact-option.opt-off { border-color: #999; color: #555; }
+    .fact-option.opt-off.selected { background: rgba(0,0,0,0.05); }
+    .fact-option.opt-emergency { border-color: var(--c-red); color: var(--c-red); }
+    .fact-option.opt-emergency.selected { background: rgba(217,70,59,0.08); }
+    .em-time-inputs { display: flex; gap: 10px; margin-top: 10px; display: none; }
+    .em-time-inputs.visible { display: flex; }
+    .em-time-inputs input { flex: 1; border: none; border-radius: 10px; padding: 12px; font-family: inherit; background: var(--bg-app); box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), inset -4px -4px 8px var(--neumorph-shadow-light); color: #333; outline: none; font-weight: 700; text-align: center; font-size: 15px; }
+    .modal-btns { display: flex; gap: 10px; }
+    .modal-btns button { flex: 1; padding: 14px; border: none; border-radius: 12px; font-weight: 800; font-size: 14px; cursor: pointer; }
+    .modal-btn-cancel { background: var(--bg-app); color: #888; box-shadow: 4px 4px 8px var(--neumorph-shadow-dark), -4px -4px 8px var(--neumorph-shadow-light); }
+    .modal-btn-save { background: #333; color: #fff; }
+
     .copy-block { padding: 20px; border-radius: 15px; background: rgba(255,255,255,0.5); cursor: pointer; text-align: left; margin-bottom: 20px; border: 1px dashed #aaa; }
     .copy-content { font-family: monospace; font-size: 13px; color: #333; white-space: pre-wrap; pointer-events: none; }
 
-    .em-status-bar { background: rgba(217,70,59,0.1); border: 2px solid var(--c-red); border-radius: 12px; padding: 12px 16px; margin-bottom: 15px; font-size: 13px; font-weight: 700; color: var(--c-red); display: none; flex-direction: column; gap: 10px; }
-    .em-status-bar.visible { display: flex; }
-    .em-status-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-    .em-actual-row { display: flex; align-items: center; gap: 8px; }
-    .em-actual-row label { font-size: 11px; font-weight: 800; color: #a33; text-transform: uppercase; white-space: nowrap; }
-    .em-actual-row input { flex: 1; background: rgba(217,70,59,0.08); border: 1px solid rgba(217,70,59,0.4); border-radius: 8px; padding: 7px 10px; font-size: 13px; font-weight: 700; color: #c0392b; outline: none; width: 80px; text-align: center; font-family: inherit; }
-    .em-status-bar button { background: var(--c-red); color: #fff; border: none; border-radius: 8px; padding: 6px 12px; font-weight: 800; font-size: 12px; cursor: pointer; flex-shrink: 0; }
+    .autosave-hint { font-size: 11px; color: #aaa; text-align: center; margin-bottom: 10px; font-weight: 600; }
+    .autosave-hint.saving { color: #007aff; }
+    .autosave-hint.saved { color: var(--c-green); }
 </style>
-
+```
 
 </head>
 <body>
 <div class="app-container">
     <div class="card">
         <h2>⚡ ELECTRIFY <span style="font-size:12px; background:#333; color:#fff; padding:2px 8px; border-radius:10px;">ADMIN</span></h2>
-        <div class="subtitle">Крок 1: Введення даних</div>
-        <textarea id="rawText" class="input-neumorph" placeholder="Встав текст графіку від Обленерго сюди..."></textarea>
-        <div style="display: flex; gap: 10px;">
-            <button class="btn-neu btn-primary" onclick="processData()" style="margin:0;">🔄 Обробити текст</button>
-            <button class="btn-neu btn-danger" style="flex: 0.3; margin:0;" onclick="clearAll()">❌</button>
+
+```
+    <div id="loaderScreen" class="loader-screen">Завантаження...</div>
+
+    <div id="mainUI" style="display:none;">
+
+        <div class="step-indicator">
+            <div class="step-pill" id="pill1">📋 План</div>
+            <div class="step-pill" id="pill2">✏️ Факт</div>
+            <div class="step-pill" id="pill3">🚀 Публікація</div>
         </div>
 
-
-    <div id="dashboardControls">
-        <div class="subtitle">Крок 2: Панель керування</div>
-
-        <div class="emergency-card" id="emergencyBlock">
-            <h3 style="margin: 0 0 10px 0; font-size: 16px;">🚨 ЕКСТРЕНА АВАРІЯ</h3>
-            <div class="em-inputs">
-                <input type="text" id="emStart" class="input-neumorph" placeholder="З якої (15:00)" style="padding: 10px; text-align:center;">
-                <input type="text" id="emEnd" class="input-neumorph" placeholder="По яку (18:00)" style="padding: 10px; text-align:center;">
+        <div id="todayBanner" style="display:none;" class="today-banner">
+            <div>
+                <div class="today-banner-text">✅ Графік на сьогодні вже є</div>
+                <div class="today-banner-date" id="todayBannerDate"></div>
             </div>
-            <button class="btn-neu" onclick="injectEmergency()" style="margin: 0; color: var(--c-red);">Додати аварійне в графік</button>
+            <button onclick="resetPlan()">Новий</button>
         </div>
 
-        <div class="em-status-bar" id="emStatusBar">
-            <div class="em-status-row">
-                <span id="emStatusText">⛔️ Аварійне активне: --:-- – --:--</span>
-                <button onclick="clearEmergency()">Зняти</button>
-            </div>
-            <div class="em-actual-row">
-                <label>Фактичний кінець:</label>
-                <input type="text" id="emActualEnd" placeholder="15:00">
-                <button onclick="updateEmergencyEnd()">Оновити</button>
+        <div id="step1" style="display:none;">
+            <div class="subtitle">Крок 1 — Вставити текст від Обленерго</div>
+            <textarea id="rawText" class="input-neumorph" placeholder="Встав текст графіку від Обленерго сюди..."></textarea>
+            <div style="display:flex; gap:10px;">
+                <button class="btn-neu btn-primary" onclick="processData()" style="margin:0;">🔄 Обробити</button>
+                <button class="btn-neu btn-danger" style="flex:0.3; margin:0;" onclick="clearRaw()">❌</button>
             </div>
         </div>
 
-        <label class="form-label">РУЧНЕ РЕДАГУВАННЯ (Клік по блоку):</label>
-        <div class="edit-chips-container" id="editorChips"></div>
-
-        <div class="copy-block" id="copyBlock" onclick="copyToClipboard()">
-            <div class="copy-content" id="finalText">Текст генерується...</div>
-            <div style="font-size:11px; color:#007aff; margin-top:10px; font-weight:bold; text-align:center;" id="copyHint">ТАПНИ, ЩОБ СКОПІЮВАТИ ПОСТ</div>
+        <div id="step2" style="display:none;">
+            <div class="section-divider"></div>
+            <div class="subtitle">Крок 2 — Фактичні корективи</div>
+            <div class="form-label">Тапни на блок щоб змінити фактичний стан:</div>
+            <div class="timeline-editor" id="timelineEditor"></div>
         </div>
 
-        <button class="btn-neu btn-success" id="btnPush" onclick="pushToMiniApp()" style="margin:0;">🚀 ОПУБЛІКУВАТИ В ДОДАТКУ</button>
-        <button class="btn-neu" id="btnReset" onclick="resetToWaiting()" style="margin-top:15px; color: #ff3b30; border: 2px dashed rgba(255, 59, 48, 0.3);">🗑 Танос графіку (Очікування)</button>
+        <div id="step3" style="display:none;">
+            <div class="section-divider"></div>
+            <div class="subtitle">Крок 3 — Публікація</div>
+            <div class="copy-block" onclick="copyToClipboard()">
+                <div class="copy-content" id="finalText">Текст генерується...</div>
+                <div style="font-size:11px; color:#007aff; margin-top:10px; font-weight:bold; text-align:center;" id="copyHint">ТАПНИ, ЩОБ СКОПІЮВАТИ ПОСТ</div>
+            </div>
+            <div class="autosave-hint" id="autosaveHint">Автозбереження активне</div>
+            <button class="btn-neu btn-success" id="btnPush" onclick="pushToMiniApp()" style="margin:0;">🚀 ОПУБЛІКУВАТИ В ДОДАТКУ</button>
+            <button class="btn-neu" onclick="resetToWaiting()" style="margin-top:15px; color:#ff3b30; border:2px dashed rgba(255,59,48,0.3);">🗑 Танос графіку (Очікування)</button>
+        </div>
+
+    </div>
+</div>
+```
+
+</div>
+
+<div class="fact-modal-overlay" id="factModalOverlay" onclick="closeModalOnOverlay(event)">
+    <div class="fact-modal">
+        <h3 id="modalTitle">Редагувати блок</h3>
+        <div class="modal-time" id="modalTime"></div>
+        <div class="fact-options" id="factOptions"></div>
+        <div class="em-time-inputs" id="emTimeInputs">
+            <input type="text" id="emStartInput" placeholder="Початок (11:30)">
+            <input type="text" id="emEndInput" placeholder="Кінець (15:30)">
+        </div>
+        <div class="modal-btns">
+            <button class="modal-btn-cancel" onclick="closeModal()">Скасувати</button>
+            <button class="modal-btn-save" onclick="saveModal()">Зберегти</button>
+        </div>
     </div>
 </div>
 
-
-</div>
-
 <script>
-    const BIN_ID = '699b325fd0ea881f40cf7aaf';
+    const BIN_PUBLIC = '699b325fd0ea881f40cf7aaf';
+    const BIN_EDITOR = '699c6dc443b1c97be996cd61';
     const API_KEY = '$2a$10$LtEcs8xMXZsRCDbVKHwou..M4xtkpoEM/3CJuf76Q0gK3gZ0I607C';
 
     let lastDateStr = "СЬОГОДНІ";
     let globalIntervals = [];
     let activeEmergency = null;
+    let autosaveTimer = null;
+    let editingIndex = null;
+    let selectedFactType = null;
 
-    function timeToMinutes(timeStr) { const [h, m] = timeStr.replace(/[^\d:]/g, '').split(':').map(Number); return (h || 0) * 60 + (m || 0); }
-    function minutesToTime(mins) { const h = Math.floor(mins / 60); const m = mins % 60; return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`; }
+    function timeToMinutes(t) { const [h, m] = t.replace(/[^\d:]/g, '').split(':').map(Number); return (h || 0) * 60 + (m || 0); }
+    function minutesToTime(mins) { const h = Math.floor(mins / 60); const m = mins % 60; return `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}`; }
     function getClockEmoji(timeStr) { let [h, m] = timeStr.split(':').map(Number); if (isNaN(m)) m = 0; let h12 = h % 12 || 12; const f = ['🕛','🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚']; const h_em = ['🕧','🕜','🕝','🕞','🕟','🕠','🕡','🕢','🕣','🕤','🕥','🕦']; return (m >= 30) ? h_em[h12 === 12 ? 0 : h12] : f[h12 === 12 ? 0 : h12]; }
+    function todayStr() { return new Date().toLocaleDateString('uk-UA', { day: 'numeric', month: 'long' }).toUpperCase(); }
+
+    async function init() {
+        try {
+            const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_EDITOR}/latest`, { headers: { 'X-Master-Key': API_KEY } });
+            const data = (await res.json()).record;
+
+            if (data && data.date && data.intervals && data.intervals.length > 0) {
+                const today = todayStr();
+                if (data.date === today || data.dateRaw === lastDateStr) {
+                    lastDateStr = data.date;
+                    globalIntervals = data.intervals;
+                    activeEmergency = data.emergency && data.emergency.active ? data.emergency : null;
+                    showTodayBanner();
+                    showStep2();
+                    showStep3();
+                } else {
+                    showStep1();
+                }
+            } else {
+                showStep1();
+            }
+        } catch(e) {
+            showStep1();
+        }
+        document.getElementById('loaderScreen').style.display = 'none';
+        document.getElementById('mainUI').style.display = 'block';
+    }
+
+    function showStep1() {
+        document.getElementById('step1').style.display = 'block';
+        document.getElementById('step2').style.display = 'none';
+        document.getElementById('step3').style.display = 'none';
+        document.getElementById('todayBanner').style.display = 'none';
+        setPill(1);
+    }
+
+    function showStep2() {
+        document.getElementById('step2').style.display = 'block';
+        document.getElementById('step3').style.display = 'block';
+        renderTimelineEditor();
+        buildPostText();
+        setPill(2);
+    }
+
+    function showTodayBanner() {
+        const banner = document.getElementById('todayBanner');
+        banner.style.display = 'flex';
+        document.getElementById('todayBannerDate').textContent = lastDateStr;
+    }
+
+    function setPill(active) {
+        [1,2,3].forEach(i => {
+            const p = document.getElementById('pill' + i);
+            p.classList.remove('active','done');
+            if (i < active) p.classList.add('done');
+            if (i === active) p.classList.add('active');
+        });
+    }
 
     function processData() {
         const text = document.getElementById('rawText').value;
@@ -119,7 +247,7 @@
 
         let tempOutages = [];
         match[1].trim().split(';').forEach(range => {
-            let parts = range.split(/[\-\–\—]/);
+            let parts = range.split(/[-–—]/);
             if (parts.length < 2) return;
             let sM = timeToMinutes(parts[0].trim());
             let eM = timeToMinutes(parts[1].trim());
@@ -132,114 +260,203 @@
         globalIntervals = [];
         let cT = 0;
         tempOutages.forEach(outage => {
-            if (cT < outage.startMin) globalIntervals.push({ type: 'on', isModified: false, startMin: cT, endMin: outage.startMin, startStr: minutesToTime(cT), displayEndStr: minutesToTime(outage.startMin) });
-            globalIntervals.push({ type: 'off', isModified: false, startMin: outage.startMin, endMin: outage.endMin, displayEndStr: outage.displayEndStr, startStr: outage.startStr });
+            if (cT < outage.startMin) globalIntervals.push({ planType: 'on', factType: null, startMin: cT, endMin: outage.startMin, startStr: minutesToTime(cT), displayEndStr: minutesToTime(outage.startMin) });
+            globalIntervals.push({ planType: 'off', factType: null, startMin: outage.startMin, endMin: outage.endMin, startStr: outage.startStr, displayEndStr: outage.displayEndStr });
             cT = outage.endMin;
         });
-        if (cT < 1440) globalIntervals.push({ type: 'on', isModified: false, startMin: cT, endMin: 1440, startStr: minutesToTime(cT), displayEndStr: "00:00" });
+        if (cT < 1440) globalIntervals.push({ planType: 'on', factType: null, startMin: cT, endMin: 1440, startStr: minutesToTime(cT), displayEndStr: "00:00" });
 
         activeEmergency = null;
-        updateEmStatusBar();
-        updateUI();
-        document.getElementById('dashboardControls').style.display = 'block';
+        document.getElementById('step1').style.display = 'none';
+        showTodayBanner();
+        showStep2();
+        autoSave();
     }
 
-    function updateEmStatusBar() {
-        const bar = document.getElementById('emStatusBar');
-        const text = document.getElementById('emStatusText');
-        if (activeEmergency) {
-            text.textContent = `⛔️ Аварійне активне: ${activeEmergency.start} – ${activeEmergency.end}`;
-            bar.classList.add('visible');
+    function renderTimelineEditor() {
+        const container = document.getElementById('timelineEditor');
+        container.innerHTML = '';
+
+        globalIntervals.forEach((int, i) => {
+            const row = document.createElement('div');
+            const displayType = int.factType || int.planType;
+            row.className = `tl-row type-${displayType}${int.factType ? ' fact-modified' : ''}`;
+
+            const planBadgeClass = int.planType === 'on' ? 'plan-on' : 'plan-off';
+            const planLabel = int.planType === 'on' ? '💡 Світло' : '🌑 Відключення';
+            let planBadgeStyle = int.factType && int.factType !== int.planType ? 'strikethrough' : '';
+
+            let factBadgeHtml = '';
+            if (int.factType && int.factType !== int.planType) {
+                if (int.factType === 'on') factBadgeHtml = `<span class="tl-badge fact-on">✅ Світло було</span>`;
+                if (int.factType === 'off') factBadgeHtml = `<span class="tl-badge plan-off">⛔ Скасовано</span>`;
+            }
+            if (int.factType === 'emergency') {
+                factBadgeHtml = `<span class="tl-badge fact-emergency">⛔️ Аварійне${int.emStart ? ` ${int.emStart}–${int.emEnd}` : ''}</span>`;
+            }
+
+            row.innerHTML = `
+                <div class="tl-time">${int.startStr} – ${int.displayEndStr}</div>
+                <div class="tl-badges">
+                    <span class="tl-badge ${planBadgeClass} ${planBadgeStyle}">${planLabel}</span>
+                    ${factBadgeHtml}
+                </div>
+                <div class="tl-arrow">›</div>`;
+            row.onclick = () => openModal(i);
+            container.appendChild(row);
+        });
+    }
+
+    function openModal(index) {
+        editingIndex = index;
+        const int = globalIntervals[index];
+        selectedFactType = int.factType || 'plan';
+
+        document.getElementById('modalTitle').textContent = `${int.startStr} – ${int.displayEndStr}`;
+        document.getElementById('modalTime').textContent = `По графіку: ${int.planType === 'on' ? '💡 Світло' : '🌑 Відключення'}`;
+
+        const opts = document.getElementById('factOptions');
+        opts.innerHTML = `
+            <div class="fact-option opt-plan ${selectedFactType === 'plan' ? 'selected' : ''}" onclick="selectFact('plan')">
+                📋 За графіком (без змін)
+            </div>
+            <div class="fact-option opt-on ${selectedFactType === 'on' ? 'selected' : ''}" onclick="selectFact('on')">
+                💡 Фактично світло було
+            </div>
+            <div class="fact-option opt-off ${selectedFactType === 'off' ? 'selected' : ''}" onclick="selectFact('off')">
+                🌑 Фактично відключення було
+            </div>
+            <div class="fact-option opt-emergency ${selectedFactType === 'emergency' ? 'selected' : ''}" onclick="selectFact('emergency')">
+                ⛔️ Аварійне відключення
+            </div>`;
+
+        const emInputs = document.getElementById('emTimeInputs');
+        if (selectedFactType === 'emergency') {
+            emInputs.classList.add('visible');
+            document.getElementById('emStartInput').value = int.emStart || int.startStr;
+            document.getElementById('emEndInput').value = int.emEnd || int.displayEndStr;
         } else {
-            bar.classList.remove('visible');
+            emInputs.classList.remove('visible');
+        }
+
+        document.getElementById('factModalOverlay').classList.add('open');
+    }
+
+    function selectFact(type) {
+        selectedFactType = type;
+        document.querySelectorAll('.fact-option').forEach(el => el.classList.remove('selected'));
+        document.querySelector(`.opt-${type}`).classList.add('selected');
+        const emInputs = document.getElementById('emTimeInputs');
+        if (type === 'emergency') {
+            emInputs.classList.add('visible');
+            const int = globalIntervals[editingIndex];
+            document.getElementById('emStartInput').value = int.emStart || int.startStr;
+            document.getElementById('emEndInput').value = int.emEnd || int.displayEndStr;
+        } else {
+            emInputs.classList.remove('visible');
         }
     }
 
-    function updateEmergencyEnd() {
-        const newEnd = document.getElementById('emActualEnd').value.trim();
-        if (!newEnd) { alert("Введи фактичний час завершення!"); return; }
-        const newEndM = timeToMinutes(newEnd);
-        const startM = timeToMinutes(activeEmergency.start);
-        if (newEndM <= startM) { alert("Кінець має бути пізніше початку!"); return; }
-
-        const oldEndM = timeToMinutes(activeEmergency.end);
-
-        let newInts = [...globalIntervals];
-        if (newEndM < oldEndM) {
-            newInts.push({ type: 'on', isModified: false, startMin: newEndM, endMin: oldEndM, startStr: newEnd, displayEndStr: activeEmergency.end });
-        }
-        globalIntervals = newInts.sort((a, b) => a.startMin - b.startMin);
-
-        activeEmergency.end = newEnd;
-        document.getElementById('emActualEnd').value = '';
-        updateEmStatusBar();
-        updateUI();
-    }
-
-    function clearEmergency() {
-        if (!confirm("Зняти аварійне відключення з графіку?")) return;
-        activeEmergency = null;
-        updateEmStatusBar();
-        updateUI();
-    }
-
-    function updateUI() {
-        const chips = document.getElementById('editorChips');
-        chips.innerHTML = '';
-        let textInts = [];
-
-        globalIntervals.forEach((int) => {
-            let t = `${int.startStr} - ${int.displayEndStr}`;
-            const btn = document.createElement('div');
-            btn.className = `edit-chip ${int.type === 'off' ? (int.isModified ? 'rescued' : 'off-state') : (int.isModified ? 'emergency' : 'on-state')}`;
-            btn.innerHTML = `${int.type === 'off' ? '🌑' : '💡'} ${t} ${int.isModified ? (int.type === 'off' ? '💡' : '⛔️ АВАРІЙНЕ') : ''}`;
-            btn.onclick = () => { int.isModified = !int.isModified; updateUI(); };
-            chips.appendChild(btn);
-
-            if ((int.type === 'off' && !int.isModified) || (int.type === 'on' && int.isModified)) {
-                textInts.push(`${getClockEmoji(int.startStr)} ${t}${(int.type === 'on') ? " (аварійне ⚠️)" : ""}`);
-            }
-        });
-
-        let emLine = '';
-        if (activeEmergency) {
-            emLine = `\n⛔️ АВАРІЙНЕ ВІДКЛЮЧЕННЯ: ${activeEmergency.start} – ${activeEmergency.end}\n`;
+    function saveModal() {
+        const int = globalIntervals[editingIndex];
+        if (selectedFactType === 'plan') {
+            int.factType = null;
+            int.emStart = null;
+            int.emEnd = null;
+        } else if (selectedFactType === 'emergency') {
+            int.factType = 'emergency';
+            int.emStart = document.getElementById('emStartInput').value.trim() || int.startStr;
+            int.emEnd = document.getElementById('emEndInput').value.trim() || int.displayEndStr;
+            activeEmergency = { active: true, start: int.emStart, end: int.emEnd };
+        } else {
+            int.factType = selectedFactType;
+            int.emStart = null;
+            int.emEnd = null;
         }
 
-        document.getElementById('finalText').textContent = `💡⚡️ ГРАФІК ВІДКЛЮЧЕНЬ ${lastDateStr}\n${emLine}\n${textInts.join('\n')}\n\n📱🆕 Динамічний онлайн-графік в нашому міні-додатку: t.me/valkyelectrifybot/electric\n\n💬 Чат: t.me/valkychat\n📣 Базарчик: t.me/valkybazar`;
+        if (selectedFactType !== 'emergency') {
+            const hasEmergency = globalIntervals.some(i => i.factType === 'emergency');
+            if (!hasEmergency) activeEmergency = null;
+        }
+
+        closeModal();
+        renderTimelineEditor();
+        buildPostText();
+        autoSave();
     }
 
-    function injectEmergency() {
-        const sStr = document.getElementById('emStart').value.trim();
-        const eStr = document.getElementById('emEnd').value.trim();
-        if (!sStr || !eStr) { alert("Введи час від і до (наприклад, 16:00 та 18:30)!"); return; }
+    function closeModal() {
+        document.getElementById('factModalOverlay').classList.remove('open');
+        editingIndex = null;
+    }
 
-        let sM = timeToMinutes(sStr);
-        let eM = timeToMinutes(eStr);
-        if (eM <= sM) eM += 1440;
+    function closeModalOnOverlay(e) {
+        if (e.target === document.getElementById('factModalOverlay')) closeModal();
+    }
 
-        let newInts = [];
+    function buildPostText() {
+        let lines = [];
         globalIntervals.forEach(int => {
-            if (int.endMin <= sM || int.startMin >= eM) {
-                newInts.push(int);
-            } else {
-                if (int.startMin < sM) {
-                    newInts.push({ ...int, endMin: sM, displayEndStr: minutesToTime(sM) });
-                }
-                if (int.endMin > eM) {
-                    newInts.push({ ...int, startMin: eM, startStr: minutesToTime(eM) });
-                }
+            const fact = int.factType;
+            const plan = int.planType;
+            const t = `${int.startStr} - ${int.displayEndStr}`;
+
+            if (fact === 'emergency') {
+                lines.push(`${getClockEmoji(int.emStart || int.startStr)} ${int.emStart || int.startStr} - ${int.emEnd || int.displayEndStr} (аварійне ⚠️)`);
+            } else if (fact === 'on' && plan === 'off') {
+                // відключення скасоване — не показуємо (було світло)
+            } else if (fact === 'off' && plan === 'on') {
+                lines.push(`${getClockEmoji(int.startStr)} ${t}`);
+            } else if (plan === 'off' && !fact) {
+                lines.push(`${getClockEmoji(int.startStr)} ${t}`);
             }
         });
 
-        globalIntervals = newInts.sort((a, b) => a.startMin - b.startMin);
+        document.getElementById('finalText').textContent =
+            `💡⚡️ ГРАФІК ВІДКЛЮЧЕНЬ ${lastDateStr}\n\n${lines.join('\n')}\n\n📱🆕 Динамічний онлайн-графік в нашому міні-додатку: t.me/valkyelectrifybot/electric\n\n💬 Чат: t.me/valkychat\n📣 Базарчик: t.me/valkybazar`;
+    }
 
-        activeEmergency = { start: sStr, end: eStr };
-        updateEmStatusBar();
-        updateUI();
+    function buildPublicIntervals() {
+        let result = [];
+        globalIntervals.forEach(int => {
+            const fact = int.factType;
+            const plan = int.planType;
 
-        document.getElementById('emStart').value = "";
-        document.getElementById('emEnd').value = "";
+            if (fact === 'emergency') {
+                const emSM = timeToMinutes(int.emStart || int.startStr);
+                const emEM = timeToMinutes(int.emEnd || int.displayEndStr);
+                if (int.startMin < emSM) result.push({ type: 'on', isModified: false, startMin: int.startMin, endMin: emSM, startStr: int.startStr, displayEndStr: int.emStart || int.startStr });
+                if (int.endMin > emEM) result.push({ type: plan, isModified: false, startMin: emEM, endMin: int.endMin, startStr: int.emEnd || int.displayEndStr, displayEndStr: int.displayEndStr });
+            } else if (fact === 'on') {
+                result.push({ type: 'off', isModified: true, startMin: int.startMin, endMin: int.endMin, startStr: int.startStr, displayEndStr: int.displayEndStr });
+            } else if (fact === 'off') {
+                result.push({ type: 'on', isModified: true, startMin: int.startMin, endMin: int.endMin, startStr: int.startStr, displayEndStr: int.displayEndStr });
+            } else {
+                result.push({ type: plan, isModified: false, startMin: int.startMin, endMin: int.endMin, startStr: int.startStr, displayEndStr: int.displayEndStr });
+            }
+        });
+        return result.sort((a, b) => a.startMin - b.startMin);
+    }
+
+    function autoSave() {
+        const hint = document.getElementById('autosaveHint');
+        hint.textContent = 'Збереження...';
+        hint.className = 'autosave-hint saving';
+        clearTimeout(autosaveTimer);
+        autosaveTimer = setTimeout(async () => {
+            try {
+                await fetch(`https://api.jsonbin.io/v3/b/${BIN_EDITOR}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+                    body: JSON.stringify({ date: lastDateStr, intervals: globalIntervals, emergency: activeEmergency || { active: false }, savedAt: new Date().toISOString() })
+                });
+                hint.textContent = '✅ Збережено';
+                hint.className = 'autosave-hint saved';
+            } catch(e) {
+                hint.textContent = '⚠️ Помилка збереження';
+                hint.className = 'autosave-hint';
+            }
+        }, 1200);
     }
 
     async function pushToMiniApp() {
@@ -247,18 +464,21 @@
         const btn = document.getElementById('btnPush');
         btn.textContent = "⏳ Відправка...";
 
-        const emergencyPayload = activeEmergency
-            ? { active: true, start: activeEmergency.start, end: activeEmergency.end }
+        const publicIntervals = buildPublicIntervals();
+        const emBlock = globalIntervals.find(i => i.factType === 'emergency');
+        const emergencyPayload = emBlock
+            ? { active: true, start: emBlock.emStart, end: emBlock.emEnd }
             : { active: false };
 
         try {
-            const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_PUBLIC}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-                body: JSON.stringify({ date: lastDateStr, intervals: globalIntervals, emergency: emergencyPayload, updatedAt: new Date().toISOString() })
+                body: JSON.stringify({ date: lastDateStr, intervals: publicIntervals, emergency: emergencyPayload, updatedAt: new Date().toISOString() })
             });
             if (res.ok) alert("✅ Опубліковано!"); else alert("❌ Помилка!");
-        } catch(e) { alert("❌ Помилка з'єднання"); } finally { btn.textContent = "🚀 ОПУБЛІКУВАТИ В ДОДАТКУ"; }
+        } catch(e) { alert("❌ Помилка з'єднання"); }
+        finally { btn.textContent = "🚀 ОПУБЛІКУВАТИ В ДОДАТКУ"; }
     }
 
     function copyToClipboard() {
@@ -266,26 +486,46 @@
         document.getElementById('copyHint').textContent = "СКОПІЙОВАНО! ✅";
     }
 
+    function resetPlan() {
+        if (!confirm("Почати новий день? Поточний план буде очищено.")) return;
+        globalIntervals = [];
+        activeEmergency = null;
+        document.getElementById('todayBanner').style.display = 'none';
+        document.getElementById('step2').style.display = 'none';
+        document.getElementById('step3').style.display = 'none';
+        document.getElementById('step1').style.display = 'block';
+        setPill(1);
+    }
+
+    function clearRaw() {
+        document.getElementById('rawText').value = '';
+    }
+
     async function resetToWaiting() {
-        if (!confirm("Точно хочеш знести поточний графік і включити режим 'Очікуємо графік на завтра'?")) return;
-        const btn = document.getElementById('btnReset');
-        btn.textContent = "⏳ Знесення...";
+        if (!confirm("Точно хочеш знести поточний графік?")) return;
         try {
-            const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            await fetch(`https://api.jsonbin.io/v3/b/${BIN_PUBLIC}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
                 body: JSON.stringify({ date: "ОЧІКУЄМО", intervals: [], emergency: { active: false }, updatedAt: new Date().toISOString() })
             });
-            if (res.ok) { alert("✅ Графік успішно знесено!"); clearAll(); } else alert("❌ Помилка при знесенні!");
-        } catch(e) { alert("❌ Помилка з'єднання"); } finally { btn.innerHTML = "🗑 Танос графіку (Очікування)"; }
+            await fetch(`https://api.jsonbin.io/v3/b/${BIN_EDITOR}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+                body: JSON.stringify({})
+            });
+            alert("✅ Графік знесено!");
+            globalIntervals = [];
+            activeEmergency = null;
+            document.getElementById('todayBanner').style.display = 'none';
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step3').style.display = 'none';
+            document.getElementById('step1').style.display = 'block';
+            setPill(1);
+        } catch(e) { alert("❌ Помилка з'єднання"); }
     }
 
-    function clearAll() {
-        document.getElementById('rawText').value = '';
-        globalIntervals = [];
-        activeEmergency = null;
-        document.getElementById('dashboardControls').style.display = 'none';
-    }
+    init();
 </script>
 
 </body>
