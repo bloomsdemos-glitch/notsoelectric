@@ -1,267 +1,149 @@
 <!DOCTYPE html>
-
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ELECTRIFY • ADMIN</title>
+    <title>ELECTRIFY • ADMIN 2026</title>
     <style>
-            :root { 
-        --bg-app: #f4f5f7; 
-        --text-main: #1d1d1f; 
-        --radius: 16px; 
-        --c-yellow: #f59e0b; 
-        --c-red: #ef4444; 
-        --c-green: #10b981; 
-        --border-line: rgba(0,0,0,0.08);
-    }
-    * { box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-app); color: var(--text-main); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-    .app-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; }
-    
-    /* Чиста картка без мила */
-    .card { background: #ffffff; padding: 25px; border-radius: var(--radius); border: 1px solid var(--border-line); box-shadow: 0 8px 30px rgba(0,0,0,0.04); }
-    
-    h2 { margin: 0 0 5px 0; font-weight: 900; color: #333; letter-spacing: -0.5px; display: flex; align-items: center; justify-content: space-between; }
-    .subtitle { font-size: 12px; color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
-    .form-label { font-size: 12px; font-weight: bold; color: #666; margin-left: 5px; display: block; margin-bottom: 8px; text-transform: uppercase; }
-    
-    /* Інпути і кнопки тепер плоскі і контрастні */
-    .input-neumorph { width: 100%; border: 1.5px solid var(--border-line); border-radius: 12px; padding: 15px; font-family: inherit; background: #fafafa; color: #333; outline: none; transition: 0.2s; font-weight: 600; }
-    .input-neumorph:focus { border-color: #333; background: #fff; }
-    textarea.input-neumorph { height: 100px; resize: none; margin-bottom: 15px; }
-    
-    .btn-neu { width: 100%; padding: 16px; border: 1px solid var(--border-line); border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; background: #ffffff; color: #333; transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-    .btn-neu:active { transform: scale(0.98); background: #f0f0f0; }
-    .btn-primary { color: #007aff; }
-    .btn-danger { color: #ff3b30; }
-    .btn-success { color: var(--c-green); font-size: 18px; padding: 20px; }
+        :root { 
+            --bg-app: #f4f5f7; 
+            --text-main: #1d1d1f; 
+            --radius: 16px; 
+            --c-yellow: #f59e0b; 
+            --c-red: #ef4444; 
+            --c-green: #10b981; 
+            --border-line: rgba(0,0,0,0.08);
+        }
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-app); color: var(--text-main); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .app-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; }
+        
+        .card { background: #ffffff; padding: 25px; border-radius: var(--radius); border: 1px solid var(--border-line); box-shadow: 0 8px 30px rgba(0,0,0,0.04); }
+        
+        h2 { margin: 0 0 5px 0; font-weight: 900; color: #333; letter-spacing: -0.5px; display: flex; align-items: center; justify-content: space-between; }
+        .subtitle { font-size: 12px; color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+        
+        .input-neumorph { width: 100%; border: 1.5px solid var(--border-line); border-radius: 12px; padding: 15px; font-family: inherit; background: #fafafa; color: #333; outline: none; transition: 0.2s; font-weight: 600; margin-bottom: 15px; }
+        .btn-neu { width: 100%; padding: 16px; border: 1px solid var(--border-line); border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; background: #ffffff; color: #333; transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .btn-neu:active { transform: scale(0.98); background: #f0f0f0; }
+        .btn-success { color: var(--c-green); font-size: 18px; padding: 20px; }
 
-    .loader-screen { text-align: center; padding: 40px 20px; color: #888; font-weight: 700; font-size: 14px; }
+        .step-indicator { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+        .step-pill { flex: 1; min-width: 80px; padding: 10px; border-radius: 10px; font-size: 11px; font-weight: 800; text-transform: uppercase; text-align: center; background: #ffffff; border: 1px solid var(--border-line); color: #aaa; cursor: pointer; transition: 0.2s; }
+        .step-pill.active { background: #333; color: #fff; border-color: #333; }
+        .step-pill.done { color: var(--c-green); border-color: rgba(40, 167, 69, 0.3); }
 
-    /* Пігулки кроків теж зробив flat */
-    .step-indicator { display: flex; gap: 8px; margin-bottom: 20px; }
-    .step-pill { flex: 1; padding: 8px; border-radius: 10px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; background: #ffffff; border: 1px solid var(--border-line); color: #aaa; transition: 0.2s; }
-    .step-pill.active { background: #333; color: #fff; border-color: #333; }
-    .step-pill.done { color: var(--c-green); border-color: rgba(40, 167, 69, 0.3); background: rgba(40, 167, 69, 0.05); }
+        .tl-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; background: #ffffff; border: 1px solid var(--border-line); cursor: pointer; margin-bottom: 8px; position: relative; }
+        .tl-row.type-off { border-left: 4px solid #999; }
+        .tl-row.type-on { border-left: 4px solid var(--c-yellow); }
+        .tl-row.type-emergency { border-left: 4px solid var(--c-red); background: rgba(239, 68, 68, 0.05); }
 
-    .today-banner { background: rgba(40, 167, 69, 0.1); border: 2px solid var(--c-green); border-radius: 12px; padding: 14px 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-    .today-banner-text { font-size: 13px; font-weight: 700; color: #1e7e34; line-height: 1.4; }
-    .today-banner-date { font-size: 11px; color: #555; font-weight: 600; margin-top: 2px; }
-    .today-banner button { background: #333; color: #fff; border: none; border-radius: 8px; padding: 7px 12px; font-weight: 800; font-size: 12px; cursor: pointer; flex-shrink: 0; }
+        .tl-time { font-size: 15px; font-weight: 800; color: #333; min-width: 100px; }
+        .tl-badges { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; }
+        .tl-badge { font-size: 10px; font-weight: 800; padding: 3px 6px; border-radius: 4px; text-transform: uppercase; border: 1px solid #ddd; }
+        .tl-badge.strikethrough { text-decoration: line-through; opacity: 0.5; }
 
-    .section-divider { height: 1px; background: var(--border-line); margin: 20px 0; }
+        .copy-block { padding: 15px; border-radius: 12px; background: #f9f9f9; cursor: pointer; border: 1px dashed #aaa; margin-bottom: 15px; }
+        .copy-content { font-family: monospace; font-size: 13px; white-space: pre-wrap; color: #333; }
 
-    /* Таймлайн-редактор: тепер чітко видно картки */
-    .timeline-editor { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-    .tl-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; background: #ffffff; border: 1px solid var(--border-line); cursor: pointer; user-select: none; transition: 0.15s; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
-    .tl-row:active { transform: scale(0.98); background: #fafafa; }
-    .tl-row.type-on { border-left: 4px solid var(--c-yellow); }
-    .tl-row.type-off { border-left: 4px solid #999; }
-    .tl-row.type-emergency { border-left: 4px solid var(--c-red); background: rgba(239, 68, 68, 0.05); }
-    .tl-row.fact-modified { opacity: 0.9; }
-    
-    .tl-time { font-size: 15px; font-weight: 800; color: #333; min-width: 110px; letter-spacing: -0.3px; }
-    .tl-badges { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; }
-    .tl-badge { font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.3px; }
-    .tl-badge.plan-on { background: rgba(245, 158, 11, 0.15); color: #b45309; border: 1px solid rgba(245, 158, 11, 0.3); }
-    .tl-badge.plan-off { background: #f0f0f0; color: #666; border: 1px solid #ddd; }
-    .tl-badge.fact-on { background: rgba(16, 185, 129, 0.12); color: #047857; border: 1px solid rgba(16, 185, 129, 0.3); }
-    .tl-badge.fact-emergency { background: rgba(239, 68, 68, 0.12); color: var(--c-red); border: 1px solid rgba(239, 68, 68, 0.3); }
-    .tl-badge.strikethrough { text-decoration: line-through; opacity: 0.5; }
-    .tl-arrow { font-size: 12px; color: #bbb; flex-shrink: 0; }
-
-
-    .fact-modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); z-index: 200; align-items: flex-end; justify-content: center; }
-    .fact-modal-overlay.open { display: flex; }
-    .fact-modal { background: var(--bg-app); border-radius: 20px 20px 0 0; padding: 25px; width: 100%; max-width: 500px; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); }
-    .fact-modal h3 { margin: 0 0 5px 0; font-size: 16px; font-weight: 900; color: #333; }
-    .fact-modal .modal-time { font-size: 13px; color: #888; font-weight: 600; margin-bottom: 20px; }
-    .fact-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-    .fact-option { padding: 14px 16px; border-radius: 12px; border: 2px solid transparent; cursor: pointer; font-weight: 700; font-size: 14px; background: var(--bg-app); box-shadow: 4px 4px 8px var(--neumorph-shadow-dark), -4px -4px 8px var(--neumorph-shadow-light); transition: 0.15s; display: flex; align-items: center; gap: 10px; }
-    .fact-option:active { transform: scale(0.98); }
-    .fact-option.selected { box-shadow: none; }
-    .fact-option.opt-plan { color: #555; }
-    .fact-option.opt-on { border-color: var(--c-yellow); color: #b45309; }
-    .fact-option.opt-on.selected { background: rgba(251,191,36,0.15); }
-    .fact-option.opt-off { border-color: #999; color: #555; }
-    .fact-option.opt-off.selected { background: rgba(0,0,0,0.05); }
-    .fact-option.opt-emergency { border-color: var(--c-red); color: var(--c-red); }
-    .fact-option.opt-emergency.selected { background: rgba(217,70,59,0.08); }
-    .em-time-inputs { display: flex; gap: 10px; margin-top: 10px; display: none; }
-    .em-time-inputs.visible { display: flex; }
-    .em-time-inputs input { flex: 1; border: none; border-radius: 10px; padding: 12px; font-family: inherit; background: var(--bg-app); box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), inset -4px -4px 8px var(--neumorph-shadow-light); color: #333; outline: none; font-weight: 700; text-align: center; font-size: 15px; }
-    .modal-btns { display: flex; gap: 10px; }
-    .modal-btns button { flex: 1; padding: 14px; border: none; border-radius: 12px; font-weight: 800; font-size: 14px; cursor: pointer; }
-    .modal-btn-cancel { background: var(--bg-app); color: #888; box-shadow: 4px 4px 8px var(--neumorph-shadow-dark), -4px -4px 8px var(--neumorph-shadow-light); }
-    .modal-btn-save { background: #333; color: #fff; }
-
-    .copy-block { padding: 20px; border-radius: 15px; background: rgba(255,255,255,0.5); cursor: pointer; text-align: left; margin-bottom: 20px; border: 1px dashed #aaa; }
-    .copy-content { font-family: monospace; font-size: 13px; color: #333; white-space: pre-wrap; pointer-events: none; }
-
-    .autosave-hint { font-size: 11px; color: #aaa; text-align: center; margin-bottom: 10px; font-weight: 600; }
-    .autosave-hint.saving { color: #007aff; }
-    .autosave-hint.saved { color: var(--c-green); }
-</style>
-
-
+        #loaderScreen { padding: 50px; text-align: center; font-weight: bold; color: #888; }
+        .fact-modal-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index:200; align-items:flex-end; justify-content:center; }
+        .fact-modal { background:#fff; width:100%; max-width:500px; padding:25px; border-radius:20px 20px 0 0; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); }
+    </style>
 </head>
 <body>
-<div class="app-container">
-    <div class="card">
-        <h2>⚡ ELECTRIFY <span style="font-size:12px; background:#333; color:#fff; padding:2px 8px; border-radius:10px;">ADMIN</span></h2>
 
+<div id="loaderScreen">ГОРТАЄМО КАЛЕНДАР...</div>
 
-    <div id="loaderScreen" class="loader-screen">Завантаження...</div>
+<div id="mainUI" class="app-container" style="display:none;">
+    
+    <div id="daySelector" class="step-indicator"></div>
 
-    <div id="mainUI" style="display:none;">
+    <div id="step1" class="card" style="display:none;">
+        <h2>КРОК 1</h2>
+        <p class="subtitle">ВСТАВИТИ ТЕКСТ ВІД ОБЛЕНЕРГО</p>
+        <textarea id="rawText" class="input-neumorph" placeholder="Встав текст сюди..."></textarea>
+        <button class="btn-neu" onclick="processData()">🔄 ОБРОБИТИ ГРАФІК</button>
+    </div>
 
-        <div class="step-indicator">
-            <div class="step-pill" id="pill1">📋 План</div>
-            <div class="step-pill" id="pill2">✏️ Факт</div>
-            <div class="step-pill" id="pill3">🚀 Публікація</div>
+    <div id="step2" class="card" style="display:none;">
+        <h2 id="displayDate">ГРАФІК</h2>
+        <div id="timelineEditor" class="timeline-editor" style="margin-top:15px;"></div>
+    </div>
+
+    <div id="step3" class="card" style="display:none;">
+        <h2>КРОК 3</h2>
+        <p class="subtitle">ПУБЛІКАЦІЯ ТА ТЕКСТ ПОСТА</p>
+        <div class="copy-block" onclick="copyToClipboard()">
+            <div id="finalText" class="copy-content"></div>
+            <div style="font-size:10px; color:#007aff; margin-top:10px; font-weight:bold; text-align:center;">ТАПНИ, ЩОБ СКОПІЮВАТИ</div>
         </div>
-
-        <div id="todayBanner" style="display:none;" class="today-banner">
-            <div>
-                <div class="today-banner-text">✅ Графік на сьогодні вже є</div>
-                <div class="today-banner-date" id="todayBannerDate"></div>
-            </div>
-            <button onclick="resetPlan()">Новий</button>
-        </div>
-
-        <div id="step1" style="display:none;">
-            <div class="subtitle">Крок 1 — Вставити текст від Обленерго</div>
-            <textarea id="rawText" class="input-neumorph" placeholder="Встав текст графіку від Обленерго сюди..."></textarea>
-            <div style="display:flex; gap:10px;">
-                <button class="btn-neu btn-primary" onclick="processData()" style="margin:0;">🔄 Обробити</button>
-                <button class="btn-neu btn-danger" style="flex:0.3; margin:0;" onclick="clearRaw()">❌</button>
-            </div>
-        </div>
-
-        <div id="step2" style="display:none;">
-            <div class="section-divider"></div>
-            <div class="subtitle">Крок 2 — Фактичні корективи</div>
-            <div class="form-label">Тапни на блок щоб змінити фактичний стан:</div>
-            <div class="timeline-editor" id="timelineEditor"></div>
-        </div>
-
-        <div id="step3" style="display:none;">
-            <div class="section-divider"></div>
-            <div class="subtitle">Крок 3 — Публікація</div>
-            <div class="copy-block" onclick="copyToClipboard()">
-                <div class="copy-content" id="finalText">Текст генерується...</div>
-                <div style="font-size:11px; color:#007aff; margin-top:10px; font-weight:bold; text-align:center;" id="copyHint">ТАПНИ, ЩОБ СКОПІЮВАТИ ПОСТ</div>
-            </div>
-            <div class="autosave-hint" id="autosaveHint">Автозбереження активне</div>
-            <button class="btn-neu btn-success" id="btnPush" onclick="pushToMiniApp()" style="margin:0;">🚀 ОПУБЛІКУВАТИ В ДОДАТКУ</button>
-            <button class="btn-neu" onclick="resetToWaiting()" style="margin-top:15px; color:#ff3b30; border:2px dashed rgba(255,59,48,0.3);">🗑 Танос графіку (Очікування)</button>
-        </div>
-
+        <div id="autosaveHint" style="font-size:11px; text-align:center; margin-bottom:10px; color:#aaa;">Автозбереження активне</div>
+        <button class="btn-neu btn-success" onclick="pushToMiniApp()">🚀 ОПУБЛІКУВАТИ В ДОДАТКУ</button>
+        <button class="btn-neu" style="color:var(--c-red); border:1px dashed var(--c-red)" onclick="resetPlan()">🗑️ ПОВНІСТЮ ОЧИСТИТИ ДЕНЬ</button>
     </div>
 </div>
 
-
-</div>
-
-<div class="fact-modal-overlay" id="factModalOverlay" onclick="closeModalOnOverlay(event)">
+<div class="fact-modal-overlay" id="factModalOverlay">
     <div class="fact-modal">
         <h3 id="modalTitle">Редагувати блок</h3>
-        <div class="modal-time" id="modalTime"></div>
-        <div class="fact-options" id="factOptions"></div>
-        <div class="em-time-inputs" id="emTimeInputs">
-            <input type="text" id="emStartInput" placeholder="Початок (11:30)">
-            <input type="text" id="emEndInput" placeholder="Кінець (15:30)">
+        <div id="modalOptions" style="margin-top:15px;">
+            <button class="btn-neu" onclick="setFact('plan')">✅ ВСЕ ЗА ПЛАНОМ</button>
+            <button class="btn-neu" style="color:var(--c-yellow)" onclick="setFact('on')">💡 ДАЛИ СВІТЛО (СКАСОВАНО)</button>
+            <button class="btn-neu" style="color:var(--c-red)" onclick="setFact('off')">🚫 ВІДКЛЮЧИЛИ (ДОДАТКОВО)</button>
+            <button class="btn-neu" style="background:#333; color:#fff" onclick="setFact('emergency')">⚠️ АВАРІЙНЕ ВІДКЛЮЧЕННЯ</button>
         </div>
-        <div class="modal-btns">
-            <button class="modal-btn-cancel" onclick="closeModal()">Скасувати</button>
-            <button class="modal-btn-save" onclick="saveModal()">Зберегти</button>
+        <div id="emTimeInputs" style="display:none; gap:10px; margin-top:10px;">
+            <input type="text" id="emStartInput" class="input-neumorph" placeholder="Початок (14:30)">
+            <input type="text" id="emEndInput" class="input-neumorph" placeholder="Кінець (16:00)">
+        </div>
+        <div style="display:flex; gap:10px; margin-top:20px;">
+            <button class="btn-neu" style="flex:1; background:#eee" onclick="closeModal()">СКАСУВАТИ</button>
+            <button class="btn-neu" style="flex:1; background:#333; color:#fff" onclick="saveModal()">ЗБЕРЕГТИ</button>
         </div>
     </div>
 </div>
 
 <script>
-    const BIN_PUBLIC = '699b325fd0ea881f40cf7aaf';
     const BIN_EDITOR = '699c6dc443b1c97be996cd61';
+    const BIN_PUBLIC = '67ba0534ad19ca34f8087d1c';
     const API_KEY = '$2a$10$LtEcs8xMXZsRCDbVKHwou..M4xtkpoEM/3CJuf76Q0gK3gZ0I607C';
 
-    let lastDateStr = "СЬОГОДНІ";
+    let db = { days: {} };
+    let currentViewDate = "";
     let globalIntervals = [];
-    let activeEmergency = null;
-    let autosaveTimer = null;
     let editingIndex = null;
     let selectedFactType = null;
+    let activeEmergency = null;
+    let autosaveTimer = null;
 
-    function timeToMinutes(t) { const [h, m] = t.replace(/[^\d:]/g, '').split(':').map(Number); return (h || 0) * 60 + (m || 0); }
+    function timeToMinutes(t) { const parts = t.replace(/[^\d:]/g, '').split(':'); return (parseInt(parts[0], 10) || 0) * 60 + (parseInt(parts[1], 10) || 0); }
     function minutesToTime(mins) { const h = Math.floor(mins / 60); const m = mins % 60; return `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}`; }
-    function getClockEmoji(timeStr) { let [h, m] = timeStr.split(':').map(Number); if (isNaN(m)) m = 0; let h12 = h % 12 || 12; const f = ['🕛','🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚']; const h_em = ['🕧','🕜','🕝','🕞','🕟','🕠','🕡','🕢','🕣','🕤','🕥','🕦']; return (m >= 30) ? h_em[h12 === 12 ? 0 : h12] : f[h12 === 12 ? 0 : h12]; }
-    function todayStr() { return new Date().toLocaleDateString('uk-UA', { day: 'numeric', month: 'long' }).toUpperCase(); }
+    function getClockEmoji(timeStr) { let h = parseInt(timeStr.split(':')[0], 10); let h12 = h % 12 || 12; const f = ['🕛','🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚']; return f[h12 === 12 ? 0 : h12]; }
 
     async function init() {
         try {
             const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_EDITOR}/latest`, { headers: { 'X-Master-Key': API_KEY } });
-            const data = (await res.json()).record;
+            db = (await res.json()).record;
+            if (!db.days) db = { days: {} };
 
-            if (data && data.date && data.intervals && data.intervals.length > 0) {
-                const today = todayStr();
-                if (data.date === today || data.dateRaw === lastDateStr) {
-                    lastDateStr = data.date;
-                    globalIntervals = data.intervals;
-                    activeEmergency = data.emergency && data.emergency.active ? data.emergency : null;
-                    showTodayBanner();
-                    showStep2();
-                    showStep3();
-                } else {
-                    showStep1();
-                }
-            } else {
-                showStep1();
-            }
-        } catch(e) {
-            showStep1();
-        }
+            const dates = Object.keys(db.days).sort();
+            if (dates.length > 0) {
+                currentViewDate = currentViewDate || dates[0];
+                loadDateData(currentViewDate);
+            } else { showStep1(); }
+        } catch(e) { showStep1(); }
         document.getElementById('loaderScreen').style.display = 'none';
         document.getElementById('mainUI').style.display = 'block';
-    }
-
-    function showStep1() {
-        document.getElementById('step1').style.display = 'block';
-        document.getElementById('step2').style.display = 'none';
-        document.getElementById('step3').style.display = 'none';
-        document.getElementById('todayBanner').style.display = 'none';
-        setPill(1);
-    }
-
-    function showStep2() {
-        document.getElementById('step2').style.display = 'block';
-        document.getElementById('step3').style.display = 'block';
-        renderTimelineEditor();
-        buildPostText();
-        setPill(2);
-    }
-
-    function showTodayBanner() {
-        const banner = document.getElementById('todayBanner');
-        banner.style.display = 'flex';
-        document.getElementById('todayBannerDate').textContent = lastDateStr;
-    }
-
-    function setPill(active) {
-        [1,2,3].forEach(i => {
-            const p = document.getElementById('pill' + i);
-            p.classList.remove('active','done');
-            if (i < active) p.classList.add('done');
-            if (i === active) p.classList.add('active');
-        });
     }
 
     function processData() {
         const text = document.getElementById('rawText').value;
         const dateMatch = text.match(/(\d{1,2})\s+(січня|лютого|березня|квітня|травня|червня|липня|серпня|вересня|жовтня|листопада|грудня)/i);
-        if (dateMatch) lastDateStr = dateMatch[0].toUpperCase();
-
+        const targetDate = dateMatch ? dateMatch[0].toUpperCase() : "СЬОГОДНІ";
+        
         const match = text.match(/(?:^|\n)\s*1\.2\s+([^\n]+)/);
-        if (!match) { alert("Не знайдено чергу 1.2!"); return; }
+        if (!match) return alert("Не знайшов чергу 1.2!");
 
         let tempOutages = [];
         match[1].trim().split(';').forEach(range => {
@@ -270,138 +152,103 @@
             let sM = timeToMinutes(parts[0].trim());
             let eM = timeToMinutes(parts[1].trim());
             if (eM === 0 || parts[1].trim() === "24:00") eM = 1440;
-            if (eM < sM) eM = 1440;
-            tempOutages.push({ startMin: sM, endMin: eM, startStr: parts[0].trim(), displayEndStr: (parts[1].trim() === "24:00" || eM === 1440 ? "00:00" : parts[1].trim()) });
+            tempOutages.push({ startMin: sM, endMin: eM, startStr: parts[0].trim(), displayEndStr: (eM === 1440 ? "00:00" : parts[1].trim()) });
         });
-        tempOutages.sort((a, b) => a.startMin - b.startMin);
 
-        globalIntervals = [];
+        let intervals = [];
         let cT = 0;
-        tempOutages.forEach(outage => {
-            if (cT < outage.startMin) globalIntervals.push({ planType: 'on', factType: null, startMin: cT, endMin: outage.startMin, startStr: minutesToTime(cT), displayEndStr: minutesToTime(outage.startMin) });
-            globalIntervals.push({ planType: 'off', factType: null, startMin: outage.startMin, endMin: outage.endMin, startStr: outage.startStr, displayEndStr: outage.displayEndStr });
+        tempOutages.sort((a, b) => a.startMin - b.startMin).forEach(outage => {
+            if (cT < outage.startMin) intervals.push({ planType: 'on', factType: null, startMin: cT, endMin: outage.startMin, startStr: minutesToTime(cT), displayEndStr: minutesToTime(outage.startMin) });
+            intervals.push({ planType: 'off', factType: null, startMin: outage.startMin, endMin: outage.endMin, startStr: outage.startStr, displayEndStr: outage.displayEndStr });
             cT = outage.endMin;
         });
-        if (cT < 1440) globalIntervals.push({ planType: 'on', factType: null, startMin: cT, endMin: 1440, startStr: minutesToTime(cT), displayEndStr: "00:00" });
+        if (cT < 1440) intervals.push({ planType: 'on', factType: null, startMin: cT, endMin: 1440, startStr: minutesToTime(cT), displayEndStr: "00:00" });
 
-        activeEmergency = null;
-        document.getElementById('step1').style.display = 'none';
-        showTodayBanner();
-        showStep2();
+        db.days[targetDate] = { intervals: intervals, emergency: { active: false } };
+        loadDateData(targetDate);
         autoSave();
+    }
+
+    function loadDateData(dateStr) {
+        if (!db.days[dateStr]) return;
+        currentViewDate = dateStr;
+        globalIntervals = db.days[dateStr].intervals;
+        activeEmergency = db.days[dateStr].emergency || {active:false};
+        
+        document.getElementById('displayDate').textContent = dateStr;
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'block';
+        document.getElementById('step3').style.display = 'block';
+        updateDayPills();
+        renderTimelineEditor();
+        buildPostText();
+    }
+
+    function updateDayPills() {
+        const dates = Object.keys(db.days).sort();
+        const container = document.getElementById('daySelector');
+        container.innerHTML = '';
+        dates.forEach(d => {
+            const pill = document.createElement('div');
+            pill.className = `step-pill ${d === currentViewDate ? 'active' : ''}`;
+            pill.textContent = d;
+            pill.onclick = () => loadDateData(d);
+            container.appendChild(pill);
+        });
+        container.style.display = dates.length > 0 ? 'flex' : 'none';
     }
 
     function renderTimelineEditor() {
         const container = document.getElementById('timelineEditor');
         container.innerHTML = '';
-
         globalIntervals.forEach((int, i) => {
-            const row = document.createElement('div');
-            const displayType = int.factType || int.planType;
-            row.className = `tl-row type-${displayType}${int.factType ? ' fact-modified' : ''}`;
+            const isEmergency = int.factType === 'emergency';
+            const typeClass = isEmergency ? 'type-emergency' : (int.factType === 'off' || (int.planType === 'off' && !int.factType) ? 'type-off' : 'type-on');
+            
+            let badgeHtml = `<span class="tl-badge ${int.factType && int.factType !== int.planType ? 'strikethrough' : ''}">${int.planType === 'off' ? 'OFF' : 'ON'}</span>`;
+            if (int.factType === 'on') badgeHtml += `<span class="tl-badge" style="color:var(--c-green)">+СВІТЛО</span>`;
+            if (int.factType === 'off') badgeHtml += `<span class="tl-badge" style="color:var(--c-red)">+ВІДКЛ.</span>`;
+            if (isEmergency) badgeHtml += `<span class="tl-badge" style="background:var(--c-red); color:#fff">⚠ АВАРІЙНЕ</span>`;
 
-            const planBadgeClass = int.planType === 'on' ? 'plan-on' : 'plan-off';
-            const planLabel = int.planType === 'on' ? '💡 Світло' : '🌑 Відключення';
-            let planBadgeStyle = int.factType && int.factType !== int.planType ? 'strikethrough' : '';
-
-            let factBadgeHtml = '';
-            if (int.factType && int.factType !== int.planType) {
-                if (int.factType === 'on') factBadgeHtml = `<span class="tl-badge fact-on">✅ Світло було</span>`;
-                if (int.factType === 'off') factBadgeHtml = `<span class="tl-badge plan-off">⛔ Скасовано</span>`;
-            }
-            if (int.factType === 'emergency') {
-                factBadgeHtml = `<span class="tl-badge fact-emergency">⛔️ Аварійне${int.emStart ? ` ${int.emStart}–${int.emEnd}` : ''}</span>`;
-            }
-
-            row.innerHTML = `
-                <div class="tl-time">${int.startStr} – ${int.displayEndStr}</div>
-                <div class="tl-badges">
-                    <span class="tl-badge ${planBadgeClass} ${planBadgeStyle}">${planLabel}</span>
-                    ${factBadgeHtml}
-                </div>
-                <div class="tl-arrow">›</div>`;
-            row.onclick = () => openModal(i);
-            container.appendChild(row);
+            container.innerHTML += `
+                <div class="tl-row ${typeClass}" onclick="openModal(${i})">
+                    <div class="tl-time">${int.startStr} - ${int.displayEndStr}</div>
+                    <div class="tl-badges">${badgeHtml}</div>
+                </div>`;
         });
     }
 
     function openModal(index) {
         editingIndex = index;
         const int = globalIntervals[index];
-        selectedFactType = int.factType || 'plan';
-
-        document.getElementById('modalTitle').textContent = `${int.startStr} – ${int.displayEndStr}`;
-        document.getElementById('modalTime').textContent = `По графіку: ${int.planType === 'on' ? '💡 Світло' : '🌑 Відключення'}`;
-
-        const opts = document.getElementById('factOptions');
-        opts.innerHTML = `
-            <div class="fact-option opt-plan ${selectedFactType === 'plan' ? 'selected' : ''}" onclick="selectFact('plan')">
-                📋 За графіком (без змін)
-            </div>
-            <div class="fact-option opt-on ${selectedFactType === 'on' ? 'selected' : ''}" onclick="selectFact('on')">
-                💡 Фактично світло було
-            </div>
-            <div class="fact-option opt-off ${selectedFactType === 'off' ? 'selected' : ''}" onclick="selectFact('off')">
-                🌑 Фактично відключення було
-            </div>
-            <div class="fact-option opt-emergency ${selectedFactType === 'emergency' ? 'selected' : ''}" onclick="selectFact('emergency')">
-                ⛔️ Аварійне відключення
-            </div>`;
-
-        const emInputs = document.getElementById('emTimeInputs');
-        if (selectedFactType === 'emergency') {
-            emInputs.classList.add('visible');
+        document.getElementById('modalTitle').textContent = `${int.startStr} - ${int.displayEndStr}`;
+        document.getElementById('emTimeInputs').style.display = int.factType === 'emergency' ? 'flex' : 'none';
+        if (int.factType === 'emergency') {
             document.getElementById('emStartInput').value = int.emStart || int.startStr;
             document.getElementById('emEndInput').value = int.emEnd || int.displayEndStr;
-        } else {
-            emInputs.classList.remove('visible');
         }
-
-        document.getElementById('factModalOverlay').classList.add('open');
+        document.getElementById('factModalOverlay').style.display = 'flex';
     }
 
-    function selectFact(type) {
+    function setFact(type) {
         selectedFactType = type;
-        document.querySelectorAll('.fact-option').forEach(el => el.classList.remove('selected'));
-        document.querySelector(`.opt-${type}`).classList.add('selected');
-        const emInputs = document.getElementById('emTimeInputs');
-        if (type === 'emergency') {
-            emInputs.classList.add('visible');
-            const int = globalIntervals[editingIndex];
-            document.getElementById('emStartInput').value = int.emStart || int.startStr;
-            document.getElementById('emEndInput').value = int.emEnd || int.displayEndStr;
-        } else {
-            emInputs.classList.remove('visible');
-        }
+        document.getElementById('emTimeInputs').style.display = type === 'emergency' ? 'flex' : 'none';
     }
 
-        function saveModal() {
+    function saveModal() {
         const int = globalIntervals[editingIndex];
-        const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/; // Формат HH:MM
+        const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
 
         if (selectedFactType === 'emergency') {
             const startVal = document.getElementById('emStartInput').value.trim();
             const endVal = document.getElementById('emEndInput').value.trim();
-
-            if (!timeRegex.test(startVal) || (!timeRegex.test(endVal) && endVal !== "00:00" && endVal !== "24:00")) {
-                alert("Будь ласка, введи коректний час у форматі ЧЧ:ММ (наприклад, 14:30)");
-                return;
-            }
-            
+            if (!timeRegex.test(startVal) || (!timeRegex.test(endVal) && endVal !== "00:00" && endVal !== "24:00")) return alert("Час має бути ЧЧ:ММ");
             int.factType = 'emergency';
             int.emStart = startVal;
             int.emEnd = endVal;
             activeEmergency = { active: true, start: startVal, end: endVal };
-        } else if (selectedFactType === 'plan') {
-            int.factType = null;
-            int.emStart = null;
-            int.emEnd = null;
-        } else {
-            int.factType = selectedFactType;
-        }
-
-        const hasEmergency = globalIntervals.some(i => i.factType === 'emergency');
-        if (!hasEmergency) activeEmergency = null;
+        } else if (selectedFactType === 'plan') { int.factType = null; }
+        else { int.factType = selectedFactType; }
 
         closeModal();
         renderTimelineEditor();
@@ -409,148 +256,57 @@
         autoSave();
     }
 
-
-    function closeModal() {
-        document.getElementById('factModalOverlay').classList.remove('open');
-        editingIndex = null;
-    }
-
-    function closeModalOnOverlay(e) {
-        if (e.target === document.getElementById('factModalOverlay')) closeModal();
-    }
-
-        function buildPostText() {
+    function buildPostText() {
         let lines = [];
         globalIntervals.forEach(int => {
             const fact = int.factType;
             const plan = int.planType;
-            const t = `${int.startStr} - ${int.displayEndStr}`;
-
-            if (fact === 'emergency') {
-                lines.push(`⚠️ ${int.emStart || int.startStr} - ${int.emEnd || int.displayEndStr} (АВАРІЙНЕ)`);
-            } else if (fact === 'off' && plan === 'on') {
-                lines.push(`${getClockEmoji(int.startStr)} ${t} (ДОДАТКОВО)`);
-            } else if (plan === 'off' && !fact) {
-                lines.push(`${getClockEmoji(int.startStr)} ${t}`);
-            }
-            // "Світло було" (fact 'on' при plan 'off') просто не входить у список відключень
+            if (fact === 'emergency') lines.push(`⚠️ ${int.emStart || int.startStr}-${int.emEnd || int.displayEndStr} (АВАРІЙНЕ)`);
+            else if (fact === 'off' && plan === 'on') lines.push(`${getClockEmoji(int.startStr)} ${int.startStr}-${int.displayEndStr} (ДОДАТКОВО)`);
+            else if (plan === 'off' && !fact) lines.push(`${getClockEmoji(int.startStr)} ${int.startStr}-${int.displayEndStr}`);
         });
-
-        document.getElementById('finalText').textContent =
-            `💡⚡️ ГРАФІК ВІДКЛЮЧЕНЬ • ${lastDateStr}\n\n${lines.length > 0 ? lines.join('\n') : '✅ Відключень не заплановано'}\n\n📱 Онлайн-графік: t.me/valkyelectrifybot/electric\n💬 Чат: t.me/valkychat`;
+        document.getElementById('finalText').textContent = `⚡️ ГРАФІК ВІДКЛЮЧЕНЬ • ${currentViewDate}\n\n${lines.length > 0 ? lines.join('\n') : '✅ Без відключень'}\n\n📱 @valkyelectrifybot`;
     }
-
-
-        function buildPublicIntervals() {
-        let result = [];
-        globalIntervals.forEach(int => {
-            const fact = int.factType;
-            const plan = int.planType;
-
-            if (fact === 'on' && plan === 'off') {
-                // Відключення скасоване, світло є
-                result.push({ type: 'off', isModified: true, startMin: int.startMin, endMin: int.endMin, startStr: int.startStr, displayEndStr: int.displayEndStr });
-            } else if (fact === 'off' && plan === 'on') {
-                // Світло мало бути, але його рубанули (не аварійне, просто факт)
-                result.push({ type: 'on', isModified: true, startMin: int.startMin, endMin: int.endMin, startStr: int.startStr, displayEndStr: int.displayEndStr });
-            } else {
-                // Звичайний план
-                result.push({ type: plan, isModified: false, startMin: int.startMin, endMin: int.endMin, startStr: int.startStr, displayEndStr: int.displayEndStr });
-            }
-        });
-        return result.sort((a, b) => a.startMin - b.startMin);
-    }
-
 
     function autoSave() {
         const hint = document.getElementById('autosaveHint');
         hint.textContent = 'Збереження...';
-        hint.className = 'autosave-hint saving';
         clearTimeout(autosaveTimer);
         autosaveTimer = setTimeout(async () => {
-            try {
-                await fetch(`https://api.jsonbin.io/v3/b/${BIN_EDITOR}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-                    body: JSON.stringify({ date: lastDateStr, intervals: globalIntervals, emergency: activeEmergency || { active: false }, savedAt: new Date().toISOString() })
-                });
-                hint.textContent = '✅ Збережено';
-                hint.className = 'autosave-hint saved';
-            } catch(e) {
-                hint.textContent = '⚠️ Помилка збереження';
-                hint.className = 'autosave-hint';
-            }
-        }, 1200);
-    }
-
-    async function pushToMiniApp() {
-        if (!globalIntervals.length) return alert("Немає даних!");
-        const btn = document.getElementById('btnPush');
-        btn.textContent = "⏳ Відправка...";
-
-        const publicIntervals = buildPublicIntervals();
-        const emBlock = globalIntervals.find(i => i.factType === 'emergency');
-        const emergencyPayload = emBlock
-            ? { active: true, start: emBlock.emStart, end: emBlock.emEnd }
-            : { active: false };
-
-        try {
-            const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_PUBLIC}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-                body: JSON.stringify({ date: lastDateStr, intervals: publicIntervals, emergency: emergencyPayload, updatedAt: new Date().toISOString() })
-            });
-            if (res.ok) alert("✅ Опубліковано!"); else alert("❌ Помилка!");
-        } catch(e) { alert("❌ Помилка з'єднання"); }
-        finally { btn.textContent = "🚀 ОПУБЛІКУВАТИ В ДОДАТКУ"; }
-    }
-
-    function copyToClipboard() {
-        navigator.clipboard.writeText(document.getElementById('finalText').textContent);
-        document.getElementById('copyHint').textContent = "СКОПІЙОВАНО! ✅";
-    }
-
-    function resetPlan() {
-        if (!confirm("Почати новий день? Поточний план буде очищено.")) return;
-        globalIntervals = [];
-        activeEmergency = null;
-        document.getElementById('todayBanner').style.display = 'none';
-        document.getElementById('step2').style.display = 'none';
-        document.getElementById('step3').style.display = 'none';
-        document.getElementById('step1').style.display = 'block';
-        setPill(1);
-    }
-
-    function clearRaw() {
-        document.getElementById('rawText').value = '';
-    }
-
-    async function resetToWaiting() {
-        if (!confirm("Точно хочеш знести поточний графік?")) return;
-        try {
-            await fetch(`https://api.jsonbin.io/v3/b/${BIN_PUBLIC}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-                body: JSON.stringify({ date: "ОЧІКУЄМО", intervals: [], emergency: { active: false }, updatedAt: new Date().toISOString() })
-            });
+            db.days[currentViewDate] = { intervals: globalIntervals, emergency: activeEmergency || {active:false} };
             await fetch(`https://api.jsonbin.io/v3/b/${BIN_EDITOR}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-                body: JSON.stringify({})
+                body: JSON.stringify(db)
             });
-            alert("✅ Графік знесено!");
-            globalIntervals = [];
-            activeEmergency = null;
-            document.getElementById('todayBanner').style.display = 'none';
-            document.getElementById('step2').style.display = 'none';
-            document.getElementById('step3').style.display = 'none';
-            document.getElementById('step1').style.display = 'block';
-            setPill(1);
-        } catch(e) { alert("❌ Помилка з'єднання"); }
+            hint.textContent = '✅ Збережено в чернетки';
+        }, 1000);
     }
+
+    async function pushToMiniApp() {
+        if (!confirm("Опублікувати для людей?")) return;
+        
+        // Трансформуємо дані для Mini App (твоя логіка buildPublicIntervals)
+        const publicIntervals = globalIntervals.map(int => {
+            if (int.factType === 'on' && int.planType === 'off') return { type: 'off', isModified: true, ...int };
+            if (int.factType === 'off' && int.planType === 'on') return { type: 'on', isModified: true, ...int };
+            return { type: int.planType, isModified: false, ...int };
+        });
+
+        await fetch(`https://api.jsonbin.io/v3/b/${BIN_PUBLIC}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+            body: JSON.stringify({ date: currentViewDate, intervals: publicIntervals, emergency: activeEmergency || {active:false}, updatedAt: new Date().toISOString() })
+        });
+        alert("✅ ОПУБЛІКОВАНО!");
+    }
+
+    function copyToClipboard() { navigator.clipboard.writeText(document.getElementById('finalText').textContent); alert("Скопійовано!"); }
+    function closeModal() { document.getElementById('factModalOverlay').style.display = 'none'; }
+    function showStep1() { document.getElementById('step1').style.display = 'block'; }
+    function resetPlan() { if(confirm("Знести графік на цей день?")) { delete db.days[currentViewDate]; location.reload(); } }
 
     init();
 </script>
-
 </body>
 </html>
