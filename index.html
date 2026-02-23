@@ -34,8 +34,12 @@
     .copy-block { padding: 20px; border-radius: 15px; background: rgba(255,255,255,0.5); cursor: pointer; text-align: left; margin-bottom: 20px; border: 1px dashed #aaa; }
     .copy-content { font-family: monospace; font-size: 13px; color: #333; white-space: pre-wrap; pointer-events: none; }
 
-    .em-status-bar { display: none; background: rgba(217,70,59,0.1); border: 2px solid var(--c-red); border-radius: 12px; padding: 12px 16px; margin-bottom: 15px; font-size: 13px; font-weight: 700; color: var(--c-red); display: none; align-items: center; justify-content: space-between; gap: 10px; }
+    .em-status-bar { background: rgba(217,70,59,0.1); border: 2px solid var(--c-red); border-radius: 12px; padding: 12px 16px; margin-bottom: 15px; font-size: 13px; font-weight: 700; color: var(--c-red); display: none; flex-direction: column; gap: 10px; }
     .em-status-bar.visible { display: flex; }
+    .em-status-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .em-actual-row { display: flex; align-items: center; gap: 8px; }
+    .em-actual-row label { font-size: 11px; font-weight: 800; color: #a33; text-transform: uppercase; white-space: nowrap; }
+    .em-actual-row input { flex: 1; background: rgba(217,70,59,0.08); border: 1px solid rgba(217,70,59,0.4); border-radius: 8px; padding: 7px 10px; font-size: 13px; font-weight: 700; color: #c0392b; outline: none; width: 80px; text-align: center; font-family: inherit; }
     .em-status-bar button { background: var(--c-red); color: #fff; border: none; border-radius: 8px; padding: 6px 12px; font-weight: 800; font-size: 12px; cursor: pointer; flex-shrink: 0; }
 </style>
 
@@ -66,8 +70,15 @@
         </div>
 
         <div class="em-status-bar" id="emStatusBar">
-            <span id="emStatusText">⛔️ Аварійне активне: --:-- – --:--</span>
-            <button onclick="clearEmergency()">Зняти аварійне</button>
+            <div class="em-status-row">
+                <span id="emStatusText">⛔️ Аварійне активне: --:-- – --:--</span>
+                <button onclick="clearEmergency()">Зняти</button>
+            </div>
+            <div class="em-actual-row">
+                <label>Фактичний кінець:</label>
+                <input type="text" id="emActualEnd" placeholder="15:00">
+                <button onclick="updateEmergencyEnd()">Оновити</button>
+            </div>
         </div>
 
         <label class="form-label">РУЧНЕ РЕДАГУВАННЯ (Клік по блоку):</label>
@@ -142,6 +153,27 @@
         } else {
             bar.classList.remove('visible');
         }
+    }
+
+    function updateEmergencyEnd() {
+        const newEnd = document.getElementById('emActualEnd').value.trim();
+        if (!newEnd) { alert("Введи фактичний час завершення!"); return; }
+        const newEndM = timeToMinutes(newEnd);
+        const startM = timeToMinutes(activeEmergency.start);
+        if (newEndM <= startM) { alert("Кінець має бути пізніше початку!"); return; }
+
+        const oldEndM = timeToMinutes(activeEmergency.end);
+
+        let newInts = [...globalIntervals];
+        if (newEndM < oldEndM) {
+            newInts.push({ type: 'on', isModified: false, startMin: newEndM, endMin: oldEndM, startStr: newEnd, displayEndStr: activeEmergency.end });
+        }
+        globalIntervals = newInts.sort((a, b) => a.startMin - b.startMin);
+
+        activeEmergency.end = newEnd;
+        document.getElementById('emActualEnd').value = '';
+        updateEmStatusBar();
+        updateUI();
     }
 
     function clearEmergency() {
