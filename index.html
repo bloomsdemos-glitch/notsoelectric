@@ -6,53 +6,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ELECTRIFY • ADMIN</title>
     <style>
-        :root { --bg-app: #e0e5ec; --text-main: #4a4a4a; --radius: 20px; --neumorph-shadow-light: #ffffff; --neumorph-shadow-dark: #a3b1c6; --c-yellow: #fbbf24; --c-red: #d9463b; --c-green: #28a745; }
-        * { box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-app); color: var(--text-main); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .app-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; }
-        .card { background: var(--bg-app); padding: 25px; border-radius: var(--radius); box-shadow: 9px 9px 16px var(--neumorph-shadow-dark), -9px -9px 16px var(--neumorph-shadow-light); border: 1px solid rgba(255,255,255,0.2); }
-        h2 { margin: 0 0 5px 0; font-weight: 900; color: #333; letter-spacing: -0.5px; display: flex; align-items: center; justify-content: space-between; }
-        .subtitle { font-size: 12px; color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
-        .form-label { font-size: 12px; font-weight: bold; color: #666; margin-left: 5px; display: block; margin-bottom: 8px; text-transform: uppercase; }
-        .input-neumorph { width: 100%; border: none; border-radius: 12px; padding: 15px; font-family: inherit; background: var(--bg-app); box-shadow: inset 6px 6px 10px var(--neumorph-shadow-dark), inset -6px -6px 10px var(--neumorph-shadow-light); color: #333; outline: none; transition: 0.3s; font-weight: 500; }
-        textarea.input-neumorph { height: 100px; resize: none; margin-bottom: 15px; }
-        .btn-neu { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; background: var(--bg-app); box-shadow: 6px 6px 10px var(--neumorph-shadow-dark), -6px -6px 10px var(--neumorph-shadow-light); color: #333; transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 15px; }
-        .btn-neu:active { box-shadow: inset 4px 4px 8px var(--neumorph-shadow-dark), inset -4px -4px 8px var(--neumorph-shadow-light); transform: scale(0.98); }
-        .btn-primary { color: #007aff; }
-        .btn-danger { color: #ff3b30; }
-        .btn-success { color: var(--c-green); font-size: 18px; padding: 20px; }
-
+            :root { 
+        --bg-app: #f4f5f7; 
+        --text-main: #1d1d1f; 
+        --radius: 16px; 
+        --c-yellow: #f59e0b; 
+        --c-red: #ef4444; 
+        --c-green: #10b981; 
+        --border-line: rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-app); color: var(--text-main); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+    .app-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; }
+    
+    /* Чиста картка без мила */
+    .card { background: #ffffff; padding: 25px; border-radius: var(--radius); border: 1px solid var(--border-line); box-shadow: 0 8px 30px rgba(0,0,0,0.04); }
+    
+    h2 { margin: 0 0 5px 0; font-weight: 900; color: #333; letter-spacing: -0.5px; display: flex; align-items: center; justify-content: space-between; }
+    .subtitle { font-size: 12px; color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+    .form-label { font-size: 12px; font-weight: bold; color: #666; margin-left: 5px; display: block; margin-bottom: 8px; text-transform: uppercase; }
+    
+    /* Інпути і кнопки тепер плоскі і контрастні */
+    .input-neumorph { width: 100%; border: 1.5px solid var(--border-line); border-radius: 12px; padding: 15px; font-family: inherit; background: #fafafa; color: #333; outline: none; transition: 0.2s; font-weight: 600; }
+    .input-neumorph:focus { border-color: #333; background: #fff; }
+    textarea.input-neumorph { height: 100px; resize: none; margin-bottom: 15px; }
+    
+    .btn-neu { width: 100%; padding: 16px; border: 1px solid var(--border-line); border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; background: #ffffff; color: #333; transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+    .btn-neu:active { transform: scale(0.98); background: #f0f0f0; }
+    .btn-primary { color: #007aff; }
+    .btn-danger { color: #ff3b30; }
+    .btn-success { color: var(--c-green); font-size: 18px; padding: 20px; }
 
     .loader-screen { text-align: center; padding: 40px 20px; color: #888; font-weight: 700; font-size: 14px; }
 
+    /* Пігулки кроків теж зробив flat */
     .step-indicator { display: flex; gap: 8px; margin-bottom: 20px; }
-    .step-pill { flex: 1; padding: 8px; border-radius: 10px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; background: var(--bg-app); box-shadow: 3px 3px 6px var(--neumorph-shadow-dark), -3px -3px 6px var(--neumorph-shadow-light); color: #aaa; }
-    .step-pill.active { background: #333; color: #fff; box-shadow: none; }
-    .step-pill.done { color: var(--c-green); }
+    .step-pill { flex: 1; padding: 8px; border-radius: 10px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; background: #ffffff; border: 1px solid var(--border-line); color: #aaa; transition: 0.2s; }
+    .step-pill.active { background: #333; color: #fff; border-color: #333; }
+    .step-pill.done { color: var(--c-green); border-color: rgba(40, 167, 69, 0.3); background: rgba(40, 167, 69, 0.05); }
 
     .today-banner { background: rgba(40, 167, 69, 0.1); border: 2px solid var(--c-green); border-radius: 12px; padding: 14px 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
     .today-banner-text { font-size: 13px; font-weight: 700; color: #1e7e34; line-height: 1.4; }
     .today-banner-date { font-size: 11px; color: #555; font-weight: 600; margin-top: 2px; }
     .today-banner button { background: #333; color: #fff; border: none; border-radius: 8px; padding: 7px 12px; font-weight: 800; font-size: 12px; cursor: pointer; flex-shrink: 0; }
 
-    .section-divider { height: 1px; background: rgba(0,0,0,0.06); margin: 20px 0; }
+    .section-divider { height: 1px; background: var(--border-line); margin: 20px 0; }
 
-    .timeline-editor { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
-    .tl-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; background: var(--bg-app); box-shadow: 4px 4px 8px var(--neumorph-shadow-dark), -4px -4px 8px var(--neumorph-shadow-light); cursor: pointer; user-select: none; transition: 0.15s; position: relative; }
-    .tl-row:active { transform: scale(0.98); }
-    .tl-row.type-on { border-left: 3px solid var(--c-yellow); }
-    .tl-row.type-off { border-left: 3px solid #999; }
-    .tl-row.type-emergency { border-left: 3px solid var(--c-red); background: rgba(217,70,59,0.05); }
+    /* Таймлайн-редактор: тепер чітко видно картки */
+    .timeline-editor { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .tl-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; background: #ffffff; border: 1px solid var(--border-line); cursor: pointer; user-select: none; transition: 0.15s; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+    .tl-row:active { transform: scale(0.98); background: #fafafa; }
+    .tl-row.type-on { border-left: 4px solid var(--c-yellow); }
+    .tl-row.type-off { border-left: 4px solid #999; }
+    .tl-row.type-emergency { border-left: 4px solid var(--c-red); background: rgba(239, 68, 68, 0.05); }
     .tl-row.fact-modified { opacity: 0.9; }
+    
     .tl-time { font-size: 15px; font-weight: 800; color: #333; min-width: 110px; letter-spacing: -0.3px; }
     .tl-badges { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; }
-    .tl-badge { font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.3px; }
-    .tl-badge.plan-on { background: rgba(251,191,36,0.15); color: #b45309; border: 1px solid rgba(251,191,36,0.4); }
-    .tl-badge.plan-off { background: #e8e8e8; color: #777; border: 1px solid #ccc; }
-    .tl-badge.fact-on { background: rgba(40,167,69,0.12); color: #1e7e34; border: 1px solid rgba(40,167,69,0.3); }
-    .tl-badge.fact-emergency { background: rgba(217,70,59,0.12); color: var(--c-red); border: 1px solid rgba(217,70,59,0.3); }
+    .tl-badge { font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.3px; }
+    .tl-badge.plan-on { background: rgba(245, 158, 11, 0.15); color: #b45309; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .tl-badge.plan-off { background: #f0f0f0; color: #666; border: 1px solid #ddd; }
+    .tl-badge.fact-on { background: rgba(16, 185, 129, 0.12); color: #047857; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .tl-badge.fact-emergency { background: rgba(239, 68, 68, 0.12); color: var(--c-red); border: 1px solid rgba(239, 68, 68, 0.3); }
     .tl-badge.strikethrough { text-decoration: line-through; opacity: 0.5; }
     .tl-arrow { font-size: 12px; color: #bbb; flex-shrink: 0; }
+
 
     .fact-modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); z-index: 200; align-items: flex-end; justify-content: center; }
     .fact-modal-overlay.open { display: flex; }
@@ -416,27 +434,26 @@
             `💡⚡️ ГРАФІК ВІДКЛЮЧЕНЬ ${lastDateStr}\n\n${lines.join('\n')}\n\n📱🆕 Динамічний онлайн-графік в нашому міні-додатку: t.me/valkyelectrifybot/electric\n\n💬 Чат: t.me/valkychat\n📣 Базарчик: t.me/valkybazar`;
     }
 
-    function buildPublicIntervals() {
+        function buildPublicIntervals() {
         let result = [];
         globalIntervals.forEach(int => {
             const fact = int.factType;
             const plan = int.planType;
 
-            if (fact === 'emergency') {
-                const emSM = timeToMinutes(int.emStart || int.startStr);
-                const emEM = timeToMinutes(int.emEnd || int.displayEndStr);
-                if (int.startMin < emSM) result.push({ type: 'on', isModified: false, startMin: int.startMin, endMin: emSM, startStr: int.startStr, displayEndStr: int.emStart || int.startStr });
-                if (int.endMin > emEM) result.push({ type: plan, isModified: false, startMin: emEM, endMin: int.endMin, startStr: int.emEnd || int.displayEndStr, displayEndStr: int.displayEndStr });
-            } else if (fact === 'on') {
+            if (fact === 'on' && plan === 'off') {
+                // Відключення скасоване, світло є
                 result.push({ type: 'off', isModified: true, startMin: int.startMin, endMin: int.endMin, startStr: int.startStr, displayEndStr: int.displayEndStr });
-            } else if (fact === 'off') {
+            } else if (fact === 'off' && plan === 'on') {
+                // Світло мало бути, але його рубанули (не аварійне, просто факт)
                 result.push({ type: 'on', isModified: true, startMin: int.startMin, endMin: int.endMin, startStr: int.startStr, displayEndStr: int.displayEndStr });
             } else {
+                // Звичайний план
                 result.push({ type: plan, isModified: false, startMin: int.startMin, endMin: int.endMin, startStr: int.startStr, displayEndStr: int.displayEndStr });
             }
         });
         return result.sort((a, b) => a.startMin - b.startMin);
     }
+
 
     function autoSave() {
         const hint = document.getElementById('autosaveHint');
