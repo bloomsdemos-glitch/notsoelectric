@@ -283,12 +283,12 @@
         }, 1000);
     }
 
-        async function pushToMiniApp() {
+            async function pushToMiniApp() {
         if (!confirm("Опублікувати для людей?")) return;
         
         let publicDays = {};
         
-        // Перебираємо всі дні, які є в чернетках Адмінки, і готуємо їх для людей
+        // Згрібаємо всі дні з чернеток
         for (let d in db.days) {
             const dayData = db.days[d];
             const publicIntervals = dayData.intervals.map(int => {
@@ -304,7 +304,6 @@
         }
 
         try {
-            // Публікуємо весь об'єкт days
             await fetch(`https://api.jsonbin.io/v3/b/${BIN_PUBLIC}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
@@ -315,6 +314,7 @@
             alert("❌ Помилка з'єднання");
         }
     }
+
 
 
     function copyToClipboard() { navigator.clipboard.writeText(document.getElementById('finalText').textContent); alert("Скопійовано!"); }
