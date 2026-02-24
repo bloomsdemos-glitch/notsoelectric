@@ -5,47 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ELECTRIFY • ADMIN 2026</title>
     <style>
-        :root { 
-            --bg-app: #f4f5f7; 
-            --text-main: #1d1d1f; 
-            --radius: 16px; 
-            --c-yellow: #f59e0b; 
-            --c-red: #ef4444; 
-            --c-green: #10b981; 
-            --border-line: rgba(0,0,0,0.08);
-        }
+        :root { --bg-app: #f4f5f7; --text-main: #1d1d1f; --radius: 16px; --c-yellow: #f59e0b; --c-red: #ef4444; --c-green: #10b981; --border-line: rgba(0,0,0,0.08); }
         * { box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-app); color: var(--text-main); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         .app-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; }
-        
         .card { background: #ffffff; padding: 25px; border-radius: var(--radius); border: 1px solid var(--border-line); box-shadow: 0 8px 30px rgba(0,0,0,0.04); }
-        
         h2 { margin: 0 0 5px 0; font-weight: 900; color: #333; letter-spacing: -0.5px; display: flex; align-items: center; justify-content: space-between; }
         .subtitle { font-size: 12px; color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
-        
         .input-neumorph { width: 100%; border: 1.5px solid var(--border-line); border-radius: 12px; padding: 15px; font-family: inherit; background: #fafafa; color: #333; outline: none; transition: 0.2s; font-weight: 600; margin-bottom: 15px; }
-        .btn-neu { width: 100%; padding: 16px; border: 1px solid var(--border-line); border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; background: #ffffff; color: #333; transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-        .btn-neu:active { transform: scale(0.98); background: #f0f0f0; }
-        .btn-success { color: var(--c-green); font-size: 18px; padding: 20px; }
-
+        .btn-neu { width: 100%; padding: 16px; border: 1px solid var(--border-line); border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; background: #ffffff; color: #333; transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .btn-neu:active { transform: scale(0.98); background: #f0f0f0 !important; }
+        .btn-success { color: var(--c-green); font-size: 18px; padding: 20px; margin-bottom:10px; }
         .step-indicator { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
         .step-pill { flex: 1; min-width: 80px; padding: 10px; border-radius: 10px; font-size: 11px; font-weight: 800; text-transform: uppercase; text-align: center; background: #ffffff; border: 1px solid var(--border-line); color: #aaa; cursor: pointer; transition: 0.2s; }
         .step-pill.active { background: #333; color: #fff; border-color: #333; }
-        .step-pill.done { color: var(--c-green); border-color: rgba(40, 167, 69, 0.3); }
-
         .tl-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; background: #ffffff; border: 1px solid var(--border-line); cursor: pointer; margin-bottom: 8px; position: relative; }
         .tl-row.type-off { border-left: 4px solid #999; }
         .tl-row.type-on { border-left: 4px solid var(--c-yellow); }
         .tl-row.type-emergency { border-left: 4px solid var(--c-red); background: rgba(239, 68, 68, 0.05); }
-
         .tl-time { font-size: 15px; font-weight: 800; color: #333; min-width: 100px; }
         .tl-badges { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; }
         .tl-badge { font-size: 10px; font-weight: 800; padding: 3px 6px; border-radius: 4px; text-transform: uppercase; border: 1px solid #ddd; }
         .tl-badge.strikethrough { text-decoration: line-through; opacity: 0.5; }
-
         .copy-block { padding: 15px; border-radius: 12px; background: #f9f9f9; cursor: pointer; border: 1px dashed #aaa; margin-bottom: 15px; }
         .copy-content { font-family: monospace; font-size: 13px; white-space: pre-wrap; color: #333; }
-
         #loaderScreen { padding: 50px; text-align: center; font-weight: bold; color: #888; }
         .fact-modal-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index:200; align-items:flex-end; justify-content:center; }
         .fact-modal { background:#fff; width:100%; max-width:500px; padding:25px; border-radius:20px 20px 0 0; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); }
@@ -56,7 +39,6 @@
 <div id="loaderScreen">ГОРТАЄМО КАЛЕНДАР...</div>
 
 <div id="mainUI" class="app-container" style="display:none;">
-    
     <div id="daySelector" class="step-indicator"></div>
 
     <div id="step1" class="card" style="display:none;">
@@ -68,7 +50,7 @@
 
     <div id="step2" class="card" style="display:none;">
         <h2 id="displayDate">ГРАФІК</h2>
-        <div id="timelineEditor" class="timeline-editor" style="margin-top:15px;"></div>
+        <div id="timelineEditor" style="margin-top:15px; display:flex; flex-direction:column;"></div>
     </div>
 
     <div id="step3" class="card" style="display:none;">
@@ -80,23 +62,31 @@
         </div>
         <div id="autosaveHint" style="font-size:11px; text-align:center; margin-bottom:10px; color:#aaa;">Автозбереження активне</div>
         <button class="btn-neu btn-success" onclick="pushToMiniApp()">🚀 ОПУБЛІКУВАТИ В ДОДАТКУ</button>
-        <button class="btn-neu" style="color:var(--c-red); border:1px dashed var(--c-red)" onclick="resetPlan()">🗑️ ПОВНІСТЮ ОЧИСТИТИ ДЕНЬ</button>
+        <button class="btn-neu" style="color:var(--c-red); border:1px dashed var(--c-red); margin-top:10px;" onclick="resetPlan()">🗑️ ПОВНІСТЮ ОЧИСТИТИ ДЕНЬ</button>
     </div>
 </div>
 
 <div class="fact-modal-overlay" id="factModalOverlay">
     <div class="fact-modal">
         <h3 id="modalTitle">Редагувати блок</h3>
-        <div id="modalOptions" style="margin-top:15px;">
-            <button class="btn-neu" onclick="setFact('plan')">✅ ВСЕ ЗА ПЛАНОМ</button>
-            <button class="btn-neu" style="color:var(--c-yellow)" onclick="setFact('on')">💡 ДАЛИ СВІТЛО (СКАСОВАНО)</button>
-            <button class="btn-neu" style="color:var(--c-red)" onclick="setFact('off')">🚫 ВІДКЛЮЧИЛИ (ДОДАТКОВО)</button>
-            <button class="btn-neu" style="background:#333; color:#fff" onclick="setFact('emergency')">⚠️ АВАРІЙНЕ ВІДКЛЮЧЕННЯ</button>
+        
+        <div id="modalOptions" style="margin-top:15px; display:flex; flex-direction:column; gap:8px;">
+            <button class="btn-neu" id="btnPlan" onclick="setFact('plan')">✅ ВСЕ ЗА ПЛАНОМ</button>
+            <button class="btn-neu" id="btnOn" style="color:var(--c-yellow)" onclick="setFact('on')">💡 ДАЛИ СВІТЛО (СКАСОВАНО)</button>
+            <button class="btn-neu" id="btnOff" style="color:var(--c-red)" onclick="setFact('off')">🚫 ВІДКЛЮЧИЛИ (ДОДАТКОВО)</button>
         </div>
-        <div id="emTimeInputs" style="display:none; gap:10px; margin-top:10px;">
-            <input type="text" id="emStartInput" class="input-neumorph" placeholder="Початок (14:30)">
-            <input type="text" id="emEndInput" class="input-neumorph" placeholder="Кінець (16:00)">
+
+        <div style="background:rgba(217,70,59,0.05); padding:15px; border-radius:12px; border:1px solid rgba(217,70,59,0.2); margin-top:15px;">
+            <label style="display:flex; align-items:center; gap:10px; font-weight:800; color:var(--c-red); cursor:pointer;">
+                <input type="checkbox" id="emCheckbox" onchange="toggleEmInputs()" style="transform:scale(1.3);">
+                ⚠️ НАКЛАСТИ АВАРІЮ НА ДЕНЬ
+            </label>
+            <div id="emTimeInputs" style="display:none; gap:10px; margin-top:10px;">
+                <input type="text" id="emStartInput" class="input-neumorph" placeholder="Поч (08:00)" style="margin-bottom:0; padding:10px;">
+                <input type="text" id="emEndInput" class="input-neumorph" placeholder="Кін (11:00)" style="margin-bottom:0; padding:10px;">
+            </div>
         </div>
+
         <div style="display:flex; gap:10px; margin-top:20px;">
             <button class="btn-neu" style="flex:1; background:#eee" onclick="closeModal()">СКАСУВАТИ</button>
             <button class="btn-neu" style="flex:1; background:#333; color:#fff" onclick="saveModal()">ЗБЕРЕГТИ</button>
@@ -114,7 +104,7 @@
     let globalIntervals = [];
     let editingIndex = null;
     let selectedFactType = null;
-    let activeEmergency = null;
+    let activeEmergency = {active: false};
     let autosaveTimer = null;
 
     function timeToMinutes(t) { const parts = t.replace(/[^\d:]/g, '').split(':'); return (parseInt(parts[0], 10) || 0) * 60 + (parseInt(parts[1], 10) || 0); }
@@ -202,16 +192,25 @@
         const container = document.getElementById('timelineEditor');
         container.innerHTML = '';
         globalIntervals.forEach((int, i) => {
-            const isEmergency = int.factType === 'emergency';
-            const typeClass = isEmergency ? 'type-emergency' : (int.factType === 'off' || (int.planType === 'off' && !int.factType) ? 'type-off' : 'type-on');
-            
-            let badgeHtml = `<span class="tl-badge ${int.factType && int.factType !== int.planType ? 'strikethrough' : ''}">${int.planType === 'off' ? 'OFF' : 'ON'}</span>`;
+            const isVisuallyOn = (int.planType === 'on' && int.factType !== 'off') || int.factType === 'on';
+            const typeClass = isVisuallyOn ? 'type-on' : 'type-off';
+
+            let emOverlap = false;
+            if (activeEmergency && activeEmergency.active) {
+                const emS = timeToMinutes(activeEmergency.start);
+                const emE = timeToMinutes(activeEmergency.end || "24:00");
+                if (int.startMin < emE && int.endMin > emS) emOverlap = true;
+            }
+
+            const finalClass = emOverlap ? 'type-emergency' : typeClass;
+
+            let badgeHtml = `<span class="tl-badge ${int.factType ? 'strikethrough' : ''}">${int.planType === 'off' ? 'OFF' : 'ON'}</span>`;
             if (int.factType === 'on') badgeHtml += `<span class="tl-badge" style="color:var(--c-green)">+СВІТЛО</span>`;
             if (int.factType === 'off') badgeHtml += `<span class="tl-badge" style="color:var(--c-red)">+ВІДКЛ.</span>`;
-            if (isEmergency) badgeHtml += `<span class="tl-badge" style="background:var(--c-red); color:#fff">⚠ АВАРІЙНЕ</span>`;
+            if (emOverlap) badgeHtml += `<span class="tl-badge" style="background:var(--c-red); color:#fff">⚠ АВАР</span>`;
 
             container.innerHTML += `
-                <div class="tl-row ${typeClass}" onclick="openModal(${i})">
+                <div class="tl-row ${finalClass}" onclick="openModal(${i})">
                     <div class="tl-time">${int.startStr} - ${int.displayEndStr}</div>
                     <div class="tl-badges">${badgeHtml}</div>
                 </div>`;
@@ -221,34 +220,62 @@
     function openModal(index) {
         editingIndex = index;
         const int = globalIntervals[index];
+        selectedFactType = int.factType || 'plan';
         document.getElementById('modalTitle').textContent = `${int.startStr} - ${int.displayEndStr}`;
-        document.getElementById('emTimeInputs').style.display = int.factType === 'emergency' ? 'flex' : 'none';
-        if (int.factType === 'emergency') {
-            document.getElementById('emStartInput').value = int.emStart || int.startStr;
-            document.getElementById('emEndInput').value = int.emEnd || int.displayEndStr;
+        
+        updateFactButtons();
+
+        const emCb = document.getElementById('emCheckbox');
+        const emInputs = document.getElementById('emTimeInputs');
+        if (activeEmergency && activeEmergency.active) {
+            emCb.checked = true;
+            emInputs.style.display = 'flex';
+            document.getElementById('emStartInput').value = activeEmergency.start;
+            document.getElementById('emEndInput').value = activeEmergency.end || "";
+        } else {
+            emCb.checked = false;
+            emInputs.style.display = 'none';
+            document.getElementById('emStartInput').value = int.startStr;
+            document.getElementById('emEndInput').value = int.displayEndStr;
         }
+
         document.getElementById('factModalOverlay').style.display = 'flex';
     }
 
     function setFact(type) {
         selectedFactType = type;
-        document.getElementById('emTimeInputs').style.display = type === 'emergency' ? 'flex' : 'none';
+        updateFactButtons();
+    }
+
+    function updateFactButtons() {
+        ['plan', 'on', 'off'].forEach(t => {
+            const btn = document.getElementById('btn' + t.charAt(0).toUpperCase() + t.slice(1));
+            if (t === selectedFactType) {
+                btn.style.boxShadow = 'inset 0 0 0 2px #333'; btn.style.background = '#f9f9f9';
+            } else {
+                btn.style.boxShadow = 'none'; btn.style.background = '#fff';
+            }
+        });
+    }
+
+    function toggleEmInputs() {
+        document.getElementById('emTimeInputs').style.display = document.getElementById('emCheckbox').checked ? 'flex' : 'none';
     }
 
     function saveModal() {
         const int = globalIntervals[editingIndex];
         const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
 
-        if (selectedFactType === 'emergency') {
+        int.factType = selectedFactType === 'plan' ? null : selectedFactType;
+
+        if (document.getElementById('emCheckbox').checked) {
             const startVal = document.getElementById('emStartInput').value.trim();
             const endVal = document.getElementById('emEndInput').value.trim();
             if (!timeRegex.test(startVal) || (!timeRegex.test(endVal) && endVal !== "00:00" && endVal !== "24:00")) return alert("Час має бути ЧЧ:ММ");
-            int.factType = 'emergency';
-            int.emStart = startVal;
-            int.emEnd = endVal;
             activeEmergency = { active: true, start: startVal, end: endVal };
-        } else if (selectedFactType === 'plan') { int.factType = null; }
-        else { int.factType = selectedFactType; }
+        } else {
+            activeEmergency = { active: false };
+        }
 
         closeModal();
         renderTimelineEditor();
@@ -258,12 +285,14 @@
 
     function buildPostText() {
         let lines = [];
+        if (activeEmergency && activeEmergency.active) {
+            lines.push(`⚠️ ${activeEmergency.start}-${activeEmergency.end} АВАРІЙНЕ`);
+        }
         globalIntervals.forEach(int => {
             const fact = int.factType;
             const plan = int.planType;
-            if (fact === 'emergency') lines.push(`⚠️ ${int.emStart || int.startStr}-${int.emEnd || int.displayEndStr} (АВАРІЙНЕ)`);
-            else if (fact === 'off' && plan === 'on') lines.push(`${getClockEmoji(int.startStr)} ${int.startStr}-${int.displayEndStr} (ДОДАТКОВО)`);
-            else if (plan === 'off' && !fact) lines.push(`${getClockEmoji(int.startStr)} ${int.startStr}-${int.displayEndStr}`);
+            if (fact === 'off' && plan === 'on') lines.push(`${getClockEmoji(int.startStr)} ${int.startStr}-${int.displayEndStr} (ДОДАТКОВО)`);
+            else if (plan === 'off' && fact !== 'on') lines.push(`${getClockEmoji(int.startStr)} ${int.startStr}-${int.displayEndStr}`);
         });
         document.getElementById('finalText').textContent = `⚡️ ГРАФІК ВІДКЛЮЧЕНЬ • ${currentViewDate}\n\n${lines.length > 0 ? lines.join('\n') : '✅ Без відключень'}\n\n📱 @valkyelectrifybot`;
     }
@@ -273,22 +302,17 @@
         hint.textContent = 'Збереження...';
         clearTimeout(autosaveTimer);
         autosaveTimer = setTimeout(async () => {
-            db.days[currentViewDate] = { intervals: globalIntervals, emergency: activeEmergency || {active:false} };
+            db.days[currentViewDate] = { intervals: globalIntervals, emergency: activeEmergency };
             await fetch(`https://api.jsonbin.io/v3/b/${BIN_EDITOR}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-                body: JSON.stringify(db)
+                method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY }, body: JSON.stringify(db)
             });
             hint.textContent = '✅ Збережено в чернетки';
         }, 1000);
     }
 
-            async function pushToMiniApp() {
+    async function pushToMiniApp() {
         if (!confirm("Опублікувати для людей?")) return;
-        
         let publicDays = {};
-        
-        // Згрібаємо всі дні з чернеток
         for (let d in db.days) {
             const dayData = db.days[d];
             const publicIntervals = dayData.intervals.map(int => {
@@ -296,26 +320,13 @@
                 if (int.factType === 'off' && int.planType === 'on') return { type: 'on', isModified: true, ...int };
                 return { type: int.planType, isModified: false, ...int };
             });
-            publicDays[d] = {
-                intervals: publicIntervals,
-                emergency: dayData.emergency || {active:false},
-                updatedAt: new Date().toISOString()
-            };
+            publicDays[d] = { intervals: publicIntervals, emergency: dayData.emergency || {active:false}, updatedAt: new Date().toISOString() };
         }
-
-        try {
-            await fetch(`https://api.jsonbin.io/v3/b/${BIN_PUBLIC}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-                body: JSON.stringify({ days: publicDays, updatedAt: new Date().toISOString() })
-            });
-            alert("✅ ОПУБЛІКОВАНО!");
-        } catch(e) {
-            alert("❌ Помилка з'єднання");
-        }
+        await fetch(`https://api.jsonbin.io/v3/b/${BIN_PUBLIC}`, {
+            method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY }, body: JSON.stringify({ days: publicDays, updatedAt: new Date().toISOString() })
+        });
+        alert("✅ ОПУБЛІКОВАНО!");
     }
-
-
 
     function copyToClipboard() { navigator.clipboard.writeText(document.getElementById('finalText').textContent); alert("Скопійовано!"); }
     function closeModal() { document.getElementById('factModalOverlay').style.display = 'none'; }
